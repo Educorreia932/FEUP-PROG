@@ -10,8 +10,8 @@ int main() {
 	double f;
 
 	cout << "Insira os valores de a, b, c, d, e e f: ";
-	cin >> a, b, c, d, e, f;
-
+	cin >> a >> b >> c >> d >> e >> f;
+	
 	double x = (c*e - b*f) / (a*e - b*d);
 	double y = (a*f - c*d) / (a*e - b*d);
 	
