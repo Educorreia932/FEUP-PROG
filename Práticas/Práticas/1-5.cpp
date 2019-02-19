@@ -2,33 +2,42 @@
 using namespace std;
 
 int main() {
-	int tempo1_hor;
-	int tempo1_min;
-	int tempo1_seg;
-	int tempo2_hor;
-	int tempo2_min;
-	int tempo2_seg;
+	int tempo1_hor = 0;
+	int tempo1_min = 0;
+	int tempo1_seg = 0;
+	int tempo2_hor = 0;
+	int tempo2_min = 0;
+	int tempo2_seg = 0;
 	int soma_dia = 0;
-	int soma_hor;
-	int soma_min;
-	int soma_seg;
+	int soma_hor = 0;
+	int soma_min = 0;
+	int soma_seg = 0;
 
-	cout << "Tempo 1 (horas minutos segundos) ? ";
+	cout << "tempo 1 (horas minutos segundos) ? ";
 	cin >> tempo1_hor >> tempo1_min >> tempo1_seg;
-	cout << "Tempo 2 (horas minutos segundos) ? ";
+	cout << "tempo 2 (horas minutos segundos) ? ";
 	cin >> tempo2_hor >> tempo2_min >> tempo2_seg;
 
 	soma_hor = tempo1_hor + tempo2_hor;
+	soma_min = tempo1_min + tempo2_min;
+	soma_seg = tempo1_seg + tempo2_seg;
 
-	while (soma_hor >= 60) {
-		if (soma_hor > 60) {
-			soma_dia++;
-			soma_hor -= 60;
-		}
+	while (soma_seg >= 60) {
+		soma_min++;
+		soma_seg -= 60;
 	}
-	
 
-	cout << "Soma dos tempos:";
+	while (soma_min >= 60) {
+		soma_hor++;
+		soma_min -= 60;
+	}
+
+	while (soma_hor >= 24) {
+		soma_dia++;
+		soma_hor -= 24;
+	}
+
+	cout << "soma dos tempos: " << soma_dia << " dia, " << soma_hor << " horas, " << soma_min << " minutos e " << soma_seg << " segundos";
 
 	return 0;
 }
