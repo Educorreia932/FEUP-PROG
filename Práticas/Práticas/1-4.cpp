@@ -2,12 +2,7 @@
 using namespace std;
 
 int main() {
-	double a;
-	double b;
-	double c;
-	double d;
-	double e;
-	double f;
+	double a, b, c, d, e, f;
 
 	cout << "Insira os valores de a, b, c, d, e e f: ";
 	cin >> a >> b >> c >> d >> e >> f;

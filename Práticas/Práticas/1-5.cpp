@@ -2,12 +2,7 @@
 using namespace std;
 
 int main() {
-	int tempo1_hor = 0;
-	int tempo1_min = 0;
-	int tempo1_seg = 0;
-	int tempo2_hor = 0;
-	int tempo2_min = 0;
-	int tempo2_seg = 0;
+	int tempo1_hor, tempo1_min, tempo1_seg, tempo2_hor, tempo2_min, tempo2_seg;
 	int soma_dia = 0;
 	int soma_hor = 0;
 	int soma_min = 0;

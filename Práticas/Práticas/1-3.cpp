@@ -3,8 +3,7 @@
 using namespace std;
 
 int main() {
-	float p;
-	float r;
+	float p, r;
 	float pi = 3.14159;
 
 	cout << "Introduza o valor de p (em Kg/m3): "; 
