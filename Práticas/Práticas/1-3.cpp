@@ -11,7 +11,7 @@ int main() {
 	cin >> p;
 	cout << "Introduza o valor de r (em m): ";
 	cin >> r;
-	cout << "O valor de M (em Kg) e " << 4 / 3 * (p*pi*r*r*r * 3); //Acento desconfigura
+	cout << "O valor de M (em Kg) e " << (4 / 3) * (p * pi * r * r * r * 3); //Acento desconfigura
 
 	return 0;
 }

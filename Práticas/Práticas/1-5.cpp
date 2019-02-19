@@ -20,10 +20,13 @@ int main() {
 
 	soma_hor = tempo1_hor + tempo2_hor;
 
-	if (soma_hor > 60) {
-		soma_dia ++ 
-		soma_hor -= 60;
+	while (soma_hor >= 60) {
+		if (soma_hor > 60) {
+			soma_dia++;
+			soma_hor -= 60;
+		}
 	}
+	
 
 	cout << "Soma dos tempos:";
 
