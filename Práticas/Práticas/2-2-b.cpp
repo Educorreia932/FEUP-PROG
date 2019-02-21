@@ -7,7 +7,7 @@ int main() {
 	cout << "Insert three numbers: ";
 	cin >> a >> b >> c;
 
-	if (a > b and a > c) {
+	if (a > b && a > c) {
 		first = a;
 
 		if (b < c) {
@@ -21,15 +21,17 @@ int main() {
 		}
 	}
 
-	else if (b > a and b > c) {
+	else if (b > a && b > c) {
 		first = b;
 
 		if (a < c) {
 			third = a;
+			second = c;
 		}
 
 		else {
 			third = c;
+			second = a;
 		}
 	}
 
