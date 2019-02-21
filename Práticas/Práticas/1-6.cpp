@@ -5,11 +5,11 @@ using namespace std;
 int main() {
 	float x1, y1, x2, y2, x3, y3;
 
-	cout << "Insira as coordenadas do primeiro ponto: ";
+	cout << "Insert the coordinates of the first point: ";
 	cin >> x1 >> y1;
-	cout << "Insira as coordenadas do segundo ponto: ";
+	cout << "Insert the coordinates of the second point: ";
 	cin >> x2 >> y2;
-	cout << "Insira as coordenadas do terceiro ponto: ";
+	cout << "Insert the coordinates of the third point: ";
 	cin >> x3 >> y3;
 
 	float a = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
@@ -18,5 +18,5 @@ int main() {
 	float s = (a + b + c) / 2;
 	float área = sqrt(s * (s - a) * (s - b) * (s - c));
 
-	cout << "A area do triangulo e de " << área << " u.a.";
+	cout << "The area of the triangle is " << área << " a. u.";
 }
