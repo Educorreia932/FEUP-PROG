@@ -10,7 +10,7 @@ int main() {
 		cout << "x ? ";
 		cin >> x;
 			
-		if (cin.fail()) {
+		if (!cin) {
 			cin.clear();
 			cin.ignore(1000, '\n');
 			failed = true;
