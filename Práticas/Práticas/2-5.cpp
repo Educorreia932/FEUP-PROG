@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <string>
 #include <iomanip>
 using namespace std;
 
@@ -11,13 +10,13 @@ int main() {
 	cin >> a >> b >> c;
 
 	if (pow(b, 2) - 4 * a * c < 0) {
-		cout << "The equations has two conjugated complex solutions " << setprecision(3) << -b/a << " - " << sqrt(-(pow(b, 2) - 4 * a * c))/a << "i and " 
-			 << -b << " + " << sqrt(-(pow(b, 2) - 4 * a * c)) << "i";
+		cout << "The equations has two conjugated complex solutions " << setprecision(4) << -b/(2 * a) << " + " << sqrt(-(pow(b, 2) - 4 * a * c)) / (2 * a) << "i and " 
+			 << -b / (2 * a) << " - " << sqrt(-(pow(b, 2) - 4 * a * c)) / (2 * a) << "i";
 	}
 
 	else {
-		float solution1 = (-b + sqrt(pow(b, 2) - 4 * a * c)) / a;
-		float solution2 = (-b - sqrt(pow(b, 2) - 4 * a * c)) / a;
+		float solution1 = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+		float solution2 = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 		
 		cout << "The equation has two different real solutions " << solution1 << " and " << solution2;
 	}
