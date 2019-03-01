@@ -1,10 +1,13 @@
 #include<iostream>
 #include<cmath>
 #include<ctime> 
+#include <fcntl.h>
+#include <io.h>
 using namespace std;
 
 int main() {
 	clock_t tStart = clock();
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	int num;
 
 	int counter = 0;
@@ -22,7 +25,7 @@ int main() {
 
 		}
 		if (primo == true) {
-			cout << "O número " << number << " é primo.\n";
+			wcout << "O número " << number << " é primo.\n";
 			counter += 1;
 			primo = false;
 		}
