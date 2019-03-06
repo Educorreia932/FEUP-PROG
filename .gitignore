@@ -33,3 +33,10 @@
 
 #Other 
 *.pdf
+*.js
+*.sln
+*.txt
+*.cmd
+/Práticas/Debug
+/Teóricas/x64
+/x64

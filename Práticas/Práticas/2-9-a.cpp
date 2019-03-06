@@ -2,15 +2,24 @@
 using namespace std;
 
 int main() {
-	double mean;
-	int n, lowest = 0, greatest = 0, sum = 0, counter = 0;
+	double mean, n, sum = 0.0;
+	int lowest = 0, greatest = 0, counter = 0;
+	bool first = true;
+
+	cout << "Insert a sequence of numbers (ending it with 0): ";
 
 	while (cin >> n && n != 0) {
-		if (n > greatest) {
+		if (first) {
+			lowest = n;
+			greatest = n;
+			first = false;
+		}
+
+		else if (n > greatest) {
 			greatest = n;
 		}
 
-		if (n < lowest) { //Concertar
+		else if (n < lowest) { 
 			lowest = n;
 		}
 
