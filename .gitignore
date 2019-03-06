@@ -37,6 +37,18 @@
 *.sln
 *.js
 *.tlog
+*.log
+*.pdb
+*.idb
+*.cmd
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.users
+
 x64/
 Debug/
+.vs/
+
+Unicode.cpp
+
 
