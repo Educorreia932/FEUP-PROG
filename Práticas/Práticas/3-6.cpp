@@ -123,12 +123,38 @@ string day(int number) {
 	}
 }
 
-int main() {
-	int userMonth, userYear, width = 10, counter = 1, once = 0;
+string month(int number) {
+	switch (number) {
+		case 1:
+			return "January";
+		case 2: 
+			return "February";
+		case 3:
+			return "March";
+		case 4:
+			return "April";
+		case 5:
+			return "May";
+		case 6:
+			return "June";
+		case 7:
+			return "July";
+		case 8:
+			return "August";
+		case 9:
+			return "September";
+		case 10:
+			return "October";
+		case 11:
+			return "November";
+		case 12:
+			return "December";
+	}
+}
 
-	cout << "Insert a month and an year: ";
-	cin >> userMonth >> userYear;
-	
+int calendar(int month, int year) {
+	int width = 10, counter = 1;
+		
 	for (counter; counter <= 7; counter++) {
 		cout << setw(width ) << day(counter % 7);
 	}
@@ -137,28 +163,40 @@ int main() {
 
 	cout << endl;
 
-	for (int i = 1; i <= numberOfdays(userMonth, userYear); i++) {
+	for (int i = 1; i <= numberOfdays(month, year); i++) {
 		counter %= 7;
-
-		if (dayOfweek(i, userMonth, userYear) != counter && once <= 7) {
+		
+		if (dayOfweek(i, month, year) != counter) {
 			i--;
-			once++;
-			cout << "Aaa";
+			cout << setw(width) << "";
 		}
 
 		else if (counter == 0) {
 			cout << setw(width) << i << endl;
-			counter = 1;
-			once = 8;
 		}
 
 		else {
 			cout << setw(width) << i;
-			once = 8 ;
+
 		}
 		
 		counter += 1;
 	}
 	
+	return 0;
+}
+
+int main() {
+	int userYear;
+
+	cout << "Insert an year: ";
+	cin >> userYear;
+
+	for (int userMonth = 1; userMonth <= 12; userMonth++) {
+		cout << month(userMonth) << '/' << userYear << endl;
+		calendar(userMonth, userYear);
+		cout << endl << endl;
+	}
+
 	return 0;
 }

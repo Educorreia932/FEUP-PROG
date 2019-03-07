@@ -9,29 +9,26 @@ int main() {
 	cout << "Insert a number: ";
 	cin >> n;
 
-	while (n /= 10) {
+	unsigned long long int nCopy = n;
+
+	while (nCopy /= 10) {
 		length++;
 	}
-
-	cout << n << " " <<length << endl;
 
 	while (length > 1) {
 		first = n / pow(10, length - 1); 
 		last = n % 10; 
-		
-		cout << first << " " << last << endl;
+
+		cout << first << ' ' << last << endl;
 		
 		if (first != last) {
 			palindrome = false;
 			break;
 		}
 
-		cout << ((int)pow(10, length - 1)) << endl;
-		n = n % ((int) pow(10, length - 1));
+		n -=  first * pow(10, length - 1);
+		n /= 10;
 		cout << n << endl;
-		n = n / 10;
-		cout << n << endl;
-
 		length -= 2;
 
 		if (length == 0) {
