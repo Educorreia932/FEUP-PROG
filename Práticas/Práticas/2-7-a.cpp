@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 	const int width = 15;
-	const double pi = 3.14;
+	const double pi = 3.141592653589793238463;
 
 	cout << setw(10) << "ang" << setw(width) << "sen" << setw(width) << "cos" << setw(width) << "tan" << endl;
 
