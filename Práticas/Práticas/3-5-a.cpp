@@ -1,6 +1,15 @@
 #include <iostream>
 using namespace std;
-//cin.get() cin.peek()
-bool readFracc(int &numerator, int &denominator) {
 
+bool readFracc(int &numerator, int &denominator) {
+	char slash;	
+
+	cin >> numerator >> slash >> denominator;
+
+	if (!cin) {
+		denominator, numerator = 0;
+		return false;
+	}
+
+	return true;
 }

@@ -177,7 +177,6 @@ int calendar(int month, int year) {
 
 		else {
 			cout << setw(width) << i;
-
 		}
 		
 		counter += 1;
