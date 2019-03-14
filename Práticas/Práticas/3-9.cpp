@@ -1,20 +1,28 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
-double integrateTR(double f(double), double a, double b, int n) {
-	double result,  h = (b - a) / n;
+double f(double x) {
+	return sqrt(4 - pow(x, 2));
+}
 
-	for (int i = a; i < b; i++) {
+double integrateTR(double f(double), double a, double b, int n) {
+	double result = 0, h = (b - a) / n;
+
+	for (int i = 1; i <= n; i++) {
 		result += (h / 2) * (f(a + (i - 1) * h) + f(a + i * h));
 	}
-	
+
 	return result;
 }
 
 int main() {
-	double f(double), a, b;
+	double a, b;
 	int n;
 
-	cout << "Insert a function, the value of a and b and the number of intervals: ";
-	cin >> f, a, b, n;
+	cout << "Enter the a and b values and the number of intervals: ";
+	cin >> a >> b >> n;
+	cout << "The approximate value of the definite integral between " << a << " and " << b << " is " << integrateTR(f, a, b, n) << ".";
+
+	return 0;
 }
