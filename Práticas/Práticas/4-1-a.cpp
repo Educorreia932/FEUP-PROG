@@ -2,18 +2,8 @@
 #include <cstring>
 using namespace std;
 
-int charCount(char compound[]) {
-	int counter = 0;
-
-	for (int i = 0; compound[i] != '\0'; i++) {
-		counter++;
-	}
-
-	return counter;
-}
-
 bool isHydroxide(char compound[]) {
-	int length = charCount(compound);
+	int length = strlen(compound);
 
 	if (compound[length - 1] == 'H' && compound[length - 2] == 'O')
 		return true;
