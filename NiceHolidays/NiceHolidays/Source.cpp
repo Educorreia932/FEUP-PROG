@@ -159,15 +159,6 @@ void Quit() {
 
 }
 
-/*string Trim(string s) {
-	s.erase(0, s.find_first_not_of(' ')); //Removes spaces to the left
-	
-	if (s[s.length() - 1] == ' ')
-		s.erase(s.find_last_of(' ') + 1); //Removes spaces to the right
-	
-	return s;
-}*/
-
 void GetAddress(Address &Address, string Line) {
 	int Counter = 0;
 	string AuxString;
@@ -200,43 +191,6 @@ void GetAddress(Address &Address, string Line) {
 	Address.Province = Trim(AuxString);
 }
 
-vector <int> GetAdquiredTravelPacks(string Line) { 
-	vector <int> Result;
-	string AuxString;
-
-	for (int i = 0; i < Line.length(); i++) {
-		if (Line[i] == ';') {
-			Result.push_back(stoi(AuxString));
-			AuxString = "";
-		}
-
-		else
-			AuxString += Line[i];
-	}
-
-	return Result;
-} 
-
-vector <string> GetTravelDestination(string Line) {
-	vector <string> Result;
-	string AuxString;
-	
-	for (int i = 0; i < Line.length(); i++) {
-		if (Line[i] == '–' || Line[i] == ',' || Line[i] == '-') {
-			Result.push_back(Trim(AuxString));
-			AuxString = "";
-		}
-
-		else {
-			AuxString += Line[i];
-		}
-	}
-	
-	Result.push_back(Trim(AuxString));
-
-	return Result;
-}
-
 void GetDate(Date &Date, string Line) {
 	int Counter = 0;
 	string StringAux;
@@ -244,18 +198,18 @@ void GetDate(Date &Date, string Line) {
 	for (int i = 0; i < Line.length(); i++) {
 		if (Line[i] == '/') {
 			switch (Counter) {
-				case 0:
-					Date.Year = stoi(StringAux);
-					break;
-				case 1:
-					Date.Month = stoi(StringAux);
-					break;
+			case 0:
+				Date.Year = stoi(StringAux);
+				break;
+			case 1:
+				Date.Month = stoi(StringAux);
+				break;
 			}
 
 			StringAux = "";
 			Counter += 1;
 		}
-		
+
 		else
 			StringAux += Line[i];
 	}
@@ -439,7 +393,7 @@ int main() {
 	SaveClients(StructAgency.ClientsFile, StructClients);
 	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 
-	cout << StructClients[0].ClientAdress.ZIPCode << endl;
+	cout << StructClients[1].AdquiredTravelPacks[0] << endl;
 
 	Menu(StructAgency.ClientsFile, StructAgency.TravelPacksFile);
 	
