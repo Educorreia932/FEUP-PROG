@@ -100,15 +100,20 @@ void ManageTravelPacks() {
 	//CreateTravelPack, ChangeTravelPack and RemoveTravelPack
 }
 
-void VisualizeSpefificClient() {
+void VisualizeSpecificClient(int ClientNumber, Client StructClients) {
+	cout << StructClients.Name << endl
+		 << StructClients.NIF << endl
+		 << StructClients.Household << endl
+		 << StructClients.ClientAdress.Street << ", " 
+		 << StructClients.ClientAdress.DoorNumber << ", "
+		 << StructClients.ClientAdress.Apartment << ", "
+		 << StructClients.ClientAdress.ZIPCode << ", "
+		 << StructClients.ClientAdress.Province << endl;
 }
 
-void VisualizeAgencyClients(string File) {
+void VisualizeAgencyClients() {
 	cout << "Worked";
-}
-
-void VisualizeSpecificClient(string File) {
-}
+} //Usar VisualizeSpecificClient
 
 void VisualizeAvailableTravelPacks() { 
 	int Selection;
@@ -341,7 +346,7 @@ void SaveTravelPacks(string File, vector <TravelPack> &StructTravelPacks) {
 	}
 }
 
-void Menu(string ClientsName, string TravelPacksName) {
+void Menu(string ClientsName, string TravelPacksName, vector <Client> StructClients, vector <TravelPack> StructTravelPacks) {
 	int Selection;
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
@@ -366,10 +371,16 @@ void Menu(string ClientsName, string TravelPacksName) {
 		ManageTravelPacks();
 		break;
 	case 3:
-		VisualizeSpecificClient(ClientsName);
+		int ClientNumber;
+
+		cout << "Insert the client number: ";
+		cin >> ClientNumber;
+		cin.ignore();
+
+		VisualizeSpecificClient(ClientNumber, StructClients[ClientNumber]);
 		break;
 	case 4:
-		VisualizeAgencyClients(ClientsName);
+		VisualizeAgencyClients();
 		break;
 	case 5:
 		VisualizeAvailableTravelPacks();
@@ -387,15 +398,13 @@ int main() {
 	string Line, AgencyName = "agency.txt";
 	Agency StructAgency;
 	vector <Client> StructClients(50);
-	vector <TravelPack> StructTravelPacks(50); //Fazer push_back
+	vector <TravelPack> StructTravelPacks(50); //Fazer push_back (recorrendo a uma struct auxiliar)
 
 	SaveAgency(AgencyName, StructAgency);
 	SaveClients(StructAgency.ClientsFile, StructClients);
 	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 
-	cout << StructClients[1].AdquiredTravelPacks[0] << endl;
-
-	Menu(StructAgency.ClientsFile, StructAgency.TravelPacksFile);
+	Menu(StructAgency.ClientsFile, StructAgency.TravelPacksFile, StructClients, StructTravelPacks);
 	
 	return 0;
 }
