@@ -48,6 +48,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include "AuxiliaryFunctions.h"
 using namespace std;
 
 typedef struct {
@@ -158,52 +159,108 @@ void Quit() {
 
 }
 
+/*string Trim(string s) {
+	s.erase(0, s.find_first_not_of(' ')); //Removes spaces to the left
+	
+	if (s[s.length() - 1] == ' ')
+		s.erase(s.find_last_of(' ') + 1); //Removes spaces to the right
+	
+	return s;
+}*/
+
 void GetAddress(Address &Address, string Line) {
 	int Counter = 0;
-	string Field;
+	string AuxString;
 
 	for (int i = 0; i < Line.length(); i++) {
 		if (Line[i] == '/') {
 			switch (Counter) {
-			case 0:
-				Address.Street = Field;
-				break;
-			case 1:
-				Address.DoorNumber = stoi(Field);
-				break;
-			case 2:
-				Address.Apartment = Field;
-				break;
-			case 3:
-				Address.ZIPCode = Field;
-				break;
-			case 4:
-				Address.Province = Field;
-				break;
+				case 0:
+					Address.Street = Trim(AuxString);
+					break;
+				case 1:
+					Address.DoorNumber = stoi(AuxString);
+					break;
+				case 2:
+					Address.Apartment = Trim(AuxString);
+					break;
+				case 3:
+					Address.ZIPCode = Trim(AuxString);
+					break;
 			}
 
-			Field = "";
+			AuxString = "";
 			Counter += 1;
 		}
-			
-		
+					
 		else	
-			Field += Line[i];	
+			AuxString += Line[i];	
 	}
+
+	Address.Province = Trim(AuxString);
 }
 
-void GetAdquiredTravelPacks(vector <int> &AdquiredTravelPacks, string Line) {
-	string Field;
-	
+vector <int> GetAdquiredTravelPacks(string Line) { 
+	vector <int> Result;
+	string AuxString;
+
 	for (int i = 0; i < Line.length(); i++) {
 		if (Line[i] == ';') {
-			AdquiredTravelPacks.push_back(stoi(Field));
-			Field = "";
+			Result.push_back(stoi(AuxString));
+			AuxString = "";
+		}
+
+		else
+			AuxString += Line[i];
+	}
+
+	return Result;
+} 
+
+vector <string> GetTravelDestination(string Line) {
+	vector <string> Result;
+	string AuxString;
+	
+	for (int i = 0; i < Line.length(); i++) {
+		if (Line[i] == '–' || Line[i] == ',' || Line[i] == '-') {
+			Result.push_back(Trim(AuxString));
+			AuxString = "";
+		}
+
+		else {
+			AuxString += Line[i];
+		}
+	}
+	
+	Result.push_back(Trim(AuxString));
+
+	return Result;
+}
+
+void GetDate(Date &Date, string Line) {
+	int Counter = 0;
+	string StringAux;
+
+	for (int i = 0; i < Line.length(); i++) {
+		if (Line[i] == '/') {
+			switch (Counter) {
+				case 0:
+					Date.Year = stoi(StringAux);
+					break;
+				case 1:
+					Date.Month = stoi(StringAux);
+					break;
+			}
+
+			StringAux = "";
+			Counter += 1;
 		}
 		
 		else
-			Field += Line[i];
-	} 
+			StringAux += Line[i];
+	}
+
+	Date.Day = stoi(StringAux);
 }
 
 void SaveAgency(string File, Agency &StructAgency) {	
@@ -268,7 +325,7 @@ void SaveClients(string File, vector <Client> &StructClients) {
 						GetAddress(StructClients[ClientCounter].ClientAdress, Line);
 						break;
 					case 4:
-						GetAdquiredTravelPacks(StructClients[ClientCounter].AdquiredTravelPacks, Line);
+						StructClients[ClientCounter].AdquiredTravelPacks = GetAdquiredTravelPacks(Line);
 						break;
 				}
 
@@ -279,15 +336,21 @@ void SaveClients(string File, vector <Client> &StructClients) {
 	}
 }
 
-void SaveTravelPacks(string File, vector <TravelPack> StructTravelPacks) {
+void SaveTravelPacks(string File, vector <TravelPack> &StructTravelPacks) {
 	string Line;
 	ifstream TravelPacks(File);
 
 	int Counter = 0, TravelPackCounter = 0;
+	bool FirstLine = true;
 
 	if (TravelPacks.is_open()) {
 		while (getline(TravelPacks, Line)) {
-			if (Line == "::::::::::") {
+			if (FirstLine) {
+				Counter = -1;
+				FirstLine = false;
+			}
+
+			else if (Line == "::::::::::") {
 				Counter = -1;
 				TravelPackCounter += 1;
 			}
@@ -295,19 +358,25 @@ void SaveTravelPacks(string File, vector <TravelPack> StructTravelPacks) {
 			else
 				switch (Counter) {
 				case 0:
-					//StructTravelPacks[ClientCounter].Name = Line;
+					StructTravelPacks[TravelPackCounter].Identifier = stoi(Line);
 					break;
 				case 1:
-					//StructClients[ClientCounter].NIF = stoi(Line);
+					StructTravelPacks[TravelPackCounter].TravelDestination = GetTravelDestination(Line);
 					break;
 				case 2:
-					//StructClients[ClientCounter].Household = stoi(Line);
+					GetDate(StructTravelPacks[TravelPackCounter].DepartureDate, Line);
 					break;
 				case 3:
-					//GetAddress(StructClients[ClientCounter].ClientAdress, Line);
+					GetDate(StructTravelPacks[TravelPackCounter].ArrivalDate, Line);
 					break;
 				case 4:
-					//GetAdquiredTravelPacks(StructClients[ClientCounter].AdquiredTravelPacks, Line);
+					StructTravelPacks[TravelPackCounter].Price = stoi(Line);
+					break;
+				case 5:
+					StructTravelPacks[TravelPackCounter].InitiallyAvailableSeats = stoi(Line);
+					break;
+				case 6:
+					StructTravelPacks[TravelPackCounter].SoldSeats = stoi(Line);
 					break;
 				}
 
@@ -329,7 +398,7 @@ void Menu(string ClientsName, string TravelPacksName) {
 		<< "5) Visualize available travel packs." << endl
 		<< "6) Visualize sold travel packs." << endl
 		<< "7) Buy a travel pack for a client." << endl 
-		<< "0) Exit the program" << endl << endl;
+		<< "0) Exit the program" << endl;
 
 	cin >> Selection;
 	cin.ignore();
@@ -364,13 +433,15 @@ int main() {
 	string Line, AgencyName = "agency.txt";
 	Agency StructAgency;
 	vector <Client> StructClients(50);
-	vector <TravelPack> StructTravelPacks(50);
+	vector <TravelPack> StructTravelPacks(50); //Fazer push_back
 
 	SaveAgency(AgencyName, StructAgency);
 	SaveClients(StructAgency.ClientsFile, StructClients);
 	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 
-	Menu(StructAgency.ClientsFile, StructAgency.TravelPacksFile);
+	cout << StructClients[0].ClientAdress.ZIPCode << endl;
 
+	Menu(StructAgency.ClientsFile, StructAgency.TravelPacksFile);
+	
 	return 0;
 }
