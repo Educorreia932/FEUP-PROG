@@ -25,6 +25,8 @@ vector <int> GetAdquiredTravelPacks(string Line) {
 			AuxString += Line[i];
 	}
 
+	Result.push_back(stoi(AuxString));
+
 	return Result;
 }
 

@@ -46,51 +46,12 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include <vector>
 #include <string>
 #include "AuxiliaryFunctions.h"
+#include "Structs.h"
 using namespace std;
-
-typedef struct {
-	string Street;
-	int DoorNumber;
-	string Apartment;
-	string ZIPCode;
-	string Province;
-} Address;
-
-typedef struct {
-	int Year;
-	int Month;
-	int Day;
-} Date;
-
-typedef struct {
-	string Name;
-	int NIF;
-	string URL;
-	Address AgencyAdress;
-	string ClientsFile;
-	string TravelPacksFile;
-} Agency;
-
-typedef struct {
-	string Name;
-	int NIF;
-	int Household;
-	Address ClientAdress;
-	vector <int> AdquiredTravelPacks;
-} Client;
-
-typedef struct  {
-	int Identifier; 
-	vector <string> TravelDestination;
-	Date DepartureDate;
-	Date ArrivalDate;
-	int Price;
-	int InitiallyAvailableSeats;
-	int SoldSeats;
-} TravelPack;
 
 void ManageClients() {
 	//CreateClient, ChangeClient and RemoveClient
@@ -100,37 +61,83 @@ void ManageTravelPacks() {
 	//CreateTravelPack, ChangeTravelPack and RemoveTravelPack
 }
 
-void VisualizeSpecificClient(int ClientNumber, Client StructClients) {
-	cout << StructClients.Name << endl
-		 << StructClients.NIF << endl
-		 << StructClients.Household << endl
-		 << StructClients.ClientAdress.Street << ", " 
-		 << StructClients.ClientAdress.DoorNumber << ", "
-		 << StructClients.ClientAdress.Apartment << ", "
-		 << StructClients.ClientAdress.ZIPCode << ", "
-		 << StructClients.ClientAdress.Province << endl;
+void VisualizeSpecificClient(Client StructClients) { //Colocar vetor e ClientNumber
+	cout << "Name: " << StructClients.Name << endl
+		 << "NIF: " << StructClients.NIF << endl
+		 << "Household: " << StructClients.Household << endl
+		 << "Address: " << StructClients.ClientAddress.Street << ", " 
+		 << StructClients.ClientAddress.DoorNumber << ", "
+		 << StructClients.ClientAddress.Apartment << ", "
+		 << StructClients.ClientAddress.ZIPCode << ", "
+		 << StructClients.ClientAddress.Province << endl
+		 << "Adquired Travel Packs: " ;
+
+	for (int i = 0; i < size(StructClients.AdquiredTravelPacks); i++) {
+		if (i < size(StructClients.AdquiredTravelPacks) - 1)
+			cout << StructClients.AdquiredTravelPacks[i] << ", ";
+
+		else
+			cout << StructClients.AdquiredTravelPacks[i] << endl;
+	}
 }
 
-void VisualizeAgencyClients() {
-	cout << "Worked";
-} //Usar VisualizeSpecificClient
+void VisualizeAgencyClients(vector <Client> StructClients) {
+	for (int i = 0; i < 2; i++) { //Mudar para for int, int < size(vector)
+		VisualizeSpecificClient(StructClients[i]);
+		cout << endl;
+	}
+}
 
-void VisualizeAvailableTravelPacks() { 
+void VisualizeSpecificTravelPack(int TravelPackNumber, vector <TravelPack> StructTravelPacks) {
+	cout << endl
+		 << "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << endl
+		 << "Travel destination: ";
+		 
+	for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
+		if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
+			cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << ", ";
+
+		else
+			cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << endl;
+	}
+		
+	cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year //Preencher data com 0
+		 << '/' << StructTravelPacks[TravelPackNumber].DepartureDate.Month
+		 << '/' << StructTravelPacks[TravelPackNumber].DepartureDate.Day << endl
+		 << "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
+		 << '/' << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
+		 << '/' << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << endl
+		 << "Price per person: " << StructTravelPacks[TravelPackNumber].Price << endl
+		 << "Initially available seats: " << StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats << endl
+		 << "Sold seats: " << StructTravelPacks[TravelPackNumber].SoldSeats << endl; 		;
+} 
+
+void VisualizeAvailableTravelPacks(vector <TravelPack> StructTravelPacks) { 
+	string AuxString;
 	int Selection;
 
 	cout << "What travel packs do you want to consult? Insert the corresponding key." << endl
-		<< "1) All." << endl
-		<< "2) All related to a specific client." << endl
-		<< "3) All between two dates." << endl
-		<< "4) All related to a specific client and between two dates." << endl;
+		 << "1) All." << endl
+		 << "2) All related to a specific travel destination." << endl
+		 << "3) All between two dates." << endl
+		 << "4) All related to a specific travel destination and between two dates." << endl;
 
 	cin >> Selection;
 	cin.ignore();
 
 	switch (Selection) {
 		case 1:
+			for (int i = 0; i <= 2; i++) //Mudar para size(vector)
+				VisualizeSpecificTravelPack(i, StructTravelPacks);
 			break;
 		case 2:
+			cout << endl << "Insert the travel destination: ";
+			getline(cin, AuxString);
+
+			for (int i = 0; i <= 2; i++) {
+				if (find(StructTravelPacks[i].TravelDestination.begin(), StructTravelPacks[i].TravelDestination.end(), AuxString) != StructTravelPacks[i].TravelDestination.end())
+					VisualizeSpecificTravelPack(i, StructTravelPacks);
+			}
 			break;
 		case 3:
 			break;
@@ -240,7 +247,7 @@ void SaveAgency(string File, Agency &StructAgency) {
 					StructAgency.URL = Line;
 					break;
 				case 3:
-					GetAddress(StructAgency.AgencyAdress, Line);
+					GetAddress(StructAgency.AgencyAddress, Line);
 					break;
 				case 4:
 					StructAgency.ClientsFile = Line;
@@ -281,7 +288,7 @@ void SaveClients(string File, vector <Client> &StructClients) {
 						StructClients[ClientCounter].Household = stoi(Line);
 						break;
 					case 3:
-						GetAddress(StructClients[ClientCounter].ClientAdress, Line);
+						GetAddress(StructClients[ClientCounter].ClientAddress, Line);
 						break;
 					case 4:
 						StructClients[ClientCounter].AdquiredTravelPacks = GetAdquiredTravelPacks(Line);
@@ -364,43 +371,44 @@ void Menu(string ClientsName, string TravelPacksName, vector <Client> StructClie
 	cout << endl;
 
 	switch (Selection) {
-	case 1:
-		ManageClients();
-		break;
-	case 2:
-		ManageTravelPacks();
-		break;
-	case 3:
-		int ClientNumber;
+		case 1:
+			ManageClients();
+			break;
+		case 2:
+			ManageTravelPacks();
+			break;
+		case 3:
+			int ClientNumber;
 
-		cout << "Insert the client number: ";
-		cin >> ClientNumber;
-		cin.ignore();
+			cout << "Insert the client number: "; 
+			cin >> ClientNumber;
+			cin.ignore();
+			cout << endl;
 
-		VisualizeSpecificClient(ClientNumber, StructClients[ClientNumber]);
-		break;
-	case 4:
-		VisualizeAgencyClients();
-		break;
-	case 5:
-		VisualizeAvailableTravelPacks();
-		break;
-	case 6:
-		VisualizeSoldTravelPacks();
-		break;
-	case 7:
-		BuyTravelPack();
-		break;	
+			VisualizeSpecificClient(StructClients[ClientNumber]);
+			break;
+		case 4:
+			VisualizeAgencyClients(StructClients);
+			break;
+		case 5:
+			VisualizeAvailableTravelPacks(StructTravelPacks);
+			break;
+		case 6:
+			VisualizeSoldTravelPacks();
+			break;
+		case 7:
+			BuyTravelPack();
+			break;	
 	}
 }
 
 int main() {
-	string Line, AgencyName = "agency.txt";
+	string Line, AgencyFile = "agency.txt"; //Deixar o utilizador inserir o nome do ficheiro
 	Agency StructAgency;
-	vector <Client> StructClients(50);
+	vector <Client> StructClients(50); //Fazer push_back (recorrendo a uma struct auxiliar)
 	vector <TravelPack> StructTravelPacks(50); //Fazer push_back (recorrendo a uma struct auxiliar)
 
-	SaveAgency(AgencyName, StructAgency);
+	SaveAgency(AgencyFile, StructAgency);
 	SaveClients(StructAgency.ClientsFile, StructClients);
 	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 
