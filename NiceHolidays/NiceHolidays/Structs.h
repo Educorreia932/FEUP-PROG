@@ -1,14 +1,13 @@
 #pragma once
 #include <vector>
 #include <string>
-using namespace std;
 
 typedef struct {
-	string Street;
+	std::string Street;
 	int DoorNumber;
-	string Apartment;
-	string ZIPCode;
-	string Province;
+	std::string Apartment;
+	std::string ZIPCode;
+	std::string Province;
 } Address;
 
 typedef struct {
@@ -18,25 +17,25 @@ typedef struct {
 } Date;
 
 typedef struct {
-	string Name;
+	std::string Name;
 	int NIF;
-	string URL;
+	std::string URL;
 	Address AgencyAddress;
-	string ClientsFile;
-	string TravelPacksFile;
+	std::string ClientsFile;
+	std::string TravelPacksFile;
 } Agency;
 
 typedef struct {
-	string Name;
+	std::string Name;
 	int NIF;
 	int Household;
 	Address ClientAddress;
-	vector <int> AdquiredTravelPacks;
+	std::vector <int> AdquiredTravelPacks;
 } Client;
 
 typedef struct {
 	int Identifier;
-	vector <string> TravelDestination;
+	std::vector <std::string> TravelDestination;
 	Date DepartureDate;
 	Date ArrivalDate;
 	int Price;
