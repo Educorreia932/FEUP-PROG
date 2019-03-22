@@ -46,9 +46,10 @@
 
 #include <iostream>
 #include <fstream>
-#include <algorithm>
+#include <iomanip>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "AuxiliaryFunctions.h"
 #include "Structs.h"
 using namespace std;
@@ -82,7 +83,7 @@ void VisualizeSpecificClient(Client StructClients) { //Colocar vetor e ClientNum
 }
 
 void VisualizeAgencyClients(vector <Client> StructClients) {
-	for (int i = 0; i < 2; i++) { //Mudar para for int, int < size(vector)
+	for (int i = 0; i < size(StructClients); i++) { 
 		VisualizeSpecificClient(StructClients[i]);
 		cout << endl;
 	}
@@ -101,12 +102,12 @@ void VisualizeSpecificTravelPack(int TravelPackNumber, vector <TravelPack> Struc
 			cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << endl;
 	}
 		
-	cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year //Preencher data com 0
-		 << '/' << StructTravelPacks[TravelPackNumber].DepartureDate.Month
-		 << '/' << StructTravelPacks[TravelPackNumber].DepartureDate.Day << endl
+	cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year 
+		 << '/' << setw(2) << setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Month
+		 << '/' << setw(2) << setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Day << endl
 		 << "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
-		 << '/' << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
-		 << '/' << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << endl
+		 << '/' << setw(2) << setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
+		 << '/' << setw(2) << setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << endl
 		 << "Price per person: " << StructTravelPacks[TravelPackNumber].Price << endl
 		 << "Initially available seats: " << StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats << endl
 		 << "Sold seats: " << StructTravelPacks[TravelPackNumber].SoldSeats << endl; 		;
@@ -127,7 +128,7 @@ void VisualizeAvailableTravelPacks(vector <TravelPack> StructTravelPacks) {
 
 	switch (Selection) {
 		case 1:
-			for (int i = 0; i <= 2; i++) //Mudar para size(vector)
+			for (int i = 0; i < size(StructTravelPacks); i++)
 				VisualizeSpecificTravelPack(i, StructTravelPacks);
 			break;
 		case 2:
@@ -267,11 +268,13 @@ void SaveAgency(string File, Agency &StructAgency) {
 void SaveClients(string File, vector <Client> &StructClients) {
 	string Line;
 	ifstream Clients(File);
+	Client AuxStruct;
 	int Counter = 0, ClientCounter = 0;
 
 	if (Clients.is_open()) {
 		while (getline(Clients, Line)) {
 			if (Line == "::::::::::") {
+				StructClients.push_back(AuxStruct);
 				Counter = -1;
 				ClientCounter += 1;
 			}
@@ -279,24 +282,26 @@ void SaveClients(string File, vector <Client> &StructClients) {
 			else 
 				switch (Counter) {
 					case 0:		
-						StructClients[ClientCounter].Name = Line;						
+						AuxStruct.Name = Line;						
 						break;
 					case 1:
-						StructClients[ClientCounter].NIF = stoi(Line);
+						AuxStruct.NIF = stoi(Line);
 						break;
 					case 2:
-						StructClients[ClientCounter].Household = stoi(Line);
+						AuxStruct.Household = stoi(Line);
 						break;
 					case 3:
-						GetAddress(StructClients[ClientCounter].ClientAddress, Line);
+						GetAddress(AuxStruct.ClientAddress, Line);
 						break;
 					case 4:
-						StructClients[ClientCounter].AdquiredTravelPacks = GetAdquiredTravelPacks(Line);
+						AuxStruct.AdquiredTravelPacks = GetAdquiredTravelPacks(Line);
 						break;
 				}
 
 			Counter += 1;
 		} 
+
+		StructClients.push_back(AuxStruct);
 
 		Clients.close();
 	}
@@ -305,6 +310,7 @@ void SaveClients(string File, vector <Client> &StructClients) {
 void SaveTravelPacks(string File, vector <TravelPack> &StructTravelPacks) {
 	string Line;
 	ifstream TravelPacks(File);
+	TravelPack AuxStruct;
 
 	int Counter = 0, TravelPackCounter = 0;
 	bool FirstLine = true;
@@ -317,6 +323,7 @@ void SaveTravelPacks(string File, vector <TravelPack> &StructTravelPacks) {
 			}
 
 			else if (Line == "::::::::::") {
+				StructTravelPacks.push_back(AuxStruct);
 				Counter = -1;
 				TravelPackCounter += 1;
 			}
@@ -324,30 +331,32 @@ void SaveTravelPacks(string File, vector <TravelPack> &StructTravelPacks) {
 			else
 				switch (Counter) {
 				case 0:
-					StructTravelPacks[TravelPackCounter].Identifier = stoi(Line);
+					AuxStruct.Identifier = stoi(Line);
 					break;
 				case 1:
-					StructTravelPacks[TravelPackCounter].TravelDestination = GetTravelDestination(Line);
+					AuxStruct.TravelDestination = GetTravelDestination(Line);
 					break;
 				case 2:
-					GetDate(StructTravelPacks[TravelPackCounter].DepartureDate, Line);
+					GetDate(AuxStruct.DepartureDate, Line);
 					break;
 				case 3:
-					GetDate(StructTravelPacks[TravelPackCounter].ArrivalDate, Line);
+					GetDate(AuxStruct.ArrivalDate, Line);
 					break;
 				case 4:
-					StructTravelPacks[TravelPackCounter].Price = stoi(Line);
+					AuxStruct.Price = stoi(Line);
 					break;
 				case 5:
-					StructTravelPacks[TravelPackCounter].InitiallyAvailableSeats = stoi(Line);
+					AuxStruct.InitiallyAvailableSeats = stoi(Line);
 					break;
 				case 6:
-					StructTravelPacks[TravelPackCounter].SoldSeats = stoi(Line);
+					AuxStruct.SoldSeats = stoi(Line);
 					break;
 				}
 
 			Counter += 1;
 		}
+
+		StructTravelPacks.push_back(AuxStruct);
 
 		TravelPacks.close();
 	}
@@ -405,8 +414,8 @@ void Menu(string ClientsName, string TravelPacksName, vector <Client> StructClie
 int main() {
 	string Line, AgencyFile = "agency.txt"; //Deixar o utilizador inserir o nome do ficheiro
 	Agency StructAgency;
-	vector <Client> StructClients(50); //Fazer push_back (recorrendo a uma struct auxiliar)
-	vector <TravelPack> StructTravelPacks(50); //Fazer push_back (recorrendo a uma struct auxiliar)
+	vector <Client> StructClients; 
+	vector <TravelPack> StructTravelPacks; //Fazer push_back (recorrendo a uma struct auxiliar)
 
 	SaveAgency(AgencyFile, StructAgency);
 	SaveClients(StructAgency.ClientsFile, StructClients);

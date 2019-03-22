@@ -40,10 +40,10 @@
 *.log
 *.pdb
 *.idb
-*.cmd
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.users
+*.users
 
 x64/
 Debug/
