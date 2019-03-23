@@ -4,7 +4,7 @@
 #include "Structs.h"
 #include <string> //Verificar se é possível remover
 
-void SaveAgency(std::string File, Agency &StructAgency);
+Agency SaveAgency(std::string File);
 void SaveClients(std::string File, std::vector <Client> &StructClients);
 void SaveTravelPacks(std::string File, std::vector <TravelPack> &StructTravelPacks);
 

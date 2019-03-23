@@ -3,7 +3,8 @@
 #include "GetFunctions.h"
 #include "AuxiliaryFunctions.h"
 
-void SaveAgency(std::string File, Agency &StructAgency) {
+Agency SaveAgency(std::string File) {
+	Agency AuxStruct;
 	std::string Line;
 	std::ifstream Agency(File);
 	int Counter = 0;
@@ -11,24 +12,24 @@ void SaveAgency(std::string File, Agency &StructAgency) {
 	if (Agency.is_open()) {
 		while (getline(Agency, Line)) {
 			switch (Counter) {
-			case 0:
-				StructAgency.Name = Line;
-				break;
-			case 1:
-				StructAgency.NIF = stoi(Line);
-				break;
-			case 2:
-				StructAgency.URL = Line;
-				break;
-			case 3:
-				GetAddress(StructAgency.AgencyAddress, Line);
-				break;
-			case 4:
-				StructAgency.ClientsFile = Line;
-				break;
-			case 5:
-				StructAgency.TravelPacksFile = Line;
-				break;
+				case 0:
+					AuxStruct.Name = Line;
+					break;
+				case 1:
+					AuxStruct.NIF = stoi(Line);
+					break;
+				case 2:
+					AuxStruct.URL = Line;
+					break;
+				case 3:
+					GetAddress(AuxStruct.AgencyAddress, Line);
+					break;
+				case 4:
+					AuxStruct.ClientsFile = Line;
+					break;
+				case 5:
+					AuxStruct.TravelPacksFile = Line;
+					break;
 			}
 
 			Counter += 1;
@@ -36,6 +37,8 @@ void SaveAgency(std::string File, Agency &StructAgency) {
 
 		Agency.close();
 	}
+
+	return AuxStruct;
 }
 
 void SaveClients(std::string File, std::vector <Client> &StructClients) {

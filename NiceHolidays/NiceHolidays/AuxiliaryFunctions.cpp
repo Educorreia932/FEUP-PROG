@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include "Structs.h"
 #include "AuxiliaryFunctions.h"
 
 std::string Trim(std::string s) {
@@ -48,4 +49,12 @@ std::vector <std::string> GetTravelDestination(std::string Line) {
 	Result.push_back(Trim(AuxString));
 
 	return Result;
+}
+
+bool IsAvailable(int TravelPackBumber, std::vector <TravelPack> StructTravelPacks) {
+	if (StructTravelPacks[TravelPackBumber].Identifier > 0)
+		return true;
+
+	else
+		return false;
 }

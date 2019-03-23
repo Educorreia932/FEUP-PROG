@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include "Structs.h"
+#include "AuxiliaryFunctions.h"
 #include "VisualizeFunctions.h"
 
 void VisualizeSpecificClient(int ClientNumber, std::vector <Client> StructClients) {
@@ -33,19 +34,19 @@ void VisualizeAgencyClients(std::vector <Client> StructClients) {
 
 void VisualizeSpecificTravelPack(int TravelPackNumber, std::vector <TravelPack> StructTravelPacks) {
 	std::cout << std::endl
-		<< "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << std::endl
-		<< "Travel destination: ";
+<< "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << std::endl
+<< "Travel destination: ";
 
-	for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
-		if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
-			std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << ", ";
+for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
+	if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
+		std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << ", ";
 
-		else
-			std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << std::endl;
-	}
+	else
+		std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << std::endl;
+}
 
-	std::cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year
-		<< '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Month
+std::cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year
+		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Month
 		<< '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Day << std::endl
 		<< "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
 		<< '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
@@ -61,25 +62,28 @@ void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 	char FirstSlash, SecondSlash;
 
 	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl
-		<< "1) All." << std::endl
-		<< "2) All related to a specific travel destination." << std::endl
-		<< "3) All between two dates." << std::endl
-		<< "4) All related to a specific travel destination and between two dates." << std::endl;
+		      << "1) All." << std::endl
+		 	  << "2) All related to a specific travel destination." << std::endl
+			  << "3) All between two dates." << std::endl
+			  << "4) All related to a specific travel destination and between two dates." << std::endl;
 
 	std::cin >> Selection;
 	std::cin.ignore();
 
 	switch (Selection) {
 		case 1:
-			for (int i = 0; i < size(StructTravelPacks); i++)
-				VisualizeSpecificTravelPack(i, StructTravelPacks);
+			for (int i = 0; i < size(StructTravelPacks); i++) {
+				if (IsAvailable(i, StructTravelPacks))
+					VisualizeSpecificTravelPack(i, StructTravelPacks);
+			}
 			break;
 		case 2:
 			std::cout << std::endl << "Insert the travel destination: ";
 			getline(std::cin, AuxString);
 
 			for (int i = 0; i <= 2; i++) {
-				if (find(StructTravelPacks[i].TravelDestination.begin(), StructTravelPacks[i].TravelDestination.end(), AuxString) != StructTravelPacks[i].TravelDestination.end())
+				if (find(StructTravelPacks[i].TravelDestination.begin(), StructTravelPacks[i].TravelDestination.end(), AuxString) != StructTravelPacks[i].TravelDestination.end() 
+					&& IsAvailable(i, StructTravelPacks))
 					VisualizeSpecificTravelPack(i, StructTravelPacks);
 			}
 			break;
@@ -92,7 +96,8 @@ void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 
 			for (int i = 0; i <= 2; i++) {
 				if (StructTravelPacks[i].DepartureDate.Year >= AuxYear1 && StructTravelPacks[i].DepartureDate.Month >= AuxMonth1 && StructTravelPacks[i].DepartureDate.Day >= AuxDay1
-					&& StructTravelPacks[i].DepartureDate.Year <= AuxYear2 && StructTravelPacks[i].DepartureDate.Month <= AuxMonth2 && StructTravelPacks[i].DepartureDate.Day <= AuxDay2)
+					&& StructTravelPacks[i].DepartureDate.Year <= AuxYear2 && StructTravelPacks[i].DepartureDate.Month <= AuxMonth2 && StructTravelPacks[i].DepartureDate.Day <= AuxDay2
+					&& IsAvailable(i, StructTravelPacks))
 					VisualizeSpecificTravelPack(i, StructTravelPacks);
 			}
 			break;
@@ -109,16 +114,17 @@ void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 			for (int i = 0; i <= 2; i++) {
 				if (StructTravelPacks[i].DepartureDate.Year >= AuxYear1 && StructTravelPacks[i].DepartureDate.Month >= AuxMonth1 && StructTravelPacks[i].DepartureDate.Day >= AuxDay1
 					&& StructTravelPacks[i].DepartureDate.Year <= AuxYear2 && StructTravelPacks[i].DepartureDate.Month <= AuxMonth2 && StructTravelPacks[i].DepartureDate.Day <= AuxDay2
-					&& find(StructTravelPacks[i].TravelDestination.begin(), StructTravelPacks[i].TravelDestination.end(), AuxString) != StructTravelPacks[i].TravelDestination.end())
+					&& find(StructTravelPacks[i].TravelDestination.begin(), StructTravelPacks[i].TravelDestination.end(), AuxString) != StructTravelPacks[i].TravelDestination.end() 
+					&& IsAvailable(i, StructTravelPacks))
 					VisualizeSpecificTravelPack(i, StructTravelPacks);
-		}
+			}
 
-		break;
+			break;
 	}
 }
 
-void VisualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks) { //To Do
-	int Selection;
+void VisualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks, std::vector <Client> StructClients) { //To Do
+	int Selection, AuxNumber;
 
 	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl
 		<< "1) Related a specific client." << std::endl
@@ -128,7 +134,18 @@ void VisualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks) { //To
 	std::cin.ignore();
 
 	switch (Selection) {
-		case 1:
+	case 1:
+		std::cout << std::endl << "Insert the client number: ";
+		std::cin >> AuxNumber;
+		std::cin.ignore();
+
+		for (int i1 = 0; i1 < size(StructClients[AuxNumber].AdquiredTravelPacks); i1++) {
+			for (int i2 = 0; i2 < size(StructTravelPacks); i2++) {
+				if (StructClients[AuxNumber].AdquiredTravelPacks[i1] == abs(StructTravelPacks[i2].Identifier))
+					VisualizeSpecificTravelPack(i2, StructTravelPacks);
+			}
+		}
+			
 			break;
 		case 2:
 			break;

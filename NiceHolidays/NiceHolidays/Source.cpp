@@ -1,4 +1,4 @@
-/*                                                       |
+ï»¿/*                                                       |
 												   --====|====--
 														 |  
 
@@ -12,35 +12,35 @@
 										  \\_//    '._       _.'    \\_//
 										   `"`        ``---``        `"` 
 
-	1. Ler e guardar a informação da agência, dos clientes e dos pacotes turísticos armazenada em
-	ficheiros.
-	2. Gerir os clientes e pacotes turísticos: criar, alterar e remover um cliente ou um pacote turístico.
-	3. Gerar e visualizar de modo formatado a informação de um cliente especificado.
-	4. Gerar e visualizar de modo formatado a informação de todos os clientes da agência.
-	5. Gerar e visualizar de modo formatado os pacotes turísticos disponíveis (todos, todos relativos a
-	um destino específico, todos entre duas datas, todos os relativos a um destino específico e entre
-	duas datas).
-	6. Gerar e visualizar de modo formatado os pacotes turísticos vendidos (a um cliente específico, a
-	todos os clientes).
-	7. Efetuar a compra de um pacote turístico por um cliente.
-	8. Calcular e visualizar o número e o valor total de pacotes vendidos.
+	1. Ler e guardar a informaÃ§Ã£o da agÃªncia, dos clientes e dos pacotes turÃ­sticos armazenada em
+	ficheiros. âœ”
+	2. Gerir os clientes e pacotes turÃ­sticos: criar, alterar e remover um cliente ou um pacote turÃ­stico. 
+	3. Gerar e visualizar de modo formatado a informaÃ§Ã£o de um cliente especificado. âœ”
+	4. Gerar e visualizar de modo formatado a informaÃ§Ã£o de todos os clientes da agÃªncia. âœ”
+	5. Gerar e visualizar de modo formatado os pacotes turÃ­sticos disponÃ­veis (todos, todos relativos a
+	um destino especÃ­fico, todos entre duas datas, todos os relativos a um destino especÃ­fico e entre
+	duas datas). âœ”
+	6. Gerar e visualizar de modo formatado os pacotes turÃ­sticos vendidos (a um cliente especÃ­fico, a
+	todos os clientes). 
+	7. Efetuar a compra de um pacote turÃ­stico por um cliente.
+	8. Calcular e visualizar o nÃºmero e o valor total de pacotes vendidos.
 
 
-	1 - Ler os ficheiros:
-		a) "agency.txt" (informação estática da agência)
-	    b) "clients.txt" (por exemplo)
-	    c) "packs.txt" (por exemplo)
+	1 - Ler os ficheiros: âœ”
+		a) "agency.txt" (informaÃ§Ã£o estÃ¡tica da agÃªncia) âœ”
+	    b) "clients.txt" (por exemplo) âœ”
+	    c) "packs.txt" (por exemplo) âœ”
 
-	2 - Guardar os dados lidos dos ficheiros nas estruturas de dados internas do programa
+	2 - Guardar os dados lidos dos ficheiros nas estruturas de dados internas do programa âœ”
 
-	3 - Exibir um menu onde aparecem as opções que implementam as funcionalidades
-		a) Gestão de clientes
-		b) Gestão de pacotes turísticos
-		c) Visualização de informação (sobre clientes e sobre pacote turísticos)
+	3 - Exibir um menu onde aparecem as opÃ§Ãµes que implementam as funcionalidades âœ”
+		a) GestÃ£o de clientes 
+		b) GestÃ£o de pacotes turÃ­sticos
+		c) VisualizaÃ§Ã£o de informaÃ§Ã£o (sobre clientes e sobre pacote turÃ­sticos)
 
-	4 - Atualizar os dados nos ficheiros antes do fim da execução (se necessário)
+	4 - Atualizar os dados nos ficheiros antes do fim da execuÃ§Ã£o (se necessÃ¡rio)
 	
-	PS: Tomar precauções contra entras válidas (i.e. valores fora da gama admissível)
+	PS: Tomar precauÃ§Ãµes contra entras vÃ¡lidas (i.e. valores fora da gama admissÃ­vel)
 
 */
 
@@ -106,7 +106,7 @@ void Menu(vector <Client> StructClients, vector <TravelPack> StructTravelPacks) 
 			VisualizeAvailableTravelPacks(StructTravelPacks);
 			break;
 		case 6:
-			VisualizeSoldTravelPacks(StructTravelPacks);
+			VisualizeSoldTravelPacks(StructTravelPacks, StructClients);
 			break;
 		case 7:
 			BuyTravelPack(StructTravelPacks);
@@ -115,12 +115,12 @@ void Menu(vector <Client> StructClients, vector <TravelPack> StructTravelPacks) 
 }
 
 int main() {
-	string Line, AgencyFile = "agency.txt"; //Deixar o utilizador inserir o nome do ficheiro
+	string AgencyFile = "agency.txt"; //Deixar o utilizador inserir o nome do ficheiro
 	Agency StructAgency;
 	vector <Client> StructClients; 
 	vector <TravelPack> StructTravelPacks; 
 
-	SaveAgency(AgencyFile, StructAgency);
+	StructAgency = SaveAgency(AgencyFile);
 	SaveClients(StructAgency.ClientsFile, StructClients);
 	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 

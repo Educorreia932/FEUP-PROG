@@ -6,5 +6,6 @@
 std::string Trim(std::string s);
 std::vector <int> GetAdquiredTravelPacks(std::string Line);
 std::vector <std::string> GetTravelDestination(std::string Line);
+bool IsAvailable(int TravelPackBumber, std::vector <TravelPack> StructTravelPacks);
 
 #endif //AUX_FUNCTIONS
