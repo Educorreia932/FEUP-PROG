@@ -38,7 +38,10 @@ void VisualizeSpecificTravelPack(int TravelPackNumber, std::vector <TravelPack> 
               << "Travel destination: ";
 
 for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
-	if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
+	if (i == 0)
+		std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << " - ";
+
+	else if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
 		std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << ", ";
 
 	else
@@ -127,24 +130,24 @@ void VisualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks, std::v
 	int Selection, AuxNumber;
 
 	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl
-		<< "1) Related a specific client." << std::endl
-		<< "2) Related to any client" << std::endl;
+		      << "1) Related a specific client." << std::endl
+			  << "2) Related to any client" << std::endl;
 
 	std::cin >> Selection;
 	std::cin.ignore();
 
 	switch (Selection) {
-	case 1:
-		std::cout << std::endl << "Insert the client number: ";
-		std::cin >> AuxNumber;
-		std::cin.ignore();
+		case 1:
+			std::cout << std::endl << "Insert the client number: ";
+			std::cin >> AuxNumber;
+			std::cin.ignore();
 
-		for (int i1 = 0; i1 < size(StructClients[AuxNumber].AdquiredTravelPacks); i1++) {
-			for (int i2 = 0; i2 < size(StructTravelPacks); i2++) {
-				if (StructClients[AuxNumber].AdquiredTravelPacks[i1] == abs(StructTravelPacks[i2].Identifier))
-					VisualizeSpecificTravelPack(i2, StructTravelPacks);
+			for (int i1 = 0; i1 < size(StructClients[AuxNumber].AdquiredTravelPacks); i1++) {
+				for (int i2 = 0; i2 < size(StructTravelPacks); i2++) {
+					if (StructClients[AuxNumber].AdquiredTravelPacks[i1] == abs(StructTravelPacks[i2].Identifier))
+						VisualizeSpecificTravelPack(i2, StructTravelPacks);
+				}
 			}
-		}
 			
 			break;
 		case 2:

@@ -12,45 +12,6 @@ std::string Trim(std::string s) {
 	return s;
 }
 
-std::vector <int> GetAdquiredTravelPacks(std::string Line) {
-	std::vector <int> Result;
-	std::string AuxString;
-
-	for (int i = 0; i < Line.length(); i++) {
-		if (Line[i] == ';') {
-			Result.push_back(stoi(AuxString));
-			AuxString = "";
-		}
-
-		else
-			AuxString += Line[i];
-	}
-
-	Result.push_back(stoi(AuxString));
-
-	return Result;
-}
-
-std::vector <std::string> GetTravelDestination(std::string Line) {
-	std::vector <std::string> Result;
-	std::string AuxString;
-
-	for (int i = 0; i < Line.length(); i++) {
-		if (Line[i] == '–' || Line[i] == ',' || Line[i] == '-') {
-			Result.push_back(Trim(AuxString));
-			AuxString = "";
-		}
-
-		else {
-			AuxString += Line[i];
-		}
-	}
-
-	Result.push_back(Trim(AuxString));
-
-	return Result;
-}
-
 bool IsAvailable(int TravelPackBumber, std::vector <TravelPack> StructTravelPacks) {
 	if (StructTravelPacks[TravelPackBumber].Identifier > 0)
 		return true;
