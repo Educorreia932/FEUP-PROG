@@ -7,14 +7,14 @@
 
 void VisualizeSpecificClient(int ClientNumber, std::vector <Client> StructClients) {
 	std::cout << "Name: " << StructClients[ClientNumber].Name << std::endl
-		<< "NIF: " << StructClients[ClientNumber].NIF << std::endl
-		<< "Household: " << StructClients[ClientNumber].Household << std::endl
-		<< "Address: " << StructClients[ClientNumber].ClientAddress.Street << ", "
-		<< StructClients[ClientNumber].ClientAddress.DoorNumber << ", "
-		<< StructClients[ClientNumber].ClientAddress.Apartment << ", "
-		<< StructClients[ClientNumber].ClientAddress.ZIPCode << ", "
-		<< StructClients[ClientNumber].ClientAddress.Province << std::endl
-		<< "Adquired Travel Packs: ";
+	          << "NIF: " << StructClients[ClientNumber].NIF << std::endl
+		      << "Household: " << StructClients[ClientNumber].Household << std::endl
+		      << "Address: " << StructClients[ClientNumber].ClientAddress.Street << ", "
+		      << StructClients[ClientNumber].ClientAddress.DoorNumber << ", "
+		      << StructClients[ClientNumber].ClientAddress.Apartment << ", "
+		      << StructClients[ClientNumber].ClientAddress.ZIPCode << ", "
+		      << StructClients[ClientNumber].ClientAddress.Province << std::endl
+		      << "Adquired Travel Packs: ";
 
 	for (int i = 0; i < size(StructClients[ClientNumber].AdquiredTravelPacks); i++) {
 		if (i < size(StructClients[ClientNumber].AdquiredTravelPacks) - 1)
@@ -34,8 +34,8 @@ void VisualizeAgencyClients(std::vector <Client> StructClients) {
 
 void VisualizeSpecificTravelPack(int TravelPackNumber, std::vector <TravelPack> StructTravelPacks) {
 	std::cout << std::endl
-<< "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << std::endl
-<< "Travel destination: ";
+              << "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << std::endl
+              << "Travel destination: ";
 
 for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
 	if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
@@ -47,13 +47,13 @@ for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination);
 
 std::cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year
 		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Month
-		<< '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Day << std::endl
-		<< "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
-		<< '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
-		<< '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << std::endl
-		<< "Price per person: " << StructTravelPacks[TravelPackNumber].Price << std::endl
-		<< "Initially available seats: " << StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats << std::endl
-		<< "Sold seats: " << StructTravelPacks[TravelPackNumber].SoldSeats << std::endl;
+		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Day << std::endl
+		  << "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
+	      << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
+		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << std::endl
+		  << "Price per person: " << StructTravelPacks[TravelPackNumber].Price << std::endl
+		  << "Initially available seats: " << StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats << std::endl
+		  << "Sold seats: " << StructTravelPacks[TravelPackNumber].SoldSeats << std::endl;
 }
 
 void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {

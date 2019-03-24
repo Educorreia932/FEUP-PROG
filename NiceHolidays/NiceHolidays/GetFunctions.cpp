@@ -2,7 +2,7 @@
 #include "GetFunctions.h"
 #include "AuxiliaryFunctions.h"
 
-void GetAddress(Address &Address, std::string Line) {
+void GetAddress(Address &Address, std::string Line) { // Colocar a retornar struct
 	int Counter = 0;
 	std::string AuxString;
 
