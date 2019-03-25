@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <fcntl.h>
+#include <io.h>
 #include "Structs.h"
 #include "AuxiliaryFunctions.h"
 #include "VisualizeFunctions.h"
@@ -38,9 +40,9 @@ void VisualizeSpecificTravelPack(int TravelPackNumber, std::vector <TravelPack> 
               << "Travel destination: ";
 
 for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
-	if (i == 0)
+	if (i == 0) 
 		std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << " - ";
-
+		
 	else if (i < size(StructTravelPacks[TravelPackNumber].TravelDestination) - 1)
 		std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << ", ";
 

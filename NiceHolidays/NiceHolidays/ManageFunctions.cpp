@@ -16,7 +16,7 @@ Client CreateClient(std::vector <Client> &StructClients) {
 	std::cin.ignore();
 	std::cout << "What's the address of the new client (insert in the format 'Street / Door Number / Apartment / ZIP Code / Province')? ";
 	getline(std::cin, ClientAddress);
-	GetAddress(AuxStruct.ClientAddress, ClientAddress);
+	GetAddress(AuxStruct.ClientAddress, ClientAddress); //Mudar para aceitar sem barras ou menos que o suposto
 	std::cout << "Which travel packs did the new client adquire (separated by ';'): ";
 	getline(std::cin, ClientAdquiredTravelPacks);
 	AuxStruct.AdquiredTravelPacks = GetAdquiredTravelPacks(ClientAdquiredTravelPacks);
@@ -28,12 +28,12 @@ void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 	int Selection;
 
 	std::cout << "What do you want to change in the client? Insert the corresponding key." << std::endl << std::endl
-		<< "1) Everything." << std::endl
-		<< "2) The name." << std::endl
-		<< "3) The NIF." << std::endl
-		<< "4) The household." << std::endl
-		<< "5) The address." << std::endl
-		<< "6) The adquired travel packs." << std::endl;
+		      << "1) Everything." << std::endl
+		      << "2) The name." << std::endl
+		      << "3) The NIF." << std::endl
+		      << "4) The household." << std::endl
+		      << "5) The address." << std::endl
+		      << "6) The adquired travel packs." << std::endl; //Mudar nas Travel Packs conforme o household
 	std::cin >> Selection;
 	std::cin.ignore();
 	std::cout << std::endl;
@@ -73,9 +73,9 @@ void ManageClients(std::vector <Client> &StructClients) {
 	int Selection, ClientNumber;
 
 	std::cout << "What do you want to do? Insert the corresponding key." << std::endl << std::endl
-		<< "1) Create a new client." << std::endl
-		<< "2) Change the information of a client." << std::endl
-		<< "3) Remove an existent client." << std::endl;
+		      << "1) Create a new client." << std::endl
+		      << "2) Change the information of a client." << std::endl
+		      << "3) Remove an existent client." << std::endl;
 	std::cin >> Selection;
 	std::cin.ignore();
 	std::cout << std::endl;
