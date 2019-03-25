@@ -11,7 +11,7 @@ void VisualizeSpecificClient(int ClientNumber, std::vector <Client> StructClient
 	std::cout << "Name: " << StructClients[ClientNumber].Name << std::endl
 	          << "NIF: " << StructClients[ClientNumber].NIF << std::endl
 		      << "Household: " << StructClients[ClientNumber].Household << std::endl
-		      << "Address: " << StructClients[ClientNumber].ClientAddress.Street << ", "
+		      << "Address: " << StructClients[ClientNumber].ClientAddress.Street << ", " //Modify to paragrafh and insert blank spaces
 		      << StructClients[ClientNumber].ClientAddress.DoorNumber << ", "
 		      << StructClients[ClientNumber].ClientAddress.Apartment << ", "
 		      << StructClients[ClientNumber].ClientAddress.ZIPCode << ", "

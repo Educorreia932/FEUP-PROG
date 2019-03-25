@@ -52,14 +52,21 @@
 #include "SaveFunctions.h"
 #include "VisualizeFunctions.h"
 #include "ManageFunctions.h"
+#include "RegistFunctions.h"
 
 using namespace std;
 
 void BuyTravelPack(vector <TravelPack> StructTravelPacks) {
 }
 
-void Menu(vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks) {
+void Quit(Agency StructAgency, vector <Client> StructClients, vector <TravelPack> StructTravelPacks) {
+	RegistClients(StructAgency, StructClients);
+}
+
+void Menu(Agency StructAgency, vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks) {
 	int Selection;
+
+	//system("cls");
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
 		 << "1) Manage clients." << endl
@@ -69,7 +76,7 @@ void Menu(vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks
 		 << "5) Visualize available travel packs." << endl
 	 	 << "6) Visualize sold travel packs." << endl
 		 << "7) Buy a travel pack for a client." << endl 
-		 << "0) Exit the program" << endl;
+		 << "0) Exit the program and save the alterations made." << endl;
 
 	cin >> Selection;
 	cin.ignore();
@@ -78,11 +85,11 @@ void Menu(vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks
 	switch (Selection) {
 		case 1:
 			ManageClients(StructClients);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 2:
 			ManageTravelPacks(StructTravelPacks);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 3:
 			int ClientNumber;
@@ -93,24 +100,27 @@ void Menu(vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks
 			cout << endl;
 
 			VisualizeSpecificClient(ClientNumber, StructClients);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 4:
 			VisualizeAgencyClients(StructClients);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 5:
 			VisualizeAvailableTravelPacks(StructTravelPacks);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 6:
 			VisualizeSoldTravelPacks(StructTravelPacks, StructClients);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 7:
 			BuyTravelPack(StructTravelPacks);
-			Menu(StructClients, StructTravelPacks);
+			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;	
+		case 0:
+			Quit(StructAgency, StructClients, StructTravelPacks);
+			break;
 	}
 }
 
@@ -124,7 +134,7 @@ int main() {
 	SaveClients(StructAgency.ClientsFile, StructClients);
 	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 
-	Menu(StructClients, StructTravelPacks);
+	Menu(StructAgency, StructClients, StructTravelPacks);
 
 	return 0;
 }

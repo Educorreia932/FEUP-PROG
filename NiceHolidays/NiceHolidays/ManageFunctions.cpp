@@ -26,6 +26,7 @@ Client CreateClient(std::vector <Client> &StructClients) {
 
 void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 	int Selection;
+	std::string ClientAddress;
 
 	std::cout << "What do you want to change in the client? Insert the corresponding key." << std::endl << std::endl
 		      << "1) Everything." << std::endl
@@ -39,23 +40,30 @@ void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 	std::cout << std::endl;
 
 	switch (Selection) {
-	case 2:
-		std::cout << "Insert the new name of the client: ";
-		getline(std::cin, StructClients[ClientNumber].Name);
-		break;
-	case 3:
-		std::cout << "Insert the new NIF of the client: ";
-		std::cin >> StructClients[ClientNumber].NIF;
-		std::cin.ignore();
-		break;
-	case 4:
-		std::cout << "Insert the new household of the client: ";
-		std::cin >> StructClients[ClientNumber].Household;
-		std::cin.ignore();
-		break;
-	case 5:
-		std::cout << "Insert the new address of the client: ";
-		break;
+		case 2:
+			std::cout << "Insert the new name of the client: ";
+			getline(std::cin, StructClients[ClientNumber].Name);
+			break;
+		case 3:
+			std::cout << "Insert the new NIF of the client: ";
+			std::cin >> StructClients[ClientNumber].NIF;
+			std::cin.ignore();
+			break;
+		case 4:
+			std::cout << "Insert the new household of the client: ";
+			std::cin >> StructClients[ClientNumber].Household;
+			std::cin.ignore();
+			break;
+		case 5:			
+			std::cout << "Insert the new address of the client (insert in the format 'Street / Door Number / Apartment / ZIP Code / Province'): ";
+			getline(std::cin, ClientAddress);
+			GetAddress(StructClients[ClientNumber].ClientAddress, ClientAddress);
+			break;
+		case 6:
+			std::string ClientAdquiredTravelPacks;
+			getline(std::cin, ClientAdquiredTravelPacks);
+			StructClients[ClientNumber].AdquiredTravelPacks = GetAdquiredTravelPacks(ClientAdquiredTravelPacks);
+			break;
 	}
 }
 
