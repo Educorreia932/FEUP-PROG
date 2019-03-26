@@ -60,13 +60,13 @@ void BuyTravelPack(vector <TravelPack> StructTravelPacks) {
 }
 
 void Quit(Agency StructAgency, vector <Client> StructClients, vector <TravelPack> StructTravelPacks) {
+	RegistIdentifier(StructTravelPacks);
 	RegistClients(StructAgency, StructClients);
+	RegistTravelPacks(StructAgency, StructTravelPacks);
 }
 
-void Menu(Agency StructAgency, vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks) {
+void Menu(Agency StructAgency, vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks) { //Colocar a voltar para trás
 	int Selection;
-
-	//system("cls");
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
 		 << "1) Manage clients." << endl
@@ -84,7 +84,9 @@ void Menu(Agency StructAgency, vector <Client> &StructClients, vector <TravelPac
 
 	switch (Selection) {
 		case 1:
+			system("cls");
 			ManageClients(StructClients);
+			system("cls");
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 2:
@@ -93,24 +95,28 @@ void Menu(Agency StructAgency, vector <Client> &StructClients, vector <TravelPac
 			break;
 		case 3:
 			int ClientNumber;
+			system("cls");
 
 			cout << "Insert the client number: "; 
 			cin >> ClientNumber;
 			cin.ignore();
 			cout << endl;
-
+			
 			VisualizeSpecificClient(ClientNumber, StructClients);
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 4:
+			system("cls");
 			VisualizeAgencyClients(StructClients);
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 5:
+			system("cls");
 			VisualizeAvailableTravelPacks(StructTravelPacks);
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 6:
+			system("cls");
 			VisualizeSoldTravelPacks(StructTravelPacks, StructClients);
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
