@@ -1,7 +1,6 @@
 #pragma once
 #ifndef VIS_FUNCTIONS
 #define VIS_FUNCTIONS
-#include <vector>
 #include "Structs.h"
 
 void VisualizeSpecificClient(int ClientNumber, std::vector <Client> StructClients);

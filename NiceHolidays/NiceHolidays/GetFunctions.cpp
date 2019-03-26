@@ -80,12 +80,12 @@ void GetDate(Date &Date, std::string Line) {
 	for (int i = 0; i < Line.length(); i++) {
 		if (Line[i] == '/') {
 			switch (Counter) {
-			case 0:
-				Date.Year = stoi(StringAux);
-				break;
-			case 1:
-				Date.Month = stoi(StringAux);
-				break;
+				case 0:
+					Date.Year = stoi(StringAux);
+					break;
+				case 1:
+					Date.Month = stoi(StringAux);
+					break;
 			}
 
 			StringAux = "";

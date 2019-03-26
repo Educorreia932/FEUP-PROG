@@ -1,6 +1,8 @@
 #include <iostream>
+#include "ManageClients.h"
 #include "Structs.h"
 #include "GetFunctions.h"
+#include "ValidateFunctions.h"
 
 Client CreateClient(std::vector <Client> &StructClients) {
 	Client AuxStruct;
@@ -8,15 +10,30 @@ Client CreateClient(std::vector <Client> &StructClients) {
 
 	std::cout << "What's the name of the new client? ";
 	getline(std::cin, AuxStruct.Name);
+
 	std::cout << "What's the NIF of the new client? ";
 	std::cin >> AuxStruct.NIF;
 	std::cin.ignore();
+
+	while (!ValidateNumber(AuxStruct.NIF, 'N')) {
+		std::cout << "Invalid input! Insert again: ";
+		std::cin >> AuxStruct.NIF;
+	}
+	
 	std::cout << "What's the household of the new client? ";
 	std::cin >> AuxStruct.Household;
+
+	while (!ValidateNumber(AuxStruct.Household, 'H')) {
+		std::cout << "Invalid input! Insert again: ";
+		std::cin >> AuxStruct.Household;
+	}
+
 	std::cin.ignore();
-	std::cout << "What's the address of the new client (insert in the format 'Street / Door Number / Apartment / ZIP Code / Province')? ";
+
+	std::cout << "What's the address of the new client (insert in the format 'Street / Door Number / Apartment / ZIP Code / Province')? " << std::endl;;
 	getline(std::cin, ClientAddress);
 	GetAddress(AuxStruct.ClientAddress, ClientAddress); //Mudar para aceitar sem barras ou menos que o suposto
+
 	std::cout << "Which travel packs did the new client adquire (separated by ';'): ";
 	getline(std::cin, ClientAdquiredTravelPacks);
 	AuxStruct.AdquiredTravelPacks = GetAdquiredTravelPacks(ClientAdquiredTravelPacks);
@@ -47,11 +64,23 @@ void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 		case 3:
 			std::cout << "Insert the new NIF of the client: ";
 			std::cin >> StructClients[ClientNumber].NIF;
+
+			while (!ValidateNumber(StructClients[ClientNumber].NIF, 'N')) {
+				std::cout << "Invalid input! Insert again: ";
+				std::cin >> StructClients[ClientNumber].NIF;
+			}
+
 			std::cin.ignore();
 			break;
 		case 4:
 			std::cout << "Insert the new household of the client: ";
 			std::cin >> StructClients[ClientNumber].Household;
+
+			while (!ValidateNumber(StructClients[ClientNumber].Household, 'H')) {
+				std::cout << "Invalid input! Insert again: ";
+				std::cin >> StructClients[ClientNumber].Household;
+			}
+
 			std::cin.ignore();
 			break;
 		case 5:			
@@ -83,16 +112,19 @@ void ManageClients(std::vector <Client> &StructClients) {
 	std::cout << "What do you want to do? Insert the corresponding key." << std::endl << std::endl
 		      << "1) Create a new client." << std::endl
 		      << "2) Change the information of a client." << std::endl
-		      << "3) Remove an existent client." << std::endl;
+		      << "3) Remove an existent client." << std::endl
+		      << "0) Go back." << std::endl;
 	std::cin >> Selection;
 	std::cin.ignore();
 	std::cout << std::endl;
 
 	switch (Selection) {
 		case 1:
+			system("cls");
 			StructClients.push_back(CreateClient(StructClients));
 			break;
 		case 2:
+			system("cls");
 			std::cout << "Insert the number of the client that you want to change: ";
 			std::cin >> ClientNumber;
 			std::cin.ignore();
@@ -101,6 +133,7 @@ void ManageClients(std::vector <Client> &StructClients) {
 			ChangeClient(ClientNumber, StructClients);
 			break;
 		case 3:
+			system("cls");
 			std::cout << "Insert the number of the client that you want to remove: "; //Change to NIF or something else
 			std::cin >> ClientNumber;
 			std::cin.ignore();
@@ -108,89 +141,8 @@ void ManageClients(std::vector <Client> &StructClients) {
 
 			RemoveClient(ClientNumber, StructClients);
 			break;
-	}
-}
-
-void CreateTravelPack(std::vector <TravelPack> &StructTravelPacks) {
-
-}
-
-void ChangeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTravelPacks) {
-	int Selection;
-	std::string TravelPackDestination;
-
-	std::cout << "What do you want to change in the travel pack? Insert the corresponding key." << std::endl << std::endl
-			  << "1) Everything." << std::endl
-			  << "2) The identifier." << std::endl
-			  << "3) The travel destination." << std::endl
-			  << "4) The departure date." << std::endl
-			  << "5) The arrival date." << std::endl
-			  << "6) The price." << std::endl
-			  << "7) The initially available seats." << std::endl
-			  << "8) The sold seats." << std::endl;
-	std::cin >> Selection;
-	std::cin.ignore();
-	std::cout << std::endl;
-
-	switch (Selection) {
-		case 1:
-			break;
-		case 2:
-			std::cout << "Insert the new identifier of the travel pack: "; 
-			std::cin >> StructTravelPacks[TravelPackNumber].Identifier;
-			std::cin.ignore();
-			break;
-		case 3: 
-			std::cout << "Insert the new travel destination of the the travel pack (insert in the format 'Region - Place1, Place2...'): " << std::endl;
-			getline(std::cin, TravelPackDestination);
-			StructTravelPacks[TravelPackNumber].TravelDestination = GetTravelDestination(TravelPackDestination);
-			break;
-		case 4:
-			break;
-	}
-}
-
-void RemoveTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTravelPacks) {
-	std::vector <TravelPack> AuxVector;
-
-	for (int i = 0; i < size(StructTravelPacks); i++)
-		if (i != TravelPackNumber)
-			AuxVector.push_back(StructTravelPacks[i]);
-
-	StructTravelPacks = AuxVector;
-}
-
-void ManageTravelPacks(std::vector <TravelPack> &StructTravelPacks) {
-	int Selection, TravelPackNumber;
-
-	std::cout << "What do you want to do ? Insert the corresponding key." << std::endl << std::endl
-		      << "1) Create a new travel pack." << std::endl
-		      << "2) Change the information of a travel pack." << std::endl
-		      << "3) Remove an existent travel pack." << std::endl;
-
-	std::cin >> Selection;
-	std::cin.ignore();
-	std::cout << std::endl;
-
-	switch (Selection) {
-		case 1:
-			CreateTravelPack(StructTravelPacks);
-			break;
-		case 2:
-			std::cout << "Insert the number of the travel pack that you want to change: ";
-			std::cin >> TravelPackNumber;
-			std::cin.ignore();
-			std::cout << std::endl;
-
-			ChangeTravelPack(TravelPackNumber, StructTravelPacks);
-			break;
-		case 3:
-			std::cout << "Insert the number of the travel pack that you want to change: ";
-			std::cin >> TravelPackNumber;
-			std::cin.ignore();
-			std::cout << std::endl;
-
-			RemoveTravelPack(TravelPackNumber, StructTravelPacks);
+		case 0:
+			system("cls");
 			break;
 	}
 }

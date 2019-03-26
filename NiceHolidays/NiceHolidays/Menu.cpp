@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Structs.h"
-#include "ManageFunctions.h"
+#include "ManageClients.h"
+#include "ManageTravelPacks.h"
 #include "VisualizeFunctions.h"
 #include "RegistFunctions.h"
 
@@ -35,6 +36,7 @@ void Menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector 
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 2:
+			system("cls");
 			ManageTravelPacks(StructTravelPacks);
 			Menu(StructAgency, StructClients, StructTravelPacks);
 			break;

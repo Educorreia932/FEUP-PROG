@@ -19,13 +19,13 @@ int numberOfdays(int month, int year) {
 			else
 				return 28;
 		case 4:
-			return 31;
+			return 30;
 		case 6:
-			return 31;
+			return 30;
 		case 9:
-			return 31;
+			return 30;
 		case 11:
-			return 31;
+			return 310;
 		default:
 			return 31;
 	}

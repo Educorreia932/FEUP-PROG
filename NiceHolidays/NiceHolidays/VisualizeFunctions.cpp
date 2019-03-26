@@ -6,6 +6,7 @@
 #include "Structs.h"
 #include "AuxiliaryFunctions.h"
 #include "VisualizeFunctions.h"
+#include "Menu.h"
 
 void VisualizeSpecificClient(int ClientNumber, std::vector <Client> StructClients) {
 	std::cout << "Name: " << StructClients[ClientNumber].Name << std::endl
@@ -70,7 +71,8 @@ void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 		      << "1) All." << std::endl
 		 	  << "2) All related to a specific travel destination." << std::endl
 			  << "3) All between two dates." << std::endl
-			  << "4) All related to a specific travel destination and between two dates." << std::endl;
+			  << "4) All related to a specific travel destination and between two dates." << std::endl
+			  << "0) Go back." << std::endl;
 
 	std::cin >> Selection;
 	std::cin.ignore();
@@ -93,15 +95,15 @@ void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 			}
 			break;
 		case 3:
-			std::cout << "Insert the first date (YYYY/MM/DD): ";
+			std::cout << "Insert the first date (in the format 'YYYY/MM/DD'): ";
 			std::cin >> AuxYear1 >> FirstSlash >> AuxMonth1 >> SecondSlash >> AuxDay1;
 			std::cin.ignore();
-			std::cout << "Insert the second date (YYYY/MM/DD): ";
+			std::cout << "Insert the second date (in the format 'YYYY/MM/DD'): ";
 			std::cin >> AuxYear2 >> FirstSlash >> AuxMonth2 >> SecondSlash >> AuxDay2;
 
 			for (int i = 0; i <= 2; i++) {
-				if (StructTravelPacks[i].DepartureDate.Year >= AuxYear1 && StructTravelPacks[i].DepartureDate.Month >= AuxMonth1 && StructTravelPacks[i].DepartureDate.Day >= AuxDay1
-					&& StructTravelPacks[i].DepartureDate.Year <= AuxYear2 && StructTravelPacks[i].DepartureDate.Month <= AuxMonth2 && StructTravelPacks[i].DepartureDate.Day <= AuxDay2
+				if (IsBefore(AuxYear1, AuxMonth1, AuxDay1, StructTravelPacks[i].DepartureDate.Year, StructTravelPacks[i].DepartureDate.Month, StructTravelPacks[i].DepartureDate.Day)
+					&& IsAfter(AuxYear2, AuxMonth2, AuxDay2, StructTravelPacks[i].ArrivalDate.Year, StructTravelPacks[i].ArrivalDate.Month, StructTravelPacks[i].ArrivalDate.Day)
 					&& IsAvailable(i, StructTravelPacks))
 					VisualizeSpecificTravelPack(i, StructTravelPacks);
 			}
@@ -124,6 +126,9 @@ void VisualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 					VisualizeSpecificTravelPack(i, StructTravelPacks);
 			}
 
+			break;
+		case 0:
+			system("cls");
 			break;
 	}
 }

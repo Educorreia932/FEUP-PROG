@@ -13,7 +13,7 @@ void removeDuplicates(vector <int> &v) {
 }
 
 int main() {
-	vector <int> v = { 9, 2, 2, 2, 1, 14, 14, 1, 3 };
+	vector <int> v = {9, 2, 2, 2, 1, 14, 14, 1, 3};
 
 	removeDuplicates(v);
 
