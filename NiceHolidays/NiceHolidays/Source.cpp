@@ -38,7 +38,7 @@
 		b) Gestão de pacotes turísticos
 		c) Visualização de informação (sobre clientes e sobre pacote turísticos)
 
-	4 - Atualizar os dados nos ficheiros antes do fim da execução (se necessário)
+	4 - Atualizar os dados nos ficheiros antes do fim da execução (se necessário) ✔
 	
 	PS: Tomar precauções contra entras válidas (i.e. valores fora da gama admissível)
 
@@ -47,88 +47,11 @@
 #include <iostream>
 #include <fstream>
 #include "Structs.h"
-#include "AuxiliaryFunctions.h"
 #include "GetFunctions.h"
 #include "SaveFunctions.h"
-#include "VisualizeFunctions.h"
-#include "ManageFunctions.h"
-#include "RegistFunctions.h"
+#include "Menu.h"
 
 using namespace std;
-
-void BuyTravelPack(vector <TravelPack> StructTravelPacks) {
-}
-
-void Quit(Agency StructAgency, vector <Client> StructClients, vector <TravelPack> StructTravelPacks) {
-	RegistIdentifier(StructTravelPacks);
-	RegistClients(StructAgency, StructClients);
-	RegistTravelPacks(StructAgency, StructTravelPacks);
-}
-
-void Menu(Agency StructAgency, vector <Client> &StructClients, vector <TravelPack> &StructTravelPacks) { //Colocar a voltar para trás
-	int Selection;
-
-	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		 << "1) Manage clients." << endl
-		 << "2) Manage travel packs." << endl
-		 << "3) Visualize a specific client." << endl
-	     << "4) Visualize all the clients of the agency." << endl
-		 << "5) Visualize available travel packs." << endl
-	 	 << "6) Visualize sold travel packs." << endl
-		 << "7) Buy a travel pack for a client." << endl 
-		 << "0) Exit the program and save the alterations made." << endl;
-
-	cin >> Selection;
-	cin.ignore();
-	cout << endl;
-
-	switch (Selection) {
-		case 1:
-			system("cls");
-			ManageClients(StructClients);
-			system("cls");
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;
-		case 2:
-			ManageTravelPacks(StructTravelPacks);
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;
-		case 3:
-			int ClientNumber;
-			system("cls");
-
-			cout << "Insert the client number: "; 
-			cin >> ClientNumber;
-			cin.ignore();
-			cout << endl;
-			
-			VisualizeSpecificClient(ClientNumber, StructClients);
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;
-		case 4:
-			system("cls");
-			VisualizeAgencyClients(StructClients);
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;
-		case 5:
-			system("cls");
-			VisualizeAvailableTravelPacks(StructTravelPacks);
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;
-		case 6:
-			system("cls");
-			VisualizeSoldTravelPacks(StructTravelPacks, StructClients);
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;
-		case 7:
-			BuyTravelPack(StructTravelPacks);
-			Menu(StructAgency, StructClients, StructTravelPacks);
-			break;	
-		case 0:
-			Quit(StructAgency, StructClients, StructTravelPacks);
-			break;
-	}
-}
 
 int main() {
 	string AgencyFile = "agency.txt"; //Deixar o utilizador inserir o nome do ficheiro
