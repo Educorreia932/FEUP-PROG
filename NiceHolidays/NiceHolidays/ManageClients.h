@@ -3,9 +3,9 @@
 #define MAN_CLIENTS
 #include "Structs.h"
 
-Client CreateClient(std::vector <Client> &StructClients);
-void ChangeClient(int ClientNumber, std::vector <Client> &StructClients);
-void RemoveClient(int ClientNumber, std::vector <Client> &StructClients);
-void ManageClients(std::vector <Client> &StructClients);
+Client createClient(std::vector <Client> &StructClients);
+void changeClient(int ClientNumber, std::vector <Client> &StructClients);
+void removeClient(int ClientNumber, std::vector <Client> &StructClients);
+void manageClients(std::vector <Client> &StructClients);
 
 #endif //MAN_CLIENTS

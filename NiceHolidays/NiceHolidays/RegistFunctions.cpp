@@ -3,7 +3,7 @@
 #include "RegistFunctions.h"
 #include "Structs.h"
 
-void RegistIdentifier(std::vector <TravelPack> &StructTravelPacks) {
+void registIdentifier(std::vector <TravelPack> &StructTravelPacks) {
 	for (int i = 0; i < size(StructTravelPacks); i++) {
 		if (StructTravelPacks[i].InitiallyAvailableSeats == StructTravelPacks[i].SoldSeats && StructTravelPacks[i].Identifier > 0)
 			StructTravelPacks[i].Identifier = -StructTravelPacks[i].Identifier;
@@ -13,7 +13,7 @@ void RegistIdentifier(std::vector <TravelPack> &StructTravelPacks) {
 	}
 }
 
-void RegistClients(Agency StructAgency, std::vector <Client> StructClients) {
+void registClients(Agency StructAgency, std::vector <Client> StructClients) {
 	std::ofstream ClientsFile;
 	ClientsFile.open(StructAgency.ClientsFile);
 
@@ -42,7 +42,7 @@ void RegistClients(Agency StructAgency, std::vector <Client> StructClients) {
 	ClientsFile.close();
 }
 
-void RegistTravelPacks(Agency StructAgency, std::vector <TravelPack> StructTravelPacks) {
+void registTravelPacks(Agency StructAgency, std::vector <TravelPack> StructTravelPacks) {
 	std::ofstream TravelPacksFile;
 	TravelPacksFile.open(StructAgency.TravelPacksFile);
 

@@ -3,9 +3,9 @@
 #define MAN_TRAVELPACKS
 #include "Structs.h"
 
-TravelPack CreateTravelPack(std::vector <TravelPack> &StructTravelPacks);
-void ChangeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTravelPacks);
-void RemoveTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTravelPacks);
-void ManageTravelPacks(std::vector <TravelPack> &StructTravelPacks);
+TravelPack createTravelPack(std::vector <TravelPack> &StructTravelPacks);
+void changeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTravelPacks);
+void removeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTravelPacks);
+void manageTravelPacks(std::vector <TravelPack> &StructTravelPacks);
 
 #endif //MAN_TRAVELPACKS

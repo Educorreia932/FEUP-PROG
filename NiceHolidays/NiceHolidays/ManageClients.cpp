@@ -3,8 +3,9 @@
 #include "Structs.h"
 #include "GetFunctions.h"
 #include "ValidateFunctions.h"
+#include "VisualizeFunctions.h"
 
-Client CreateClient(std::vector <Client> &StructClients) {
+Client createClient(std::vector <Client> &StructClients) {
 	Client AuxStruct;
 	std::string ClientAddress, ClientAdquiredTravelPacks;
 
@@ -15,7 +16,7 @@ Client CreateClient(std::vector <Client> &StructClients) {
 	std::cin >> AuxStruct.NIF;
 	std::cin.ignore();
 
-	while (!ValidateNumber(AuxStruct.NIF, 'N')) {
+	while (!validateNumber(AuxStruct.NIF, 'N')) {
 		std::cout << "Invalid input! Insert again: ";
 		std::cin >> AuxStruct.NIF;
 	}
@@ -23,7 +24,7 @@ Client CreateClient(std::vector <Client> &StructClients) {
 	std::cout << "What's the household of the new client? ";
 	std::cin >> AuxStruct.Household;
 
-	while (!ValidateNumber(AuxStruct.Household, 'H')) {
+	while (!validateNumber(AuxStruct.Household, 'H')) {
 		std::cout << "Invalid input! Insert again: ";
 		std::cin >> AuxStruct.Household;
 	}
@@ -32,16 +33,16 @@ Client CreateClient(std::vector <Client> &StructClients) {
 
 	std::cout << "What's the address of the new client (insert in the format 'Street / Door Number / Apartment / ZIP Code / Province')? " << std::endl;;
 	getline(std::cin, ClientAddress);
-	GetAddress(AuxStruct.ClientAddress, ClientAddress); //Mudar para aceitar sem barras ou menos que o suposto
+	getAddress(AuxStruct.ClientAddress, ClientAddress); //Mudar para aceitar sem barras ou menos que o suposto
 
 	std::cout << "Which travel packs did the new client adquire (separated by ';'): ";
 	getline(std::cin, ClientAdquiredTravelPacks);
-	AuxStruct.AdquiredTravelPacks = GetAdquiredTravelPacks(ClientAdquiredTravelPacks);
+	AuxStruct.AdquiredTravelPacks = getAdquiredTravelPacks(ClientAdquiredTravelPacks);
 
 	return AuxStruct;
 }
 
-void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
+void changeClient(int ClientNumber, std::vector <Client> &StructClients) {
 	int Selection;
 	std::string ClientAddress;
 
@@ -65,7 +66,7 @@ void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 			std::cout << "Insert the new NIF of the client: ";
 			std::cin >> StructClients[ClientNumber].NIF;
 
-			while (!ValidateNumber(StructClients[ClientNumber].NIF, 'N')) {
+			while (!validateNumber(StructClients[ClientNumber].NIF, 'N')) {
 				std::cout << "Invalid input! Insert again: ";
 				std::cin >> StructClients[ClientNumber].NIF;
 			}
@@ -76,7 +77,7 @@ void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 			std::cout << "Insert the new household of the client: ";
 			std::cin >> StructClients[ClientNumber].Household;
 
-			while (!ValidateNumber(StructClients[ClientNumber].Household, 'H')) {
+			while (!validateNumber(StructClients[ClientNumber].Household, 'H')) {
 				std::cout << "Invalid input! Insert again: ";
 				std::cin >> StructClients[ClientNumber].Household;
 			}
@@ -86,17 +87,17 @@ void ChangeClient(int ClientNumber, std::vector <Client> &StructClients) {
 		case 5:			
 			std::cout << "Insert the new address of the client (insert in the format 'Street / Door Number / Apartment / ZIP Code / Province'): " << std::endl;
 			getline(std::cin, ClientAddress);
-			GetAddress(StructClients[ClientNumber].ClientAddress, ClientAddress);
+			getAddress(StructClients[ClientNumber].ClientAddress, ClientAddress);
 			break;
 		case 6:
 			std::string ClientAdquiredTravelPacks;
 			getline(std::cin, ClientAdquiredTravelPacks);
-			StructClients[ClientNumber].AdquiredTravelPacks = GetAdquiredTravelPacks(ClientAdquiredTravelPacks);
+			StructClients[ClientNumber].AdquiredTravelPacks = getAdquiredTravelPacks(ClientAdquiredTravelPacks);
 			break;
 	}
 }
 
-void RemoveClient(int ClientNumber, std::vector <Client> &StructClients) {
+void removeClient(int ClientNumber, std::vector <Client> &StructClients) {
 	std::vector <Client> AuxVector;
 
 	for (int i = 0; i < size(StructClients); i++)
@@ -106,7 +107,7 @@ void RemoveClient(int ClientNumber, std::vector <Client> &StructClients) {
 	StructClients = AuxVector;
 }
 
-void ManageClients(std::vector <Client> &StructClients) {
+void manageClients(std::vector <Client> &StructClients) {
 	int Selection, ClientNumber;
 
 	std::cout << "What do you want to do? Insert the corresponding key." << std::endl << std::endl
@@ -121,25 +122,27 @@ void ManageClients(std::vector <Client> &StructClients) {
 	switch (Selection) {
 		case 1:
 			system("cls");
-			StructClients.push_back(CreateClient(StructClients));
+			StructClients.push_back(createClient(StructClients));
 			break;
 		case 2:
 			system("cls");
-			std::cout << "Insert the number of the client that you want to change: ";
+			std::cout << "Which client do you wish to change the information of? Insert the corresponding key. " << std::endl << std::endl;
+			visualizeClientsSelection(StructClients);
 			std::cin >> ClientNumber;
 			std::cin.ignore();
 			std::cout << std::endl;
 
-			ChangeClient(ClientNumber, StructClients);
+			changeClient(ClientNumber, StructClients);
 			break;
 		case 3:
 			system("cls");
-			std::cout << "Insert the number of the client that you want to remove: "; //Change to NIF or something else
+			std::cout << "Which client do you wish to remove? Insert the corresponding key. " << std::endl << std::endl; 
+			visualizeClientsSelection(StructClients);
 			std::cin >> ClientNumber;
 			std::cin.ignore();
 			std::cout << std::endl;
 
-			RemoveClient(ClientNumber, StructClients);
+			removeClient(ClientNumber, StructClients);
 			break;
 		case 0:
 			system("cls");

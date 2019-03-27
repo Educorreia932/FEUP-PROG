@@ -3,7 +3,7 @@
 #define MENU
 #include "Structs.h"
 
-void Quit(Agency StructAgency, std::vector <Client> StructClients, std::vector <TravelPack> StructTravelPacks);
-void Menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector <TravelPack> &StructTravelPacks);
+void quit(Agency StructAgency, std::vector <Client> StructClients, std::vector <TravelPack> StructTravelPacks);
+void menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector <TravelPack> &StructTravelPacks);
 
-#endif MENU
+#endif //MENU

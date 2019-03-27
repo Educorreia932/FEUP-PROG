@@ -3,7 +3,7 @@
 #include "GetFunctions.h"
 #include "AuxiliaryFunctions.h"
 
-Agency SaveAgency(std::string File) {
+Agency saveAgency(std::string File) {
 	Agency AuxStruct;
 	std::string Line;
 	std::ifstream Agency(File);
@@ -22,7 +22,7 @@ Agency SaveAgency(std::string File) {
 					AuxStruct.URL = Line;
 					break;
 				case 3:
-					GetAddress(AuxStruct.AgencyAddress, Line);
+					getAddress(AuxStruct.AgencyAddress, Line);
 					break;
 				case 4:
 					AuxStruct.ClientsFile = Line;
@@ -41,7 +41,7 @@ Agency SaveAgency(std::string File) {
 	return AuxStruct;
 }
 
-void SaveClients(std::string File, std::vector <Client> &StructClients) {
+void saveClients(std::string File, std::vector <Client> &StructClients) {
 	std::string Line;
 	std::ifstream Clients(File);
 	Client AuxStruct;
@@ -67,10 +67,10 @@ void SaveClients(std::string File, std::vector <Client> &StructClients) {
 					AuxStruct.Household = stoi(Line);
 					break;
 				case 3:
-					GetAddress(AuxStruct.ClientAddress, Line);
+					getAddress(AuxStruct.ClientAddress, Line);
 					break;
 				case 4:
-					AuxStruct.AdquiredTravelPacks = GetAdquiredTravelPacks(Line);
+					AuxStruct.AdquiredTravelPacks = getAdquiredTravelPacks(Line);
 					break;
 				}
 
@@ -83,7 +83,7 @@ void SaveClients(std::string File, std::vector <Client> &StructClients) {
 	}
 }
 
-void SaveTravelPacks(std::string File, std::vector <TravelPack> &StructTravelPacks) {
+void saveTravelPacks(std::string File, std::vector <TravelPack> &StructTravelPacks) {
 	std::string Line;
 	std::ifstream TravelPacks(File);
 	TravelPack AuxStruct;
@@ -110,13 +110,13 @@ void SaveTravelPacks(std::string File, std::vector <TravelPack> &StructTravelPac
 					AuxStruct.Identifier = stoi(Line);
 					break;
 				case 1:
-					AuxStruct.TravelDestination = GetTravelDestination(Line);
+					AuxStruct.TravelDestination = getTravelDestination(Line);
 					break;
 				case 2:
-					GetDate(AuxStruct.DepartureDate, Line);
+					getDate(AuxStruct.DepartureDate, Line);
 					break;
 				case 3:
-					GetDate(AuxStruct.ArrivalDate, Line);
+					getDate(AuxStruct.ArrivalDate, Line);
 					break;
 				case 4:
 					AuxStruct.Price = stoi(Line);

@@ -3,7 +3,7 @@
 #define VAL_FUNCTIONS
 #include <string>
 
-bool ValidateNumber(int Number, char Mode);
-bool ValidateDate(std::string StringDate);
+bool validateNumber(int Number, char Mode);
+bool validateDate(std::string StringDate);
 
 #endif

@@ -5,7 +5,7 @@
 
 //ValidateAddress
 
-bool ValidateNumber(int Number, char Mode) {
+bool validateNumber(int Number, char Mode) { //Verificar se é string
 	switch (Mode) {
 		case 'N':
 			if (Number > 100000000 && Number < 999999999)
@@ -23,12 +23,12 @@ bool ValidateNumber(int Number, char Mode) {
 	}	
 }
 
-bool ValidateDate(std::string StringDate) {
+bool validateDate(std::string StringDate) {
 	Date AuxDate;
 
-	GetDate(AuxDate, StringDate);
+	getDate(AuxDate, StringDate);
 
-	if (AuxDate.Year < 0 || AuxDate.Month < 0 || AuxDate.Month > 12 || AuxDate.Day > NumberOfDays(AuxDate.Month, AuxDate.Year) || AuxDate.Day < 0)
+	if (AuxDate.Year < 0 || AuxDate.Month < 0 || AuxDate.Month > 12 || AuxDate.Day > numberOfDays(AuxDate.Month, AuxDate.Year) || AuxDate.Day < 0)
 		return false;
 
 	else

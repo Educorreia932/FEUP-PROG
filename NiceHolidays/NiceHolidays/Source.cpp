@@ -14,18 +14,17 @@
 
 	1. Ler e guardar a informação da agência, dos clientes e dos pacotes turísticos armazenada em
 	ficheiros. ✔
-	2. Gerir os clientes e pacotes turísticos: criar, alterar e remover um cliente ou um pacote turístico. 
+	2. Gerir os clientes e pacotes turísticos: criar, alterar e remover um cliente ou um pacote turístico. ✔
 	3. Gerar e visualizar de modo formatado a informação de um cliente especificado. ✔
 	4. Gerar e visualizar de modo formatado a informação de todos os clientes da agência. ✔
 	5. Gerar e visualizar de modo formatado os pacotes turísticos disponíveis (todos, todos relativos a
 	um destino específico, todos entre duas datas, todos os relativos a um destino específico e entre
 	duas datas). ✔
 	6. Gerar e visualizar de modo formatado os pacotes turísticos vendidos (a um cliente específico, a
-	todos os clientes). 
+	todos os clientes). ✔
 	7. Efetuar a compra de um pacote turístico por um cliente.
 	8. Calcular e visualizar o número e o valor total de pacotes vendidos.
-
-
+	
 	1 - Ler os ficheiros: ✔
 		a) "agency.txt" (informação estática da agência) ✔
 	    b) "clients.txt" (por exemplo) ✔
@@ -59,11 +58,11 @@ int main() {
 	vector <Client> StructClients; 
 	vector <TravelPack> StructTravelPacks; 
 
-	StructAgency = SaveAgency(AgencyFile);
-	SaveClients(StructAgency.ClientsFile, StructClients);
-	SaveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
+	StructAgency = saveAgency(AgencyFile);
+	saveClients(StructAgency.ClientsFile, StructClients);
+	saveTravelPacks(StructAgency.TravelPacksFile, StructTravelPacks);
 
-	Menu(StructAgency, StructClients, StructTravelPacks);
+	menu(StructAgency, StructClients, StructTravelPacks);
 
 	return 0;
 }

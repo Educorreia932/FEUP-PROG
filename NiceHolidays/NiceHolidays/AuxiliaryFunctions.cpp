@@ -3,7 +3,7 @@
 #include "Structs.h"
 #include "AuxiliaryFunctions.h"
 
-std::string Trim(std::string s) {
+std::string trim(std::string s) {
 	s.erase(0, s.find_first_not_of(' ')); //Removes spaces to the left
 
 	if (s[s.length() - 1] == ' ')
@@ -12,7 +12,7 @@ std::string Trim(std::string s) {
 	return s;
 }
 
-bool IsAvailable(int TravelPackBumber, std::vector <TravelPack> StructTravelPacks) {
+bool isAvailable(int TravelPackBumber, std::vector <TravelPack> StructTravelPacks) {
 	if (StructTravelPacks[TravelPackBumber].Identifier > 0)
 		return true;
 
@@ -20,7 +20,7 @@ bool IsAvailable(int TravelPackBumber, std::vector <TravelPack> StructTravelPack
 		return false;
 }
 
-bool IsBefore(int Year1, int Month1, int Day1, int Year2, int Month2, int Day2) {
+bool isBefore(int Year1, int Month1, int Day1, int Year2, int Month2, int Day2) {
 	if (Year1 < Year2)
 		return true;
 
@@ -34,7 +34,7 @@ bool IsBefore(int Year1, int Month1, int Day1, int Year2, int Month2, int Day2) 
 		return false;
 }
 
-bool IsAfter(int Year1, int Month1, int Day1, int Year2, int Month2, int Day2) {
+bool isAfter(int Year1, int Month1, int Day1, int Year2, int Month2, int Day2) {
 	if (Year1 > Year2)
 		return true;
 
@@ -48,7 +48,7 @@ bool IsAfter(int Year1, int Month1, int Day1, int Year2, int Month2, int Day2) {
 		return false;
 }
 
-bool IsBissextile(int year) {
+bool isBissextile(int year) {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 		return true;
 
@@ -56,10 +56,10 @@ bool IsBissextile(int year) {
 		return false;
 }
 
-int NumberOfDays(int month, int year) {
+int numberOfDays(int month, int year) {
 	switch (month) {
 		case 2:
-			if (IsBissextile(year))
+			if (isBissextile(year))
 				return 29;
 			else
 				return 28;

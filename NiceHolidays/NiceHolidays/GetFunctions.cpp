@@ -2,7 +2,7 @@
 #include "GetFunctions.h"
 #include "AuxiliaryFunctions.h"
 
-std::vector <int> GetAdquiredTravelPacks(std::string Line) {
+std::vector <int> getAdquiredTravelPacks(std::string Line) {
 	std::vector <int> Result;
 	std::string AuxString;
 
@@ -21,13 +21,13 @@ std::vector <int> GetAdquiredTravelPacks(std::string Line) {
 	return Result;
 }
 
-std::vector <std::string> GetTravelDestination(std::string Line) {
+std::vector <std::string> getTravelDestination(std::string Line) {
 	std::vector <std::string> Result;
 	std::string AuxString;
 
 	for (int i = 0; i < Line.length(); i++) {
 		if (Line[i] == '–' || Line[i] == ',' || Line[i] == '-') {
-			Result.push_back(Trim(AuxString));
+			Result.push_back(trim(AuxString));
 			AuxString = "";
 		}
 
@@ -36,12 +36,12 @@ std::vector <std::string> GetTravelDestination(std::string Line) {
 		}
 	}
 
-	Result.push_back(Trim(AuxString));
+	Result.push_back(trim(AuxString));
 
 	return Result;
 }
 
-void GetAddress(Address &Address, std::string Line) { // Colocar a retornar struct
+void getAddress(Address &Address, std::string Line) { // Colocar a retornar struct
 	int Counter = 0;
 	std::string AuxString;
 
@@ -49,16 +49,16 @@ void GetAddress(Address &Address, std::string Line) { // Colocar a retornar stru
 		if (Line[i] == '/') {
 			switch (Counter) {
 			case 0:
-				Address.Street = Trim(AuxString);
+				Address.Street = trim(AuxString);
 				break;
 			case 1:
 				Address.DoorNumber = stoi(AuxString);
 				break;
 			case 2:
-				Address.Apartment = Trim(AuxString);
+				Address.Apartment = trim(AuxString);
 				break;
 			case 3:
-				Address.ZIPCode = Trim(AuxString);
+				Address.ZIPCode = trim(AuxString);
 				break;
 			}
 
@@ -70,10 +70,10 @@ void GetAddress(Address &Address, std::string Line) { // Colocar a retornar stru
 			AuxString += Line[i];
 	}
 
-	Address.Province = Trim(AuxString);
+	Address.Province = trim(AuxString);
 }
 
-void GetDate(Date &Date, std::string Line) {
+void getDate(Date &Date, std::string Line) {
 	int Counter = 0;
 	std::string StringAux;
 

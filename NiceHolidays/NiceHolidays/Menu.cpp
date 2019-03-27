@@ -5,14 +5,14 @@
 #include "VisualizeFunctions.h"
 #include "RegistFunctions.h"
 
-void Quit(Agency StructAgency, std::vector <Client> StructClients, std::vector <TravelPack> StructTravelPacks) {
-	RegistIdentifier(StructTravelPacks);
-	RegistClients(StructAgency, StructClients);
-	RegistTravelPacks(StructAgency, StructTravelPacks);
+void quit(Agency StructAgency, std::vector <Client> StructClients, std::vector <TravelPack> StructTravelPacks) {
+	registIdentifier(StructTravelPacks);
+	registClients(StructAgency, StructClients);
+	registTravelPacks(StructAgency, StructTravelPacks);
 }
 
-void Menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector <TravelPack> &StructTravelPacks) { //Colocar a voltar para trás
-	int Selection;
+void menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector <TravelPack> &StructTravelPacks) { //Colocar a voltar para trás
+	int selection;
 
 	std::cout << "What do you want to do? Insert the corresponding key." << std::endl << std::endl
 			  << "1) Manage clients." << std::endl
@@ -24,21 +24,21 @@ void Menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector 
 			  << "7) Buy a travel pack for a client." << std::endl
 			  << "0) Exit the program and save the alterations made." << std::endl;
 
-	std::cin >> Selection;
+	std::cin >> selection;
 	std::cin.ignore();
 	std::cout << std::endl;
 
-	switch (Selection) {
+	switch (selection) {
 		case 1:
 			system("cls");
-			ManageClients(StructClients);
+			manageClients(StructClients);
 			system("cls");
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 2:
 			system("cls");
-			ManageTravelPacks(StructTravelPacks);
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			manageTravelPacks(StructTravelPacks);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 3:
 			int ClientNumber;
@@ -49,29 +49,29 @@ void Menu(Agency StructAgency, std::vector <Client> &StructClients, std::vector 
 			std::cin.ignore();
 			std::cout << std::endl;
 
-			VisualizeSpecificClient(ClientNumber, StructClients);
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			visualizeSpecificClient(ClientNumber, StructClients);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 4:
 			system("cls");
-			VisualizeAgencyClients(StructClients);
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			visualizeAgencyClients(StructClients);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 5:
 			system("cls");
-			VisualizeAvailableTravelPacks(StructTravelPacks);
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			visualizeAvailableTravelPacks(StructTravelPacks);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 6:
 			system("cls");
-			VisualizeSoldTravelPacks(StructTravelPacks, StructClients);
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			visualizeSoldTravelPacks(StructTravelPacks, StructClients);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 7:
-			Menu(StructAgency, StructClients, StructTravelPacks);
+			menu(StructAgency, StructClients, StructTravelPacks);
 			break;
 		case 0:
-			Quit(StructAgency, StructClients, StructTravelPacks);
+			quit(StructAgency, StructClients, StructTravelPacks);
 			break;
 	}
 }
