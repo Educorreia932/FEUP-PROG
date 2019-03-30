@@ -6,7 +6,7 @@
 #include "Structs.h"
 #include "AuxiliaryFunctions.h"
 #include "VisualizeFunctions.h"
-#include "Menu.h"
+#include "ReadFunctions.h"
 
 void visualizeSpecificClient(int ClientNumber, std::vector <Client> StructClients) {
 	std::cout << "Name: " << StructClients[ClientNumber].Name << std::endl
@@ -29,15 +29,12 @@ void visualizeSpecificClient(int ClientNumber, std::vector <Client> StructClient
 }
 
 void visualizeAgencyClients(std::vector <Client> StructClients) {
-	for (int i = 0; i < size(StructClients); i++) {
+	for (int i = 0; i < size(StructClients); i++)
 		visualizeSpecificClient(i, StructClients);
-		std::cout << std::endl;
-	}
 }
 
 void visualizeSpecificTravelPack(int TravelPackNumber, std::vector <TravelPack> StructTravelPacks) {
-	std::cout << std::endl
-              << "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << std::endl
+	std::cout << "Numeric identifier: " << StructTravelPacks[TravelPackNumber].Identifier << std::endl
               << "Travel destination: ";
 
 	for (int i = 0; i < size(StructTravelPacks[TravelPackNumber].TravelDestination); i++) {
@@ -51,34 +48,35 @@ void visualizeSpecificTravelPack(int TravelPackNumber, std::vector <TravelPack> 
 			std::cout << StructTravelPacks[TravelPackNumber].TravelDestination[i] << std::endl;
 }
 
-std::cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year
-		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Month
-		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Day << std::endl
-		  << "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
-	      << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
-		  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << std::endl
-		  << "Price per person: " << StructTravelPacks[TravelPackNumber].Price << std::endl
-		  << "Initially available seats: " << StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats << std::endl
-		  << "Sold seats: " << StructTravelPacks[TravelPackNumber].SoldSeats << std::endl;
+	std::cout << "Departure date: " << StructTravelPacks[TravelPackNumber].DepartureDate.Year
+			  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Month
+			  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].DepartureDate.Day << std::endl
+			  << "Arrival date: " << StructTravelPacks[TravelPackNumber].ArrivalDate.Year
+			  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Month
+			  << '/' << std::setw(2) << std::setfill('0') << StructTravelPacks[TravelPackNumber].ArrivalDate.Day << std::endl
+			  << "Price per person: " << StructTravelPacks[TravelPackNumber].Price << std::endl
+			  << "Initially available seats: " << StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats << std::endl
+			  << "Sold seats: " << StructTravelPacks[TravelPackNumber].SoldSeats << std::endl << std::endl;
 }
 
 void visualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 	std::string AuxString;
-	int Selection, AuxYear1, AuxMonth1, AuxDay1, AuxYear2, AuxMonth2, AuxDay2;
+	int selection, AuxYear1, AuxMonth1, AuxDay1, AuxYear2, AuxMonth2, AuxDay2;
 	char FirstSlash, SecondSlash;
 
-	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl
+	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl << std::endl
 		      << "1) All." << std::endl
 		 	  << "2) All related to a specific travel destination." << std::endl
 			  << "3) All between two dates." << std::endl
 			  << "4) All related to a specific travel destination and between two dates." << std::endl
 			  << "0) Go back." << std::endl;
 
-	std::cin >> Selection;
+	selection = readSelection(0, 4);
 	std::cin.ignore();
 
-	switch (Selection) {
+	switch (selection) {
 		case 1:
+			system("cls");
 			for (int i = 0; i < size(StructTravelPacks); i++) {
 				if (isAvailable(i, StructTravelPacks))
 					visualizeSpecificTravelPack(i, StructTravelPacks);
@@ -96,7 +94,7 @@ void visualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 			break;
 		case 3:
 			std::cout << "Insert the first date (in the format 'YYYY/MM/DD'): ";
-			std::cin >> AuxYear1 >> FirstSlash >> AuxMonth1 >> SecondSlash >> AuxDay1;
+			std::cin >> AuxYear1 >> FirstSlash >> AuxMonth1 >> SecondSlash >> AuxDay1; //validar
 			std::cin.ignore();
 			std::cout << "Insert the second date (in the format 'YYYY/MM/DD'): ";
 			std::cin >> AuxYear2 >> FirstSlash >> AuxMonth2 >> SecondSlash >> AuxDay2;
@@ -133,20 +131,24 @@ void visualizeAvailableTravelPacks(std::vector <TravelPack> StructTravelPacks) {
 	}
 }
 
-void visualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks, std::vector <Client> StructClients) { //To Do
-	int Selection, AuxNumber;
+void visualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks, std::vector <Client> StructClients) {
+	int selection, AuxNumber;
 
-	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl
-		      << "1) Related a specific client." << std::endl
-			  << "2) Related to any client" << std::endl;
+	std::cout << "What travel packs do you want to consult? Insert the corresponding key." << std::endl << std::endl
+		      << "1) Related to a specific client." << std::endl
+			  << "2) Related to any client" << std::endl
+			  << "0) Go back." << std::endl;
 
-	std::cin >> Selection;
+	selection = readSelection(0, 2);
 	std::cin.ignore();
 
-	switch (Selection) {
+	switch (selection) {
 		case 1:
-			std::cout << std::endl << "Insert the client number: ";
-			std::cin >> AuxNumber;
+			system("cls");
+			std::cout << "Related to which client? Insert the corresponding key." << std::endl << std::endl;
+			visualizeClientsSelection(StructClients);
+
+			AuxNumber = readSelection(1, size(StructClients));
 			std::cin.ignore();
 
 			for (int i1 = 0; i1 < size(StructClients[AuxNumber].AdquiredTravelPacks); i1++) {
@@ -156,17 +158,21 @@ void visualizeSoldTravelPacks(std::vector <TravelPack> StructTravelPacks, std::v
 			}
 			
 			break;
-		case 2:
+		case 2: //Fazer
+			system("cls");
+			break;
+		case 0:
+			system("cls");
 			break;
 	}
 }
 
 void visualizeClientsSelection(std::vector <Client> StructClients) {
 	for (int i = 0; i < size(StructClients); i++) 
-		std::cout << i << ") " << StructClients[i].Name << " (" << StructClients[i].NIF << ")" << std::endl;	
+		std::cout << i + 1 << ") " << StructClients[i].Name << " (" << StructClients[i].NIF << ")" << std::endl;	
 }
 
-void visualizeTravelPacksSelection(std::vector <TravelPack> StructTravelPacks) {
+void visualizeTravelPacksSelection(std::vector <TravelPack> StructTravelPacks) { //availabel and non available
 	for (int i = 0; i < size(StructTravelPacks); i++)
-		std::cout << i << ") " << StructTravelPacks[i].TravelDestination[0] << " (" << StructTravelPacks[i].Identifier << ")" << std::endl;
+		std::cout << i + 1 << ") " << StructTravelPacks[i].TravelDestination[0] << " (" << StructTravelPacks[i].Identifier << ")" << std::endl;
 }

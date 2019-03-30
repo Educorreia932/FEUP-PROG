@@ -37,7 +37,7 @@
 		b) Gestão de pacotes turísticos
 		c) Visualização de informação (sobre clientes e sobre pacote turísticos)
 
-	4 - Atualizar os dados nos ficheiros antes do fim da execução (se necessário) ✔
+	4 - Atualizar os dados nos ficheiros antes do fim da execução (se necessário) 
 	
 	PS: Tomar precauções contra entras válidas (i.e. valores fora da gama admissível)
 

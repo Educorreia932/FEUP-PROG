@@ -2,34 +2,39 @@
 #include "ManageTravelPacks.h"
 #include "Structs.h"
 #include "GetFunctions.h"
-#include "ValidateFunctions.h"
+#include "ReadFunctions.h"
 #include "VisualizeFunctions.h"
+#include "RegistFunctions.h"
 
-TravelPack createTravelPack(std::vector <TravelPack> &StructTravelPacks) {
+TravelPack createTravelPack(std::vector <TravelPack> &StructTravelPacks) {  //Identificador diferente de um já existente
 	TravelPack AuxStruct;
 	std::string AuxString;
 
-	std::cout << "What's the identifier of the travel pack? ";
-	std::cin >> AuxStruct.Identifier;
+	std::cout << "What's the identifier of the travel pack? "; //Identificador diferente de um já existente
+	AuxStruct.Identifier = readIdentifier(StructTravelPacks);
 	std::cin.ignore();
+
 	std::cout << "What's the travel destination of the travel pack (in the format 'Region - Place1, Place2...')? " << std::endl;
 	getline(std::cin, AuxString);
+
 	AuxStruct.TravelDestination = getTravelDestination(AuxString);
 	std::cout << "What's the departure date of the travel pack (in the format 'YYYY/MM/DD')? ";
 	getline(std::cin, AuxString);
 	getDate(AuxStruct.DepartureDate, AuxString);
+
 	std::cout << "What's the arrival date of the travel pack (in the format 'YYYY/MM/DD')? ";
 	getline(std::cin, AuxString);
 	getDate(AuxStruct.ArrivalDate, AuxString);
-	std::cout << "What's the price of the travel pack? ";
+
+	std::cout << "What's the price of the travel pack? "; 
 	std::cin >> AuxStruct.Price;
 	std::cin.ignore();
+
 	std::cout << "How many are the initially available seats? ";
-	std::cin >> AuxStruct.InitiallyAvailableSeats;
-	std::cin.ignore();
+	AuxStruct.InitiallyAvailableSeats = readPrice();
+
 	std::cout << "How many are the sold seats? ";
-	std::cin >> AuxStruct.SoldSeats;
-	std::cin.ignore();
+	AuxStruct.SoldSeats = readSeats('S', AuxStruct.InitiallyAvailableSeats, 0);
 
 	return AuxStruct;
 }
@@ -46,7 +51,8 @@ void changeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTrav
 		      << "5) The arrival date." << std::endl
 		      << "6) The price." << std::endl
 		      << "7) The initially available seats." << std::endl
-		      << "8) The sold seats." << std::endl;
+		      << "8) The sold seats." << std::endl
+	          << "0) Go back." << std::endl;
 	std::cin >> selection;
 	std::cin.ignore();
 	std::cout << std::endl;
@@ -58,6 +64,7 @@ void changeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTrav
 			std::cout << "Insert the new identifier of the travel pack: ";
 			std::cin >> StructTravelPacks[TravelPackNumber].Identifier;
 			std::cin.ignore();
+			registIdentifier(StructTravelPacks);
 			break;
 		case 3:
 			std::cout << "Insert the new travel destination of the travel pack (in the format 'Region - Place1, Place2...'): " << std::endl;
@@ -68,7 +75,7 @@ void changeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTrav
 			std::cout << "Insert the new departure date of the travel pack (in the format 'YYYY/MM/DD'): ";
 			getline(std::cin, AuxString);
 
-			while (!validateDate(AuxString)) {
+			while (!readDate(AuxString)) {
 				std::cout << "Invalid input! Insert again: ";
 				getline(std::cin, AuxString);
 			}
@@ -79,7 +86,7 @@ void changeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTrav
 			std::cout << "Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ";
 			getline(std::cin, AuxString);
 		
-			while (!validateDate(AuxString)) {
+			while (!readDate(AuxString)) {
 				std::cout << "Invalid input! Insert again: ";
 				getline(std::cin, AuxString);
 			}				
@@ -88,37 +95,21 @@ void changeTravelPack(int TravelPackNumber, std::vector <TravelPack> &StructTrav
 			break;
 		case 6:
 			std::cout << "Insert the new price of the travel pack: ";
-			std::cin >> StructTravelPacks[TravelPackNumber].Price;
-
-			while (!validateNumber(StructTravelPacks[TravelPackNumber].Price, 'H')) {
-				std::cout << "Invalid input! Insert again: ";
-				std::cin >> StructTravelPacks[TravelPackNumber].Price;
-			}
-
+			StructTravelPacks[TravelPackNumber].Price = readPrice();
 			std::cin.ignore();
 			break;
 		case 7:
 			std::cout << "Insert the new quantity of initially available seats of the travel pack: ";
-			std::cin >> StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats;
-			
-			while (!validateNumber(StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats, 'H')) {
-				std::cout << "Invalid input! Insert again: ";
-				std::cin >> StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats;
-			}
-
+			StructTravelPacks[TravelPackNumber].SoldSeats = readSeats('I', StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats, StructTravelPacks[TravelPackNumber].SoldSeats);
 			std::cin.ignore();
 			break;
 		case 8:
-			std::cout << "Insert the new quantity of sold seats of the travel pack: ";
-			std::cin >> StructTravelPacks[TravelPackNumber].SoldSeats;
-
-			while (!validateNumber(StructTravelPacks[TravelPackNumber].SoldSeats, 'H')) {
-				std::cout << "Invalid input! Insert again: ";
-				std::cin >> StructTravelPacks[TravelPackNumber].SoldSeats;
-			}
-
+			std::cout << "Insert the new quantity of sold seats of the travel pack: "; //Não posso ser superior a initially avaliale
+			StructTravelPacks[TravelPackNumber].SoldSeats = readSeats('S', StructTravelPacks[TravelPackNumber].InitiallyAvailableSeats, StructTravelPacks[TravelPackNumber].SoldSeats);
 			std::cin.ignore();
 			break;
+		case 0:
+			system("cls");
 	}
 }
 
@@ -154,18 +145,24 @@ void manageTravelPacks(std::vector <TravelPack> &StructTravelPacks) { //Inserir 
 		system("cls");
 		std::cout << "Which travel pack do you wish to change the information of? Insert the corresponding key. " << std::endl << std::endl;
 		visualizeTravelPacksSelection(StructTravelPacks);
-		std::cin >> TravelPackNumber;
+
+		std::cin >> TravelPackNumber; //read travelpack
+		TravelPackNumber = abs(TravelPackNumber) - 1;
 		std::cin.ignore();
 		std::cout << std::endl;
 
 		system("cls");
 		changeTravelPack(TravelPackNumber, StructTravelPacks);
+
+		system("cls");
+		registIdentifier(StructTravelPacks);
 		break;
 	case 3:
 		system("cls");
 		std::cout << "Which travel pack do you wish to remove? Insert the corresponding key. " << std::endl << std::endl;
 		visualizeTravelPacksSelection(StructTravelPacks);
 		std::cin >> TravelPackNumber;
+		TravelPackNumber -= 1;
 		std::cin.ignore();
 		std::cout << std::endl;
 
