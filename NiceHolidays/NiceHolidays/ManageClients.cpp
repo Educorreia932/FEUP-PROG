@@ -27,7 +27,7 @@ Client createClient(std::vector <Client> &StructClients) {
 	std::cout << "Which travel packs did the new client adquire (separated by ';'): ";
 	getline(std::cin, ClientAdquiredTravelPacks);
 	AuxStruct.AdquiredTravelPacks = getAdquiredTravelPacks(ClientAdquiredTravelPacks);
-
+	
 	return AuxStruct;
 }
 
