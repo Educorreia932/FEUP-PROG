@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include "1.h"
 
 using namespace std;
 
@@ -165,11 +166,4 @@ bool Date::isBefore(const Date& date) {
 		return false;
 	else
 		return true;
-}
-
-int main() {
-	Date Today = Date();		
-	Today.show();
-
-	return 0;
 }
