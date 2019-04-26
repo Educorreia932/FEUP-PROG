@@ -74,7 +74,7 @@ bool Date::isBissextile(unsigned int year) {
 		return false;
 }
 
-int Date::numberOfDays(unsigned int month, unsigned int year) {
+unsigned int Date::numberOfDays(unsigned int month, unsigned int year) {
 	switch (month) {
 	case 2:
 		if (isBissextile(year))

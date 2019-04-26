@@ -1,13 +1,15 @@
 #pragma once
+#include <string>
 
 using namespace std;
 
 class Address {
-	public: 
+	public:
+		Address(string street, unsigned int door_number, string apartment, string zip_code, string province);
 	private:
-		string Street;
-		int DoorNumber;
-		string Apartment;
-		string ZIPCode;
-		string Province;
+		string street;
+		unsigned int door_number;
+		string apartment;
+		string zip_code;
+		string province;
 };

@@ -21,9 +21,9 @@ class Date {
 		bool isAfter(const Date& date);
 		bool isBefore(const Date& date);
 	private:
-		int year;
-		int month;
-		int day;
+		unsigned int year;
+		unsigned int month;
+		unsigned int day;
 		bool isBissextile(unsigned int year);
-		int numberOfDays(unsigned int month, unsigned int year);
+		unsigned int numberOfDays(unsigned int month, unsigned int year);
 };

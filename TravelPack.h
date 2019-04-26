@@ -7,11 +7,10 @@ using namespace std;
 
 class TravelPack {
 	private:
-		int Identifier;
-		vector <string> TravelDestination;
+		int identifier;
+		vector <string> travel_destination; //Mudar para stringstream (?)
 		Date DepartureDate;
 		Date ArrivalDate;
-		int Price;
-		int InitiallyAvailableSeats;
-		int SoldSeats;
+		unsigned int price;
+		unsigned int maximum_seats;
 };

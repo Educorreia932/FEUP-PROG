@@ -6,11 +6,14 @@ using namespace std;
 
 class Agency {
 	public:
+		Agency(string name, unsigned int nif, Address AgencyAddress, string url, string clients_file, string travelpacks_file);
 	private:
-		string Name;
-		int NIF;
-		string URL;
+		string name;
+		unsigned int nif;
 		Address AgencyAddress;
-		string ClientsFile;
-		string TravelPacksFile;
+		string url;
+		//lista de pacotes
+		//lista de clientes
+		string clients_file;
+		string travelpacks_file;
 };
