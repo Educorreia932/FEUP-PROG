@@ -2,8 +2,11 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 class Date {
 	public:
+		Date();
 		Date(unsigned int year, unsigned int month, unsigned int day);
 		Date(string yearMonthDay); // yearMonthDay must be in format "yyyy/mm/dd"
 		void setYear(unsigned int year);
@@ -24,6 +27,7 @@ class Date {
 		unsigned int year;
 		unsigned int month;
 		unsigned int day;
+
 		bool isBissextile(unsigned int year);
 		unsigned int numberOfDays(unsigned int month, unsigned int year);
 };

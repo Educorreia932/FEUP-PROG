@@ -1,19 +1,25 @@
 #pragma once
-#include <string>
-#include "Address.h"
+#include <fstream>
+#include "Client.h"
+#include "TravelPack.h"
 
 using namespace std;
 
 class Agency {
 	public:
-		Agency(string name, unsigned int nif, Address AgencyAddress, string url, string clients_file, string travelpacks_file);
+		Agency();
+		Agency(string file_name);
+		string getClientsFile();
+		string getTravelPacksFile();
 	private:
 		string name;
-		unsigned int nif;
+		int nif;
 		Address AgencyAddress;
 		string url;
-		//lista de pacotes
-		//lista de clientes
 		string clients_file;
 		string travelpacks_file;
+		vector <Client> clientsObjs;
+		vector <TravelPack> travelPacksObjs;
+
+		vector <TravelPack> readTravelPacks(string file_name);
 };

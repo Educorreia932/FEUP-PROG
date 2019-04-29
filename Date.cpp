@@ -2,6 +2,12 @@
 
 using namespace std;
 
+Date::Date() {
+	this->year = 0;
+	this->month = 0;
+	this->day = 0;
+}
+
 Date::Date(unsigned int year, unsigned int month, unsigned int day) {
 	this->year = year;
 	this->month = month;
@@ -10,8 +16,8 @@ Date::Date(unsigned int year, unsigned int month, unsigned int day) {
 
 Date::Date(string yearMonthDay) {
 	this->year = stoi(yearMonthDay.substr(0, 4));
-	this->month = stoi(yearMonthDay.substr(4, 2));
-	this->day = stoi(yearMonthDay.substr(6, 2));
+	this->month = stoi(yearMonthDay.substr(5, 2));
+	this->day = stoi(yearMonthDay.substr(8, 2));
 }
 
 void Date::setYear(unsigned int year) {

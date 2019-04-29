@@ -1,15 +1,16 @@
 #pragma once
-#include <string>
+#include "Auxiliary.h"
 
 using namespace std;
 
 class Address {
 	public:
-		Address(string street, unsigned int door_number, string apartment, string zip_code, string province);
+		Address();
+		Address(string line);
 	private:
 		string street;
-		unsigned int door_number;
+		int door_number;
 		string apartment;
 		string zip_code;
-		string province;
+		string locality;
 };

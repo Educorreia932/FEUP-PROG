@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include <vector>
 #include "Address.h"
 
@@ -8,11 +7,12 @@ using namespace std;
 class Client {
 	public:
 		Client();
+		Client(string file_name);
 	private:
 		string name;
-		unsigned int nif;
-		unsigned int household;
+		int nif;
+		int household;
 		Address ClientAddress;			
-		vector <int> AdquiredTravelPacks; //Mudar para vector <TravelPack> (?)
-		unsigned int total_purchases; //int ou outro tipo (?)
+		vector <int> AdquiredTravelPacks; 
+		int total_purchases; 
 };

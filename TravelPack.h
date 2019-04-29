@@ -1,16 +1,22 @@
 #pragma once
-#include <string>
 #include <vector>
 #include "Date.h"
+#include "Auxiliary.h"
 
 using namespace std;
 
 class TravelPack {
+	public:
+		TravelPack();
+		TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats);
+		int getIdentifier();
 	private:
 		int identifier;
-		vector <string> travel_destination; //Mudar para stringstream (?)
+		vector <string> travel_destination; 
 		Date DepartureDate;
 		Date ArrivalDate;
-		unsigned int price;
-		unsigned int maximum_seats;
+		int price;
+		int maximum_seats;
+
+		vector <string> convertTravelDestination(string travel_destination);
 };
