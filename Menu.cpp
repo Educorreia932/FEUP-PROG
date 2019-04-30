@@ -30,7 +30,7 @@ void Menu::menuSelection(int selected) {
 		case 1:
 			break;
 		case 2:
-			showManageTravelPacks();
+			manageTravelPacksSelection(showManageTravelPacks());
 			break;
 		case 3:
 			break;
@@ -54,11 +54,17 @@ int Menu::showManageTravelPacks() {
 	return selection;
 }
 
-void Menu::manageTravelPacks(int selected) {
+void Menu::manageTravelPacksSelection(int selected) {
 	system("cls");
 
 	switch (selected) {
 		case 1:
+			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key. " << endl << endl;
+
+			showChangeTravelPacks(); //Apresenta o menu de seleção do pacote a alterar
+			manageTravelPacksSelection(showChangeTravelPacks());
+
+			cout << endl;
 			break;
 		case 2:
 			break;
@@ -70,7 +76,40 @@ void Menu::manageTravelPacks(int selected) {
 }
 
 int Menu::showTravelPacks() {
+	int selection;
+
 	for (int i = 0; i < size(AgencyObj.getTravelPacksObjs()); i++)
-		cout << i + 1 << ") " << AgencyObj.getTravelPacksObjs()[i].getTravelDestination() << " (" << AgencyObj.getTravelPacksObjs()[i].getIdentifier() << ")" << std::endl;
+		cout << i + 1 << ") " << AgencyObj.getTravelPacksObjs()[i].getTravelDestination()[0] << " (" << AgencyObj.getTravelPacksObjs()[i].getIdentifier() << ")" << endl;
+
+	cin >> selection;
+	cin.ignore();
+
+	return selection;
 }
 
+int Menu::showChangeTravelPacks() {
+	int selection;
+
+	cout << "What do you want to change in the travel pack? Insert the corresponding key." << endl << endl
+		 << "1) The identifier." << endl
+		 << "2) The travel destination." << endl
+		 << "3) The departure date." << endl
+	 	 << "4) The arrival date." << endl
+	 	 << "5) The price." << endl
+		 << "6) The initially available seats." << endl
+		 << "7) The sold seats." << endl
+		 << "0) Go back." << endl;
+
+	cin >> selection;
+	cin.ignore();
+
+	return selection;
+}
+
+void Menu::manageTravelPacksSelection(int selected) {
+	switch (selected) {
+		case 1:
+			//Identifier
+		case 2:
+	}
+}

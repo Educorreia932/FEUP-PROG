@@ -9,10 +9,10 @@ class TravelPack {
 	public:
 		TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats);
 		int getIdentifier() const;
-		int getTravelDestination() const;
+		vector <string> getTravelDestination() const;
 	private:
 		int identifier;
-		vector <string> travel_destination; 
+		vector <string> travelDestination; 
 		Date DepartureDate;
 		Date ArrivalDate;
 		int price;

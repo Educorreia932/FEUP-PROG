@@ -198,7 +198,6 @@ void Agency::updateClientFile() {
 
 }
 
-
 //Save to packs file(Not working)
 /*
 

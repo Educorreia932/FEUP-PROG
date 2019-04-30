@@ -13,7 +13,6 @@ class Address {
 		string getApartment();
 		string getZipCode();
 		string getLocality();
-
 	private:
 		string street;
 		int door_number;
