@@ -85,7 +85,7 @@ int Menu::showManageTravelPacks() {
 }
 
 void Menu::manageTravelPacksSelection(int selected) {
-	int selectedTravelPack;
+	int selected_travel_pack;
 	system("cls");
 
 	switch (selected) {
@@ -95,8 +95,8 @@ void Menu::manageTravelPacksSelection(int selected) {
 		case 2:
 			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key. " << endl << endl;
 
-			selectedTravelPack = showTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
-			changeTravelPacksSelection(showChangeTravelPacks(), selectedTravelPack);
+			selected_travel_pack = showTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
+			changeTravelPacksSelection(showChangeTravelPacks(), selected_travel_pack);
 			break;
 		case 3:
 			cout << "Not working. In construction.";
@@ -126,7 +126,7 @@ int Menu::showChangeTravelPacks() {
 	return selection;
 }
 
-void Menu::changeTravelPacksSelection(int selected, int selectedTravelPack) {
+void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 	int aux_int;
 	string aux_string;
 
@@ -136,39 +136,39 @@ void Menu::changeTravelPacksSelection(int selected, int selectedTravelPack) {
 			cin >> aux_int;
 			cin.ignore();
 
-			AgencyObj.travelPacksObjs[selectedTravelPack].setIdentifier(aux_int); 
+			AgencyObj.travelPacksObjs[selected_travel_pack].setIdentifier(aux_int); 
 			break;
 		case 2:
 			cout << "Insert the new travel destination of the travel pack (in the format 'Region - Place1, Place2...'): ";
 			getline(cin, aux_string);
 
-			AgencyObj.travelPacksObjs[selectedTravelPack].setTravelDestination(aux_string);
+			AgencyObj.travelPacksObjs[selected_travel_pack].setTravelDestination(aux_string);
 			break;
 		case 3:
 			cout << "Insert the new departure date of the travel pack (in the format 'YYYY/MM/DD'): ";
 			getline(cin, aux_string);
 
-			AgencyObj.travelPacksObjs[selectedTravelPack].setDepartureDate(aux_string);
+			AgencyObj.travelPacksObjs[selected_travel_pack].setDepartureDate(aux_string);
 			break;
 		case 4:
 			cout << "Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ";
 			getline(cin, aux_string);
 
-			AgencyObj.travelPacksObjs[selectedTravelPack].setArrivalDate(aux_string);
+			AgencyObj.travelPacksObjs[selected_travel_pack].setArrivalDate(aux_string);
 			break;
 		case 5:
 			cout << "Insert the new price of the travel pack: ";
 			cin >> aux_int;
 			cin.ignore();
 
-			AgencyObj.travelPacksObjs[selectedTravelPack].setPrice(aux_int);
+			AgencyObj.travelPacksObjs[selected_travel_pack].setPrice(aux_int);
 			break;
 		case 6:
 			cout << "Insert the new number of maximum seats of the travel pack: ";
 			cin >> aux_int;
 			cin.ignore();
 
-			AgencyObj.travelPacksObjs[selectedTravelPack].setMaximumSeats(aux_int);
+			AgencyObj.travelPacksObjs[selected_travel_pack].setMaximumSeats(aux_int);
 			break;
 	}
 }
