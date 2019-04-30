@@ -28,4 +28,5 @@ class Agency {
 		vector <Client> readClients(string file_name);
 
 		void updateClientFile();
+		void updatePacksFile();
 };

@@ -193,3 +193,49 @@ void Agency::updateClientFile() {
 	f.close();
 
 }
+
+
+//Save to packs file(Not working)
+/*
+
+void Agency::updatePacksFile() {
+
+	ofstream f;
+
+	f.open(travelpacks_file);
+
+	if (f.is_open()) {
+
+		f << abs(packs.at(size(packs) - 1).identifier) << endl;
+
+		for (size_t i = 0; i < size(packs); i++) {
+
+			f << packs.at(i).identifier << endl;
+
+			if (size(packs.at(i).destinations) == 1)
+				f << packs.at(i).destinations.at(0) << endl;
+			else {
+				f << packs.at(i).destinations.at(0) << " - " << packs.at(i).destinations.at(1);
+				for (size_t j = 2; j < size(packs.at(i).destinations); j++) {
+					f << ',' << packs.at(i).destinations.at(j);
+				} f << endl;
+
+			}
+
+			f << packs.at(i).startDate.year << '/' << packs.at(i).startDate.month << '/' << packs.at(i).startDate.day << endl;
+			f << packs.at(i).endDate.year << '/' << packs.at(i).endDate.month << '/' << packs.at(i).endDate.day << endl;
+			f << packs.at(i).price << endl;
+			f << packs.at(i).maxPeople << endl;
+			f << packs.at(i).numberOfSold << endl;
+
+			if (i != size(packs) - 1)
+				f << "::::::::::" << endl;
+
+		}
+
+	}
+	f.close();
+
+}
+
+*/
