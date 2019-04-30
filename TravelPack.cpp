@@ -17,6 +17,10 @@ vector <string> TravelPack::getTravelDestination() const {
 	return travelDestination;
 }
 
+void TravelPack::setIdentifier(int identifier) {
+	this->identifier = identifier;
+}
+
 vector <string> TravelPack::convertTravelDestination(string travel_destination) {
 	vector <string> result;
 	string aux_string;

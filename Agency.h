@@ -29,4 +29,6 @@ class Agency {
 
 		void updateClientFile();
 		void updatePacksFile();
+
+		friend class Menu;
 };

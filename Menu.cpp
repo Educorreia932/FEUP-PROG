@@ -61,8 +61,8 @@ void Menu::manageTravelPacksSelection(int selected) {
 		case 1:
 			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key. " << endl << endl;
 
-			showChangeTravelPacks(); //Apresenta o menu de seleção do pacote a alterar
-			manageTravelPacksSelection(showChangeTravelPacks());
+			int selectedTravelPack = showChangeTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
+			manageTravelPacksSelection(showChangeTravelPacks(), selectedTravelPack);
 
 			cout << endl;
 			break;
@@ -106,10 +106,10 @@ int Menu::showChangeTravelPacks() {
 	return selection;
 }
 
-void Menu::manageTravelPacksSelection(int selected) {
+void Menu::manageTravelPacksSelection(int selected, int selectedTravelPack) {
 	switch (selected) {
 		case 1:
-			//Identifier
+			AgencyObj.travelPacksObjs[selectedTravelPack].setIdentifier(3);
 		case 2:
 	}
 }

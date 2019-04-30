@@ -13,5 +13,5 @@ class Menu {
 		void manageTravelPacksSelection(int selected);
 		int showTravelPacks();
 		int showChangeTravelPacks();
-		void manageTravelPacksSelection(int selected);
+		void manageTravelPacksSelection(int selected, int selectedTravelPack);
 };
