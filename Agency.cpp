@@ -46,12 +46,16 @@ Agency::Agency(string file_name) {
 	this->travelPacksObjs = readTravelPacks(travelpacks_file);
 }
 
-string Agency::getClientsFile() {
+string Agency::getClientsFile() const  {
 	return clients_file;
 }
 
-string Agency::getTravelPacksFile() {
+string Agency::getTravelPacksFile() const {
 	return travelpacks_file;
+}
+
+vector <TravelPack> Agency::getTravelPacksObjs() const {
+	return travelPacksObjs;
 }
 
 vector <TravelPack> Agency::readTravelPacks(string file_name) {

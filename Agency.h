@@ -9,8 +9,9 @@ class Agency {
 	public:
 		Agency();
 		Agency(string file_name);
-		string getClientsFile();
-		string getTravelPacksFile();
+		vector <TravelPack> getTravelPacksObjs() const;
+		string getClientsFile() const;
+		string getTravelPacksFile() const;
 	private:
 		//Variables/Data Structure
 		string name;
@@ -24,7 +25,6 @@ class Agency {
 
 		//Functions
 		vector <TravelPack> readTravelPacks(string file_name);
-
 		vector <Client> readClients(string file_name);
 
 		void updateClientFile();
