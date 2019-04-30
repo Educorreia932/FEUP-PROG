@@ -39,19 +39,22 @@ Address::Address(string line) {
 	this->locality = trim(aux_string);
 }
 
-
 string Address::getStreet() {
 	return this->street;
 }
+
 int Address::getDoorNumber() {
 	return this->door_number;
 }
+
 string Address::getApartment() {
 	return this->apartment;
 }
+
 string Address::getZipCode() {
 	return this->zip_code;
 }
+
 string Address::getLocality() {
 	return this->locality;
 }
