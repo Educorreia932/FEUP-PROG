@@ -1,4 +1,4 @@
-# NiceHolidyays2
+# NiceHolidays2
 Project for PROG course
 
 ## A fazer:
