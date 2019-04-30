@@ -8,3 +8,19 @@ string trim(string s) {
 
 	return s;
 }
+
+vector<int> readPackageIds(string line) {
+
+	vector<int> packageIds;
+	istringstream s(line);
+	int aux;
+	char c;
+	
+	while (s >> aux) {
+		packageIds.push_back(aux);
+		s >> c;
+	}
+
+
+	return packageIds;
+}

@@ -24,4 +24,6 @@ class Agency {
 
 		//Functions
 		vector <TravelPack> readTravelPacks(string file_name);
+
+		vector <Client> readClients(string file_name);
 };

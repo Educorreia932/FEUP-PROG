@@ -1,18 +1,18 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "Address.h"
 
 using namespace std;
 
 class Client {
 	public:
-		Client();
-		Client(string file_name);
+		Client(string name, int nif, int household, Address ClientAddress, vector <int> AcquiredTravelPacks, int total_purchases);
 	private:
 		string name;
 		int nif;
 		int household;
 		Address ClientAddress;			
-		vector <int> AdquiredTravelPacks; 
+		vector <int> AcquiredTravelPacks; 
 		int total_purchases; 
 };
