@@ -15,12 +15,13 @@ class TravelPack {
 
 		//Setters
 		void setIdentifier(int identifier);
-		void setTravelDestination(vector <string> travelDestination);
-		void setArrivalDate(Date ArrivalDate);
-		void setDepartureDate(Date DepartureDate);
+		void setTravelDestination(string travelDestination);
+		void setArrivalDate(string ArrivalDate);
+		void setDepartureDate(string DepartureDate);
 		void setPrice(int price);
 		void setMaximumSeats(int maximum_seats);
 	private:
+		//Variables/Data Structure
 		int identifier;
 		vector <string> travelDestination; 
 		Date DepartureDate;
@@ -28,5 +29,6 @@ class TravelPack {
 		int price;
 		int maximum_seats;
 
+		//Functions
 		vector <string> convertTravelDestination(string travel_destination);
 };

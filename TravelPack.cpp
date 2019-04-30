@@ -21,15 +21,16 @@ void TravelPack::setIdentifier(int identifier) {
 	this->identifier = identifier;
 }
 
-void TravelPack::setTravelDestination(vector <string> travelDestination) {
-	this->travelDestination = travelDestination;
-}
-void TravelPack::setArrivalDate(Date ArrivalDate) {
-	this->ArrivalDate = ArrivalDate;
+void TravelPack::setTravelDestination(string travelDestination) {
+	this->travelDestination = convertTravelDestination(travelDestination);
 }
 
-void TravelPack::setDepartureDate(Date DepartureDate) {
-	this->DepartureDate = DepartureDate;
+void TravelPack::setDepartureDate(string DepartureDate) {
+	this->DepartureDate = Date(DepartureDate);
+}
+
+void TravelPack::setArrivalDate(string ArrivalDate) {
+	this->ArrivalDate = Date(ArrivalDate);
 }
 
 void TravelPack::setPrice(int price) {

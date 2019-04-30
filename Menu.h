@@ -8,10 +8,17 @@ class Menu {
 		int showMenu();
 		void menuSelection(int selected);
 	private:
+		//Variables/Data Structure
 		Agency AgencyObj;
-		int showManageTravelPacks();
-		void manageTravelPacksSelection(int selected);
+
+		//Function
 		int showTravelPacks();
+
+		int showManageTravelPacks();
+		void manageTravelPacksSelection(int selected);		
+
 		int showChangeTravelPacks();
-		void manageTravelPacksSelection(int selected, int selectedTravelPack);
+		void changeTravelPacksSelection(int selected, int selectedTravelPack);
+
+		void createTravelPack();
 };
