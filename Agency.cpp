@@ -46,12 +46,16 @@ Agency::Agency(string file_name) {
 	this->travelPacksObjs = readTravelPacks(travelpacks_file);
 }
 
-string Agency::getClientsFile() {
+string Agency::getClientsFile() const  {
 	return clients_file;
 }
 
-string Agency::getTravelPacksFile() {
+string Agency::getTravelPacksFile() const {
 	return travelpacks_file;
+}
+
+vector <TravelPack> Agency::getTravelPacksObjs() const {
+	return travelPacksObjs;
 }
 
 vector <TravelPack> Agency::readTravelPacks(string file_name) {
@@ -127,7 +131,6 @@ vector <Client> Agency::readClients(string file_name) {
 	if (ClientsFile.is_open()) {
 		while (getline(ClientsFile, line)) {
 			if (line == "::::::::::") {
-				//result.push_back(Client(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
 				counter = -1;
 			}
 

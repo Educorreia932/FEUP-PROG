@@ -30,6 +30,7 @@ void Menu::menuSelection(int selected) {
 		case 1:
 			break;
 		case 2:
+			showManageTravelPacks();
 			break;
 		case 3:
 			break;
@@ -37,3 +38,39 @@ void Menu::menuSelection(int selected) {
 			break;
 	}
 }
+
+int Menu::showManageTravelPacks() {
+	int selection;
+
+	cout << "What do you want to do ? Insert the corresponding key." << endl << endl
+	 	 << "1) Create a new travel pack." << endl
+		 << "2) Change the information of a travel pack." << endl
+		 << "3) Remove an existent travel pack." << endl
+		 << "0) Go back." << endl;
+
+	cin >> selection;
+	cin.ignore();
+
+	return selection;
+}
+
+void Menu::manageTravelPacks(int selected) {
+	system("cls");
+
+	switch (selected) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 0:
+			break;
+	}
+}
+
+int Menu::showTravelPacks() {
+	for (int i = 0; i < size(AgencyObj.getTravelPacksObjs()); i++)
+		cout << i + 1 << ") " << AgencyObj.getTravelPacksObjs()[i].getTravelDestination() << " (" << AgencyObj.getTravelPacksObjs()[i].getIdentifier() << ")" << std::endl;
+}
+
