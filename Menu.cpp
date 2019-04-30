@@ -53,6 +53,21 @@ int Menu::showTravelPacks() {
 	return selection;
 }
 
+int Menu::showManageTravelPacks() {
+	int selection;
+
+	cout << "What do you want to do ? Insert the corresponding key." << endl << endl
+		<< "1) Create a new travel pack." << endl
+		<< "2) Change the information of a travel pack." << endl
+		<< "3) Remove an existent travel pack." << endl
+		<< "0) Go back." << endl;
+
+	cin >> selection;
+	cin.ignore();
+
+	return selection;
+}
+
 void Menu::manageTravelPacksSelection(int selected) {
 	int selectedTravelPack;
 
@@ -74,21 +89,6 @@ void Menu::manageTravelPacksSelection(int selected) {
 	case 0:
 		break;
 	}
-}
-
-int Menu::showManageTravelPacks() {
-	int selection;
-
-	cout << "What do you want to do ? Insert the corresponding key." << endl << endl
-		 << "1) Create a new travel pack." << endl
-		 << "2) Change the information of a travel pack." << endl
-		 << "3) Remove an existent travel pack." << endl
-		 << "0) Go back." << endl;
-
-	cin >> selection;
-	cin.ignore();
-
-	return selection;
 }
 
 int Menu::showChangeTravelPacks() {
