@@ -131,6 +131,7 @@ vector <Client> Agency::readClients(string file_name) {
 	if (ClientsFile.is_open()) {
 		while (getline(ClientsFile, line)) {
 			if (line == "::::::::::") {
+				result.push_back(Client(aux_name, aux_nif, aux_household, aux_ClientAddress, aux_AcquiredTravelPacks, aux_total_purchases));
 				counter = -1;
 			}
 
@@ -163,4 +164,36 @@ vector <Client> Agency::readClients(string file_name) {
 	}
 
 	return result;
+}
+
+//Not tested
+void Agency::updateClientFile() {
+
+	ofstream f;
+
+	f.open(clients_file);
+
+	if (f.is_open()) {
+
+		for (size_t i = 0; i < size(clientsObjs); i++) {
+
+			f << clientsObjs.at(i).getName() << endl;
+			f << clientsObjs.at(i).getNif() << endl;
+			f << clientsObjs.at(i).getHousehold() << endl;
+			f << clientsObjs.at(i).getClientAddress().getStreet() << '/' << clientsObjs.at(i).getClientAddress().getDoorNumber() << '/' << clientsObjs.at(i).getClientAddress().getApartment() << '/'
+				<< clientsObjs.at(i).getClientAddress().getZipCode() << '/' << clientsObjs.at(i).getClientAddress().getLocality() << endl;
+			f << clientsObjs.at(i).getAcquiredTravelPacks()[0];
+			for (size_t j = 1; j < size(clientsObjs.at(i).getAcquiredTravelPacks()); j++) {
+				f << ';' << clientsObjs.at(i).getAcquiredTravelPacks().at(j);
+			}
+			f << endl;
+
+			if (i != size(clientsObjs) - 1)
+				f << "::::::::::" << endl;
+
+		}
+
+	}
+	f.close();
+
 }
