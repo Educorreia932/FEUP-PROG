@@ -18,7 +18,7 @@ TravelPack::TravelPack(int identifier, string travel_destination, Date Departure
 	this->maximum_seats = maximum_seats;
 }
 
-int TravelPack::getIdentifier() {
+int TravelPack::getIdentifier() const {
 	return identifier;
 }
 

@@ -109,3 +109,55 @@ vector <TravelPack> Agency::readTravelPacks(string file_name) {
 
 	return result;
 }
+
+vector <Client> Agency::readClients(string file_name) {
+	vector <Client> result;
+	string line;
+	ifstream ClientsFile(file_name);
+	int counter = 0;
+
+	string aux_name;
+	int aux_nif;
+	int aux_household;
+	Address aux_ClientAddress;
+	vector <int> aux_AcquiredTravelPacks;
+	int aux_total_purchases;
+
+
+	if (ClientsFile.is_open()) {
+		while (getline(ClientsFile, line)) {
+			if (line == "::::::::::") {
+				//result.push_back(Client(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
+				counter = -1;
+			}
+
+			switch (counter) {
+			case 0:
+				aux_name = line;
+				break;
+			case 1:
+				aux_nif = stoi(line);
+				break;
+			case 2:
+				aux_household = stoi(line);
+				break;
+			case 3:
+				aux_ClientAddress = Address(line);
+				break;
+			case 4:
+				aux_AcquiredTravelPacks = readPackageIds(line);
+				break;
+			case 5:
+				aux_total_purchases = stoi(line);
+				break;
+			}
+
+			counter++;
+		}
+
+		result.push_back(Client(aux_name, aux_nif, aux_household, aux_ClientAddress, aux_AcquiredTravelPacks,aux_total_purchases));
+		ClientsFile.close();
+	}
+
+	return result;
+}
