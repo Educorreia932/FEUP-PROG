@@ -12,6 +12,7 @@ class Agency {
 		string getClientsFile();
 		string getTravelPacksFile();
 	private:
+		//Variables/Data Structure
 		string name;
 		int nif;
 		Address AgencyAddress;
@@ -21,5 +22,6 @@ class Agency {
 		vector <Client> clientsObjs;
 		vector <TravelPack> travelPacksObjs;
 
+		//Functions
 		vector <TravelPack> readTravelPacks(string file_name);
 };

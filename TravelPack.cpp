@@ -1,14 +1,5 @@
 #include "TravelPack.h"
 
-TravelPack::TravelPack() {
-	this->identifier = 0;
-	this->travel_destination = {};
-	this->DepartureDate = Date();
-	this->ArrivalDate = Date();
-	this->price = -1;
-	this->maximum_seats = -1;
-}
-
 TravelPack::TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats) {
 	this->identifier = identifier;
 	this->travel_destination = convertTravelDestination(travel_destination);

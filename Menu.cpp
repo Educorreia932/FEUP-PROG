@@ -4,7 +4,7 @@ Menu::Menu(Agency AgencyObj) {
 	this->AgencyObj = AgencyObj;
 }
 
-int Menu::show() {
+int Menu::showMenu() {
 	int selection;
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
@@ -21,4 +21,19 @@ int Menu::show() {
 	cin.ignore();
 
 	return selection;
+}
+
+void Menu::menuSelection(int selected) {
+	system("cls");
+
+	switch (selected) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 0:
+			break;
+	}
 }

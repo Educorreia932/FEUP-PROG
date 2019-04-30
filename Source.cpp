@@ -3,7 +3,7 @@
 int main() {
 	Menu ProjMenu(Agency("agency.txt"));
 
-	ProjMenu.show();
+	ProjMenu.menuSelection(ProjMenu.showMenu());
 
 	return 0;
 }

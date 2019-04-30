@@ -4,7 +4,8 @@
 class Menu {
 	public:
 		Menu(Agency AgencyObj);
-		int show();
+		int showMenu();
+		void menuSelection(int selected);
 	private:
 		Agency AgencyObj;
 };
