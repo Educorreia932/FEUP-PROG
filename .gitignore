@@ -55,3 +55,7 @@ x64/Debug/
 *.iobj
 
 *.ipdb
+
+html/
+
+latex/
