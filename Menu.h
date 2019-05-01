@@ -8,20 +8,19 @@ class Menu {
 		int showMenu();
 		void menuSelection(int selected);
 	private:
-		//Variables/Data Structure
+		//Variables/Data Structures
 		Agency AgencyObj;
 
 		//Clients Menus
 		int showClients();
 
 		int showManageClients();
-		void manageClientsTravelPacksSelection(int selected);
+		void manageClientsSelection(int selected);
 		
 		int showChangeClients();
 		void changeClientsSelection(int selected, int selected_client);
 
 		void createClient();
-		void removeClient();
 
 		//Travel Packs Menus
 		int showTravelPacks();
@@ -33,5 +32,4 @@ class Menu {
 		void changeTravelPacksSelection(int selected, int selected_travel_pack);
 
 		void createTravelPack();
-		void removeTravelPack(int selected);
 };

@@ -1,5 +1,6 @@
 #include "TravelPack.h"
 
+//Constructor
 TravelPack::TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats) {
 	this->identifier = identifier;
 	this->travelDestination = convertTravelDestination(travel_destination);
@@ -9,6 +10,7 @@ TravelPack::TravelPack(int identifier, string travel_destination, Date Departure
 	this->maximum_seats = maximum_seats;
 }
 
+//Getters
 int TravelPack::getIdentifier() const {
 	return identifier;
 }
@@ -17,6 +19,7 @@ vector <string> TravelPack::getTravelDestination() const {
 	return travelDestination;
 }
 
+//Setters
 void TravelPack::setIdentifier(int identifier) {
 	this->identifier = identifier;
 }
@@ -41,6 +44,7 @@ void TravelPack::setMaximumSeats(int maximum_seats) {
 	this->maximum_seats = maximum_seats;
 }
 
+//Other
 vector <string> TravelPack::convertTravelDestination(string travel_destination) {
 	vector <string> result;
 	string aux_string;

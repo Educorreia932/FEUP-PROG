@@ -1,8 +1,16 @@
 #include "Menu.h"
+#define clients AgencyObj.clientsObjs
+#define travelPacks AgencyObj.travelPacksObjs	
 
+//Constructor
 Menu::Menu(Agency AgencyObj) {
 	this->AgencyObj = AgencyObj;
 }
+
+/*
+	«Show» functions - Mostram menu de seleção e retornam opção selecionada
+	«Selection» functions - "Switch cases", fazem ações diferentes conforme o selecionado
+*/
 
 int Menu::showMenu() {
 	int selection;
@@ -32,7 +40,7 @@ void Menu::menuSelection(int selected) {
 
 	switch (selected) {
 		case 1:
-			cout << "Not working. In construction.";
+			manageClientsSelection(showManageClients());
 			break;
 		case 2:
 			manageTravelPacksSelection(showManageTravelPacks());
@@ -57,11 +65,166 @@ void Menu::menuSelection(int selected) {
 	}
 }
 
+//Clients Menus
+
+int Menu::showClients() {
+	int selection;
+
+	for (int i = 0; i < size(clients); i++)
+		cout << i + 1 << ") " << clients[i].getName() << " (" << clients[i].getNif() << ")" << endl;
+
+	cin >> selection;
+	cin.ignore();
+
+	return selection;
+}
+
+int Menu::showManageClients() {
+	int selection;
+
+	cout << "What do you want to do? Insert the corresponding key." << endl << endl
+		 << "1) Create a new client." << endl
+		 << "2) Change the information of a client." << endl
+		 << "3) Remove an existent client." << endl
+		 << "0) Go back." << endl;
+
+	cin >> selection;
+	cin.ignore();
+
+	return selection;
+}
+
+void Menu::manageClientsSelection(int selected) {
+	int selected_client;
+	system("cls");
+
+	switch (selected) {
+		case 1:
+			createClient();
+			break;
+		case 2:
+			cout << "Which client do you wish to change the information of? Insert the corresponding key." << endl << endl;
+
+			selected_client = showClients() - 1;
+			changeClientsSelection(showChangeClients(), selected_client);
+			break;
+		case 3:
+			cout << "Which client do you wish to remove? Insert the corresponding key." << endl << endl;
+
+			selected_client = showClients() - 1;
+			AgencyObj.removeClient(selected_client);
+			break;
+	}
+
+	menuSelection(showMenu());
+}
+
+int Menu::showChangeClients() {
+	int selection;
+
+	cout << "What do you want to change in the client? Insert the corresponding key." << endl << endl
+		 << "1) The name." << endl
+		 << "2) The NIF." << endl
+		 << "3) The household." << endl
+		 << "4) The address." << endl
+		 << "5) The acquired travel packs." << endl
+		 << "6) The value of total purchases." << endl
+		 << "0) Go back." << endl;
+
+	cin >> selection;
+	cin.ignore();
+	
+	return selection;
+}
+
+void Menu::changeClientsSelection(int selected, int selected_client) {
+	int aux_int;
+	string aux_string;
+
+	switch (selected) {
+		case 1:
+			cout << "Insert the new name of the client: ";
+			getline(cin, aux_string);
+
+			clients[selected_client].setName(aux_string);
+			break;
+		case 2:
+			cout << "Insert the new NIF of the client: ";
+			cin >> aux_int;
+			cin.ignore();
+
+			clients[selected_client].setNif(aux_int);
+			break;
+		case 3:
+			cout << "Insert the new household of the client: ";
+			cin >> aux_int;
+			cin.ignore();
+
+			clients[selected_client].setHousehold(aux_int);
+			break;
+		case 4:
+			cout << "Insert the new address of the client: ";
+			getline(cin, aux_string);
+
+			clients[selected_client].setAddress(aux_string);
+			break;
+		case 5:
+			cout << "Insert the new acquired travel packs of the client: ";
+			getline(cin, aux_string);
+
+			clients[selected_client].setAcquiredTravelPacks(aux_string);
+			break;
+		case 6:
+			cout << "Insert the new value of total purchases of the client: ";
+			cin >> aux_int;
+			cin.ignore();
+
+			clients[selected_client].setTotalPurchases(aux_int);
+			break;
+	}
+}
+
+void Menu::createClient() {
+	string aux_name;
+	int aux_nif;
+	int aux_household;
+	string aux_client_address;
+	string aux_acquired_travel_packs;
+	int aux_total_purchases;
+
+	cout << "What's the name of the new client? ";
+	getline(cin, aux_name);
+
+	cout << "What's the NIF of the new client? ";
+	cin >> aux_nif;
+	cin.ignore();
+
+	cout << "What's the household of the new client? ";
+	cin >> aux_household;
+	cin.ignore();
+
+	cout << "What's the address of the new client? ";
+	getline(cin, aux_client_address);
+	Address auxClientAddress(aux_client_address);
+
+	cout << "What are the acquired travel packs of the new client? ";
+	getline(cin, aux_acquired_travel_packs);
+	vector <int> auxAcquiredTravelPacks = readPackageIds(aux_acquired_travel_packs);
+
+	cout << "What's the value of total purchases of the new client? ";
+	cin >> aux_total_purchases;
+	cin.ignore();
+
+	clients.push_back(Client(aux_name, aux_nif, aux_household, auxClientAddress, auxAcquiredTravelPacks, aux_total_purchases));
+}
+
+//Travel Packs Menus
+
 int Menu::showTravelPacks() {
 	int selection;
 
-	for (int i = 0; i < size(AgencyObj.getTravelPacksObjs()); i++)
-		cout << i + 1 << ") " << AgencyObj.getTravelPacksObjs()[i].getTravelDestination()[0] << " (" << AgencyObj.getTravelPacksObjs()[i].getIdentifier() << ")" << endl;
+	for (int i = 0; i < size(travelPacks); i++)
+		cout << i + 1 << ") " << travelPacks[i].getTravelDestination()[0] << " (" << travelPacks[i].getIdentifier() << ")" << endl;
 
 	cin >> selection;
 	cin.ignore();
@@ -72,7 +235,7 @@ int Menu::showTravelPacks() {
 int Menu::showManageTravelPacks() {
 	int selection;
 
-	cout << "What do you want to do ? Insert the corresponding key." << endl << endl
+	cout << "What do you want to do? Insert the corresponding key." << endl << endl
 		 << "1) Create a new travel pack." << endl
 		 << "2) Change the information of a travel pack." << endl
 	 	 << "3) Remove an existent travel pack." << endl
@@ -95,14 +258,14 @@ void Menu::manageTravelPacksSelection(int selected) {
 		case 2:
 			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key." << endl << endl;
 
-			selected_travel_pack = showTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
+			selected_travel_pack = showTravelPacks() - 1;
 			changeTravelPacksSelection(showChangeTravelPacks(), selected_travel_pack);
 			break;
 		case 3:
 			cout << "Which travel pack do you wish to remove? Insert the corresponding key." << endl << endl;
 
-			selected_travel_pack = showTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
-			removeTravelPack(selected_travel_pack);
+			selected_travel_pack = showTravelPacks() - 1;
+			AgencyObj.removeTravelPack(selected_travel_pack);
 			break;
 		case 0:
 			break;
@@ -139,39 +302,39 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 			cin >> aux_int;
 			cin.ignore();
 
-			AgencyObj.travelPacksObjs[selected_travel_pack].setIdentifier(aux_int); 
+			travelPacks[selected_travel_pack].setIdentifier(aux_int);
 			break;
 		case 2:
 			cout << "Insert the new travel destination of the travel pack (in the format 'Region - Place1, Place2...'): ";
 			getline(cin, aux_string);
 
-			AgencyObj.travelPacksObjs[selected_travel_pack].setTravelDestination(aux_string);
+			travelPacks[selected_travel_pack].setTravelDestination(aux_string);
 			break;
 		case 3:
 			cout << "Insert the new departure date of the travel pack (in the format 'YYYY/MM/DD'): ";
 			getline(cin, aux_string);
 
-			AgencyObj.travelPacksObjs[selected_travel_pack].setDepartureDate(aux_string);
+			travelPacks[selected_travel_pack].setDepartureDate(aux_string);
 			break;
 		case 4:
 			cout << "Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ";
 			getline(cin, aux_string);
 
-			AgencyObj.travelPacksObjs[selected_travel_pack].setArrivalDate(aux_string);
+			travelPacks[selected_travel_pack].setArrivalDate(aux_string);
 			break;
 		case 5:
 			cout << "Insert the new price of the travel pack: ";
 			cin >> aux_int;
 			cin.ignore();
 
-			AgencyObj.travelPacksObjs[selected_travel_pack].setPrice(aux_int);
+			travelPacks[selected_travel_pack].setPrice(aux_int);
 			break;
 		case 6:
 			cout << "Insert the new number of maximum seats of the travel pack: ";
 			cin >> aux_int;
 			cin.ignore();
 
-			AgencyObj.travelPacksObjs[selected_travel_pack].setMaximumSeats(aux_int);
+			travelPacks[selected_travel_pack].setMaximumSeats(aux_int);
 			break;
 	}
 }
@@ -206,9 +369,5 @@ void Menu::createTravelPack() {
 	cin >> aux_maximum_seats;
 	cin.ignore();
 
-	AgencyObj.travelPacksObjs.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
-}
-
-void Menu::removeTravelPack(int selected) {
-	AgencyObj.travelPacksObjs.erase(AgencyObj.travelPacksObjs.begin() + selected);
+	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
 }

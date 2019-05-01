@@ -13,7 +13,7 @@ class Agency {
 		string getClientsFile() const;
 		string getTravelPacksFile() const;
 	private:
-		//Variables/Data Structure
+		//Variables/Data Structures
 		string name;
 		int nif;
 		Address AgencyAddress;
@@ -29,6 +29,9 @@ class Agency {
 
 		void updateClientFile();
 		void updatePacksFile();
+
+		void removeTravelPack(int selected);
+		void removeClient(int selected);
 
 		friend class Menu;
 };

@@ -1,5 +1,6 @@
 #include "Agency.h"
 
+//Constructors
 Agency::Agency() {
 	this->name = "N/A";
 	this->nif = -1;
@@ -44,8 +45,10 @@ Agency::Agency(string file_name) {
 	}
 
 	this->travelPacksObjs = readTravelPacks(travelpacks_file);
+	this->clientsObjs = readClients(clients_file);
 }
 
+//Getters
 string Agency::getClientsFile() const  {
 	return clients_file;
 }
@@ -58,6 +61,7 @@ vector <TravelPack> Agency::getTravelPacksObjs() const {
 	return travelPacksObjs;
 }
 
+//Read functions
 vector <TravelPack> Agency::readTravelPacks(string file_name) {
 	vector <TravelPack> result;
 	string line;
@@ -126,7 +130,6 @@ vector <Client> Agency::readClients(string file_name) {
 	Address aux_ClientAddress;
 	vector <int> aux_AcquiredTravelPacks;
 	int aux_total_purchases;
-
 
 	if (ClientsFile.is_open()) {
 		while (getline(ClientsFile, line)) {
@@ -242,3 +245,11 @@ void Agency::updatePacksFile() {
 }
 
 */
+
+void Agency::removeTravelPack(int selected) {
+	travelPacksObjs.erase(travelPacksObjs.begin() + selected);
+}
+
+void Agency::removeClient(int selected) {
+	clientsObjs.erase(clientsObjs.begin() + selected);
+}

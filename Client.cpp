@@ -9,6 +9,8 @@ Client::Client(string name, int nif, int household, Address ClientAddress, vecto
 	this->totalPurchases = totalPurchases;
 }
 
+//Getters
+
 string Client::getName() const {
 	return this->name;
 }
@@ -31,4 +33,30 @@ vector <int> Client::getAcquiredTravelPacks() const {
 
 int Client::getTotalPurchases() const{
 	return this->totalPurchases;
+}
+
+//Setters
+
+void Client::setName(string name) {
+	this->name = name;
+}
+
+void Client::setNif(int nif) {
+	this->nif = nif;
+}
+
+void Client::setHousehold(int household) {
+	this->household = household;
+}
+
+void Client::setAddress(string client_address) {
+	this->ClientAddress = Address(client_address);
+}
+
+void Client::setAcquiredTravelPacks(string adcquired_travel_packs) {
+	this->AcquiredTravelPacks = readPackageIds(adcquired_travel_packs);
+}
+
+void Client::setTotalPurchases(int total_purchases) {
+	this->totalPurchases = total_purchases;
 }

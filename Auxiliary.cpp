@@ -21,6 +21,5 @@ vector<int> readPackageIds(string line) {
 		s >> c;
 	}
 
-
 	return packageIds;
 }
