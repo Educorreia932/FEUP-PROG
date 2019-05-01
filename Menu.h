@@ -33,5 +33,5 @@ class Menu {
 		void changeTravelPacksSelection(int selected, int selected_travel_pack);
 
 		void createTravelPack();
-		void removeTravelPack();		
+		void removeTravelPack(int selected);
 };

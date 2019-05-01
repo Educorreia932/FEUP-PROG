@@ -18,7 +18,7 @@ int Menu::showMenu() {
 		 << "7) Buy a travel pack for a client." << endl
 		 << "8) Visualize the number and total value of sold travel packs." << endl
 		 << "9) Obtain the name of the most visited places." << endl
-		 << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl << endl
+		 // << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl << endl
 		 << "0) Exit the program and save the alterations made." << endl;
 
 	cin >> selection;
@@ -93,13 +93,16 @@ void Menu::manageTravelPacksSelection(int selected) {
 			createTravelPack();			
 			break;
 		case 2:
-			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key. " << endl << endl;
+			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key." << endl << endl;
 
 			selected_travel_pack = showTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
 			changeTravelPacksSelection(showChangeTravelPacks(), selected_travel_pack);
 			break;
 		case 3:
-			cout << "Not working. In construction.";
+			cout << "Which travel pack do you wish to remove? Insert the corresponding key." << endl << endl;
+
+			selected_travel_pack = showTravelPacks() - 1; //Apresenta o menu de seleção do pacote a alterar
+			removeTravelPack(selected_travel_pack);
 			break;
 		case 0:
 			break;
@@ -204,4 +207,8 @@ void Menu::createTravelPack() {
 	cin.ignore();
 
 	AgencyObj.travelPacksObjs.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
+}
+
+void Menu::removeTravelPack(int selected) {
+	AgencyObj.travelPacksObjs.erase(AgencyObj.travelPacksObjs.begin() + selected);
 }
