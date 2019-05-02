@@ -32,4 +32,8 @@ class Menu {
 		void changeTravelPacksSelection(int selected, int selected_travel_pack);
 
 		void createTravelPack();
+
+		//Reading functions
+
+		int readOption(int maxOptions,bool includingZero = true);
 };

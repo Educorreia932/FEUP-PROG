@@ -13,25 +13,23 @@ Menu::Menu(Agency AgencyObj) {
 */
 
 int Menu::showMenu() {
-	int selection;
 	system("cls");
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		 << "1) Manage clients." << endl
-		 << "2) Manage travel packs." << endl
-		 << "3) Visualize a specific client." << endl
-		 << "4) Visualize all the clients of the agency." << endl
-		 << "5) Visualize available travel packs." << endl
-		 << "6) Visualize sold travel packs." << endl
-		 << "7) Buy a travel pack for a client." << endl
-		 << "8) Visualize the number and total value of sold travel packs." << endl
-		 << "9) Obtain the name of the most visited places." << endl
-		 // << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl << endl
-		 << "0) Exit the program and save the alterations made." << endl
-		 << "\nOption: ";
-	
-	cin >> selection;
-	cin.ignore();
+		<< "1) Manage clients." << endl
+		<< "2) Manage travel packs." << endl
+		<< "3) Visualize a specific client." << endl
+		<< "4) Visualize all the clients of the agency." << endl
+		<< "5) Visualize available travel packs." << endl
+		<< "6) Visualize sold travel packs." << endl
+		<< "7) Buy a travel pack for a client." << endl
+		<< "8) Visualize the number and total value of sold travel packs." << endl
+		<< "9) Obtain the name of the most visited places." << endl
+		// << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl << endl
+		<< "0) Exit the program and save the alterations made." << endl;
+
+
+	int selection = readOption(9); // Mudar para outro valor se se acrescentar alguma coisa
 
 	return selection;
 }
@@ -80,30 +78,25 @@ void Menu::menuSelection(int selected) {
 //Clients Menus
 
 int Menu::showClients() {
-	int selection;
 
 	for (int i = 0; i < size(clients); i++)
 		cout << i + 1 << ") " << clients[i].getName() << " (" << clients[i].getNif() << ")" << endl;
 
-	cout << "\nOption: ";
-	cin >> selection;
-	cin.ignore();
+	int selection = readOption(size(clients));
 
 	return selection;
 }
 
 int Menu::showManageClients() {
-	int selection;
+	
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		 << "1) Create a new client." << endl
-		 << "2) Change the information of a client." << endl
-		 << "3) Remove an existent client." << endl
-		 << "0) Go back." << endl
-		 << "\nOption: ";
+		<< "1) Create a new client." << endl
+		<< "2) Change the information of a client." << endl
+		<< "3) Remove an existent client." << endl
+		<< "0) Go back." << endl;
 
-	cin >> selection;
-	cin.ignore();
+	int selection = readOption(3);
 
 	return selection;
 }
@@ -132,7 +125,6 @@ void Menu::manageClientsSelection(int selected) {
 }
 
 int Menu::showChangeClients() {
-	int selection;
 
 	cout << "What do you want to change in the client? Insert the corresponding key." << endl << endl
 		 << "1) The name." << endl
@@ -143,8 +135,7 @@ int Menu::showChangeClients() {
 		 << "6) The value of total purchases." << endl
 		 << "0) Go back." << endl;
 
-	cin >> selection;
-	cin.ignore();
+	int selection = readOption(6);
 	
 	return selection;
 }
@@ -233,30 +224,24 @@ void Menu::createClient() {
 //Travel Packs Menus
 
 int Menu::showTravelPacks() {
-	int selection;
 
 	for (int i = 0; i < size(travelPacks); i++)
 		cout << i + 1 << ") " << travelPacks[i].getTravelDestination()[0] << " (" << travelPacks[i].getIdentifier() << ")" << endl;
 
-	cout << endl << "Option: ";
-	cin >> selection;
-	cin.ignore();
+	int selection = readOption(size(travelPacks));
 
 	return selection;
 }
 
 int Menu::showManageTravelPacks() {
-	int selection;
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		 << "1) Create a new travel pack." << endl
-		 << "2) Change the information of a travel pack." << endl
-		 << "3) Remove an existent travel pack." << endl
-		 << "0) Go back." << endl << endl
-		 << "Option: ";
-
-	cin >> selection;
-	cin.ignore();
+		<< "1) Create a new travel pack." << endl
+		<< "2) Change the information of a travel pack." << endl
+		<< "3) Remove an existent travel pack." << endl
+		<< "0) Go back." << endl << endl;
+		
+	int selection = readOption(3);
 
 	return selection;
 }
@@ -287,7 +272,6 @@ void Menu::manageTravelPacksSelection(int selected) {
 }
 
 int Menu::showChangeTravelPacks() {
-	int selection;
 
 	cout << "What do you want to change in the travel pack? Insert the corresponding key." << endl << endl
 		 << "1) The identifier." << endl
@@ -298,8 +282,7 @@ int Menu::showChangeTravelPacks() {
 		 << "6) The number of maximum seats." << endl
 		 << "0) Go back." << endl;
 
-	cin >> selection;
-	cin.ignore();
+	int selection = readOption(6);
 
 	return selection;
 }
@@ -383,8 +366,48 @@ void Menu::createTravelPack() {
 	cin.ignore();
 
 	cout << "What's the number of sold seats of the new travel pack? ";
-	cin >> aux_maximum_seats;
+	cin >> aux_sold_seats;
 	cin.ignore();
 
 	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
+}
+
+
+
+//Reading Function
+
+
+//Reads an integer between 0 (inclusive if includingZero is true(default) else exclusive) and maxOption(inclusive)
+//Returns that value
+int Menu::readOption(int maxOptions, bool includingZero) {
+
+	int option;
+	if (includingZero) {
+		do {
+			cout << endl << "Choose your option:  ";
+			if (cin >> option && option >= 0 && option <= maxOptions) {
+				cin.ignore(1000, '\n');
+				return option;
+			}
+			else {
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << "Invalid input!!" << endl;
+			}
+		} while (true);
+	}
+	else {
+		do {
+			cout << endl << "Choose your option:  ";
+			if (cin >> option && option > 0 && option <= maxOptions) {
+				cin.ignore(1000, '\n');
+				return option;
+			}
+			else {
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << "Invalid input!!" << endl;
+			}
+		} while (true);
+	}
 }
