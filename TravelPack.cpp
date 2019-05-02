@@ -61,4 +61,4 @@ vector <string> TravelPack::convertTravelDestination(string travel_destination) 
 	result.push_back(trim(aux_string));
 
 	return result;
-} //
+} 

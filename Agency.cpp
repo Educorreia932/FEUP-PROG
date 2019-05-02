@@ -1,4 +1,5 @@
 #include "Agency.h"
+#include <iomanip> 
 
 //Constructors
 Agency::Agency() {
@@ -59,6 +60,67 @@ string Agency::getTravelPacksFile() const {
 
 vector <TravelPack> Agency::getTravelPacksObjs() const {
 	return travelPacksObjs;
+}
+
+//View
+void Agency::viewAllClients() const
+{
+	cout << '\n';
+	cout << left << setw(30) << "Name";
+	cout << left << setw(15) << "NIF";
+	cout << left << setw(8) << "Family";
+	cout << left << setw(30) << "Street";
+	cout << left << setw(6) << "Door";
+	cout << left << setw(8) << "Floor";
+	cout << left << setw(10) << "ZIP";
+	cout << left << setw(20) << "City";
+	cout << left << "Travel Packs" << "\n \n";
+
+	for (size_t i = 0; i < clientsObjs.size(); i++)
+	{
+		cout << left << setw(30) << clientsObjs[i].getName() << left;
+		cout << setw(15) << clientsObjs[i].getNif() << left;
+		cout << setw(8) << clientsObjs[i].getHousehold() << left;
+		cout << setw(30) << clientsObjs[i].getClientAddress().getStreet() << left;
+		cout << setw(6) << clientsObjs[i].getClientAddress().getDoorNumber() << left;
+		cout << setw(8) << clientsObjs[i].getClientAddress().getApartment() << left;
+		cout << setw(10) << clientsObjs[i].getClientAddress().getZipCode() << left;
+		cout << setw(20) << clientsObjs[i].getClientAddress().getLocality() << left;
+		//Packs
+		if (clientsObjs[i].getAcquiredTravelPacks().size() == 0)
+			cout << "---";
+		else
+		{
+			cout << clientsObjs[i].getAcquiredTravelPacks().at(0);
+			for (size_t j = 1; j < clientsObjs[i].getAcquiredTravelPacks().size(); j++)
+				cout << ", " << clientsObjs[i].getAcquiredTravelPacks().at(j);
+		}
+		cout << "\n \n \n";
+	}
+}
+
+void Agency::viewSpecificClient(int index) const
+{
+	cout << '\n';
+	cout << "NAME: " << clientsObjs.at(index).getName() << '\n';
+	cout << "NIF: " << clientsObjs.at(index).getNif() << '\n';
+	cout << "FAMILY SIZE: " << clientsObjs.at(index).getHousehold() << '\n';
+	cout << "STREET: " << clientsObjs.at(index).getClientAddress().getStreet() << '\n';
+	cout << "DOOR: " << clientsObjs.at(index).getClientAddress().getDoorNumber() << '\n';
+	cout << "FLOOR: " << clientsObjs.at(index).getClientAddress().getApartment() << '\n';
+	cout << "ZIP: " << clientsObjs.at(index).getClientAddress().getZipCode() << '\n';
+	cout << "CITY: " << clientsObjs.at(index).getClientAddress().getLocality() << '\n';
+	cout << "TRAVEL PACKS: ";
+	if (clientsObjs.at(index).getAcquiredTravelPacks().size() == 0)
+		cout << "-----" << '\n';
+	else
+	{
+		cout << clientsObjs.at(index).getAcquiredTravelPacks().at(0);
+		for (size_t i = 1; i < clientsObjs.at(index).getAcquiredTravelPacks().size(); i++)
+			cout << ", " << clientsObjs.at(index).getAcquiredTravelPacks().at(i);
+		cout << "\n \n \n";
+	}
+	return;
 }
 
 //Read functions
@@ -168,6 +230,7 @@ vector <Client> Agency::readClients(string file_name) {
 
 	return result;
 }
+
 
 //Not tested
 void Agency::updateClientFile() {

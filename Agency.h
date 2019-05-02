@@ -12,6 +12,8 @@ class Agency {
 		vector <TravelPack> getTravelPacksObjs() const;
 		string getClientsFile() const;
 		string getTravelPacksFile() const;
+		void viewAllClients() const;
+		void viewSpecificClient(int index) const;
 	private:
 		//Variables/Data Structures
 		string name;

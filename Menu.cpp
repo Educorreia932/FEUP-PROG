@@ -27,8 +27,9 @@ int Menu::showMenu() {
 		 << "8) Visualize the number and total value of sold travel packs." << endl
 		 << "9) Obtain the name of the most visited places." << endl
 		 // << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl << endl
-		 << "0) Exit the program and save the alterations made." << endl;
-
+		 << "0) Exit the program and save the alterations made." << endl
+		 << "\nOption: ";
+	
 	cin >> selection;
 	cin.ignore();
 
@@ -40,16 +41,17 @@ void Menu::menuSelection(int selected) {
 
 	switch (selected) {
 		case 1:
-			manageClientsSelection(showManageClients());
+			manageClientsSelection(showManageClients() - 1);
 			break;
 		case 2:
 			manageTravelPacksSelection(showManageTravelPacks());
 			break;
 		case 3:
-			cout << "Not working. In construction.";
+			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl;
+			AgencyObj.viewSpecificClient(showClients());
 			break;
 		case 4:
-			cout << "Not working. In construction.";
+			AgencyObj.viewAllClients();
 			break;
 		case 5:
 			cout << "Not working. In construction.";
@@ -73,6 +75,7 @@ int Menu::showClients() {
 	for (int i = 0; i < size(clients); i++)
 		cout << i + 1 << ") " << clients[i].getName() << " (" << clients[i].getNif() << ")" << endl;
 
+	cout << "\nOption: ";
 	cin >> selection;
 	cin.ignore();
 
@@ -86,7 +89,8 @@ int Menu::showManageClients() {
 		 << "1) Create a new client." << endl
 		 << "2) Change the information of a client." << endl
 		 << "3) Remove an existent client." << endl
-		 << "0) Go back." << endl;
+		 << "0) Go back." << endl
+		 << "\nOption: ";;
 
 	cin >> selection;
 	cin.ignore();
