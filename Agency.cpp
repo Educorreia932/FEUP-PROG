@@ -233,7 +233,9 @@ vector <Client> Agency::readClients(string file_name) {
 	return result;
 }
 
-//Not tested
+//Save to clients file
+//NOT TESTED
+
 void Agency::updateClientFile() {
 
 	ofstream f;
@@ -265,8 +267,8 @@ void Agency::updateClientFile() {
 
 }
 
-//Save to packs file(Not working)
-
+//Save to packs file
+//NOT TESTED
 
 void Agency::updatePacksFile() {
 
