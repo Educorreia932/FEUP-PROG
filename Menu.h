@@ -35,5 +35,5 @@ class Menu {
 
 		//Reading functions
 
-		int readOption(int maxOptions,bool includingZero = true);
+		int readOption(int maxOptions, bool includingZero = true);
 };

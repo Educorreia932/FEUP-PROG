@@ -308,8 +308,6 @@ void Agency::updatePacksFile() {
 	f.close();
 }
 
-
-
 void Agency::removeTravelPack(int selected) {
 	travelPacksObjs.erase(travelPacksObjs.begin() + selected);
 }

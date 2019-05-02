@@ -113,6 +113,7 @@ void Menu::manageClientsSelection(int selected) {
 			cout << "Which client do you wish to change the information of? Insert the corresponding key." << endl << endl;
 
 			selected_client = showClients() - 1;
+			system("cls");
 			changeClientsSelection(showChangeClients(), selected_client);
 			break;
 		case 3:
@@ -133,7 +134,8 @@ int Menu::showChangeClients() {
 		 << "4) The address." << endl
 		 << "5) The acquired travel packs." << endl
 		 << "6) The value of total purchases." << endl
-		 << "0) Go back." << endl;
+		 << "0) Go back." << endl << endl
+		 << "Option: ";
 
 	int selection = readOption(6);
 	
@@ -280,7 +282,8 @@ int Menu::showChangeTravelPacks() {
 	 	 << "4) The arrival date." << endl
 	 	 << "5) The price." << endl
 		 << "6) The number of maximum seats." << endl
-		 << "0) Go back." << endl;
+		 << "0) Go back." << endl << endl
+		 << "Option: " << endl;
 
 	int selection = readOption(6);
 
