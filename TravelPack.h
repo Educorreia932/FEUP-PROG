@@ -12,6 +12,11 @@ class TravelPack {
 		//Getters
 		int getIdentifier() const;
 		vector <string> getTravelDestination() const;
+		Date getDepartureDate() const;
+		Date getArrivalDate() const;
+		int getPrice() const;
+		int getMaximumSeats() const;
+		int getSoldSeats() const;
 
 		//Setters
 		void setIdentifier(int identifier);

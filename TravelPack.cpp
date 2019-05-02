@@ -13,11 +13,31 @@ TravelPack::TravelPack(int identifier, string travel_destination, Date Departure
 
 //Getters
 int TravelPack::getIdentifier() const {
-	return identifier;
+	return this->identifier;
 }
 
 vector <string> TravelPack::getTravelDestination() const {
-	return travelDestination;
+	return this->travelDestination;
+}
+
+Date TravelPack::getDepartureDate() const {
+	return this->DepartureDate;
+}
+
+Date TravelPack::getArrivalDate() const {
+	return this->ArrivalDate;
+}
+
+int TravelPack::getPrice() const {
+	return this->price;
+}
+
+int TravelPack::getMaximumSeats() const {
+	return this->maximum_seats;
+}
+
+int TravelPack::getSoldSeats() const {
+	return this->sold_seats;
 }
 
 //Setters

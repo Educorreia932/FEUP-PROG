@@ -266,7 +266,7 @@ void Agency::updateClientFile() {
 }
 
 //Save to packs file(Not working)
-/*
+
 
 void Agency::updatePacksFile() {
 
@@ -276,39 +276,37 @@ void Agency::updatePacksFile() {
 
 	if (f.is_open()) {
 
-		f << abs(packs.at(size(packs) - 1).identifier) << endl;
+		f << abs(travelPacksObjs.at(size(travelPacksObjs) - 1).getIdentifier()) << endl;
 
-		for (size_t i = 0; i < size(packs); i++) {
+		for (size_t i = 0; i < size(travelPacksObjs); i++) {
 
-			f << packs.at(i).identifier << endl;
+			f << travelPacksObjs.at(i).getIdentifier() << endl;
 
-			if (size(packs.at(i).destinations) == 1)
-				f << packs.at(i).destinations.at(0) << endl;
+			if (size(travelPacksObjs.at(i).getTravelDestination()) == 1)
+				f << travelPacksObjs.at(i).getTravelDestination().at(0) << endl;
 			else {
-				f << packs.at(i).destinations.at(0) << " - " << packs.at(i).destinations.at(1);
-				for (size_t j = 2; j < size(packs.at(i).destinations); j++) {
-					f << ',' << packs.at(i).destinations.at(j);
+				f << travelPacksObjs.at(i).getTravelDestination().at(0) << " - " << travelPacksObjs.at(i).getTravelDestination().at(1);
+				for (size_t j = 2; j < size(travelPacksObjs.at(i).getTravelDestination()); j++) {
+					f << ',' << travelPacksObjs.at(i).getTravelDestination().at(j);
 				} f << endl;
 
 			}
 
-			f << packs.at(i).startDate.year << '/' << packs.at(i).startDate.month << '/' << packs.at(i).startDate.day << endl;
-			f << packs.at(i).endDate.year << '/' << packs.at(i).endDate.month << '/' << packs.at(i).endDate.day << endl;
-			f << packs.at(i).price << endl;
-			f << packs.at(i).maxPeople << endl;
-			f << packs.at(i).numberOfSold << endl;
+			f << travelPacksObjs.at(i).getDepartureDate().getYear() << '/' << travelPacksObjs.at(i).getDepartureDate().getMonth() << '/' << travelPacksObjs.at(i).getDepartureDate().getDay() << endl;
+			f << travelPacksObjs.at(i).getArrivalDate().getYear() << '/' << travelPacksObjs.at(i).getArrivalDate().getMonth() << '/' << travelPacksObjs.at(i).getArrivalDate().getDay() << endl;
+			f << travelPacksObjs.at(i).getPrice() << endl;
+			f << travelPacksObjs.at(i).getMaximumSeats() << endl;
+			f << travelPacksObjs.at(i).getSoldSeats() << endl;
 
-			if (i != size(packs) - 1)
+			if (i != size(travelPacksObjs) - 1)
 				f << "::::::::::" << endl;
 
 		}
-
 	}
 	f.close();
-
 }
 
-*/
+
 
 void Agency::removeTravelPack(int selected) {
 	travelPacksObjs.erase(travelPacksObjs.begin() + selected);
