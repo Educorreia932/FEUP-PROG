@@ -1,5 +1,4 @@
 #include "Agency.h"
-#include <iomanip> 
 
 //Constructors
 Agency::Agency() {
@@ -62,7 +61,7 @@ vector <TravelPack> Agency::getTravelPacksObjs() const {
 	return travelPacksObjs;
 }
 
-//View
+//View functions
 void Agency::viewAllClients() const
 {
 	cout << '\n';
@@ -137,6 +136,7 @@ vector <TravelPack> Agency::readTravelPacks(string file_name) {
 	Date AuxArrivalDate;
 	int aux_price;
 	int aux_maximum_seats;
+	int aux_sold_seats;
 
 	if (TravelPacksFile.is_open()) {
 		while (getline(TravelPacksFile, line)) {
@@ -146,7 +146,7 @@ vector <TravelPack> Agency::readTravelPacks(string file_name) {
 			}
 
 			if (line == "::::::::::") {
-				result.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
+				result.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
 				counter = -1;
 			}
 
@@ -168,12 +168,14 @@ vector <TravelPack> Agency::readTravelPacks(string file_name) {
 					break;
 				case 5:
 					aux_maximum_seats = stoi(line);
+				case 6:
+					aux_sold_seats = stoi(line);
 			}
 
 			counter++;
 		}
 
-		result.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
+		result.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
 		TravelPacksFile.close(); 
 	}
 
@@ -230,7 +232,6 @@ vector <Client> Agency::readClients(string file_name) {
 
 	return result;
 }
-
 
 //Not tested
 void Agency::updateClientFile() {

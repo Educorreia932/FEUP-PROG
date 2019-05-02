@@ -1,13 +1,14 @@
 #include "TravelPack.h"
 
 //Constructor
-TravelPack::TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats) {
+TravelPack::TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats, int sold_seats) {
 	this->identifier = identifier;
 	this->travelDestination = convertTravelDestination(travel_destination);
 	this->DepartureDate = DepartureDate;
 	this->ArrivalDate = ArrivalDate;
 	this->price = price;
 	this->maximum_seats = maximum_seats;
+	this->sold_seats = sold_seats;
 }
 
 //Getters
@@ -42,6 +43,10 @@ void TravelPack::setPrice(int price) {
 
 void TravelPack::setMaximumSeats(int maximum_seats) {
 	this->maximum_seats = maximum_seats;
+}
+
+void TravelPack::setSoldSeats(int sold_seats) {
+	this->sold_seats = sold_seats;
 }
 
 //Other

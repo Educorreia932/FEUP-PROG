@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <iomanip> 
 #include "Client.h"
 #include "TravelPack.h"
 
@@ -7,11 +8,16 @@ using namespace std;
 
 class Agency {
 	public:
+		//Constructors
 		Agency();
 		Agency(string file_name);
+
+		//Getters
 		vector <TravelPack> getTravelPacksObjs() const;
 		string getClientsFile() const;
 		string getTravelPacksFile() const;
+
+		//View functions
 		void viewAllClients() const;
 		void viewSpecificClient(int index) const;
 	private:

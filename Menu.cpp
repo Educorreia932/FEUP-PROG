@@ -41,17 +41,19 @@ void Menu::menuSelection(int selected) {
 
 	switch (selected) {
 		case 1:
-			manageClientsSelection(showManageClients() - 1);
+			manageClientsSelection(showManageClients());
 			break;
 		case 2:
 			manageTravelPacksSelection(showManageTravelPacks());
 			break;
 		case 3:
 			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl;
-			AgencyObj.viewSpecificClient(showClients());
+			AgencyObj.viewSpecificClient(showClients() - 1);
+			system("pause");
 			break;
 		case 4:
 			AgencyObj.viewAllClients();
+			system("pause");
 			break;
 		case 5:
 			cout << "Not working. In construction.";
@@ -62,9 +64,17 @@ void Menu::menuSelection(int selected) {
 		case 7:
 			cout << "Not working. In construction.";
 			break;
+		case 8:
+			cout << "Not working. In construction.";
+			break;
+		case 9:
+			cout << "Not working. In construction.";
+			break;
 		case 0:
 			break;
 	}
+
+	menuSelection(showMenu());
 }
 
 //Clients Menus
@@ -90,7 +100,7 @@ int Menu::showManageClients() {
 		 << "2) Change the information of a client." << endl
 		 << "3) Remove an existent client." << endl
 		 << "0) Go back." << endl
-		 << "\nOption: ";;
+		 << "\nOption: ";
 
 	cin >> selection;
 	cin.ignore();
@@ -119,8 +129,6 @@ void Menu::manageClientsSelection(int selected) {
 			AgencyObj.removeClient(selected_client);
 			break;
 	}
-
-	menuSelection(showMenu());
 }
 
 int Menu::showChangeClients() {
@@ -230,6 +238,7 @@ int Menu::showTravelPacks() {
 	for (int i = 0; i < size(travelPacks); i++)
 		cout << i + 1 << ") " << travelPacks[i].getTravelDestination()[0] << " (" << travelPacks[i].getIdentifier() << ")" << endl;
 
+	cout << endl << "Option: ";
 	cin >> selection;
 	cin.ignore();
 
@@ -242,8 +251,9 @@ int Menu::showManageTravelPacks() {
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
 		 << "1) Create a new travel pack." << endl
 		 << "2) Change the information of a travel pack." << endl
-	 	 << "3) Remove an existent travel pack." << endl
-		 << "0) Go back." << endl;
+		 << "3) Remove an existent travel pack." << endl
+		 << "0) Go back." << endl << endl
+		 << "Option: ";
 
 	cin >> selection;
 	cin.ignore();
@@ -274,8 +284,6 @@ void Menu::manageTravelPacksSelection(int selected) {
 		case 0:
 			break;
 	}
-
-	menuSelection(showMenu()); //Or go back (return)
 }
 
 int Menu::showChangeTravelPacks() {
@@ -349,6 +357,7 @@ void Menu::createTravelPack() {
 	string aux_date;
 	int aux_price;
 	int aux_maximum_seats;
+	int aux_sold_seats;
 
 	cout << "What's the identifier of the new travel pack? "; 
 	cin >> aux_identifier;
@@ -373,5 +382,9 @@ void Menu::createTravelPack() {
 	cin >> aux_maximum_seats;
 	cin.ignore();
 
-	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats));
+	cout << "What's the number of sold seats of the new travel pack? ";
+	cin >> aux_maximum_seats;
+	cin.ignore();
+
+	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
 }
