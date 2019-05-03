@@ -62,6 +62,52 @@ vector <TravelPack> Agency::getTravelPacksObjs() const {
 }
 
 //View functions
+void Agency::viewAvailablePacks() const
+{
+	string date;
+
+	cout << left << setw(10) << "ID";
+	cout << left << setw(15) << "Start Date";
+	cout << left << setw(15) << "Final Date";
+	cout << left << setw(8) << "Price";
+	cout << left << setw(9) << "Capacity";
+	cout << left << setw(8) << "Sold";
+	cout << left << setw(30) << "Places" << '\n';
+	cout << "----------------------------------------------------------------------------------------------------------------------------------------------- \n";
+
+	for (size_t i = 0; i < getTravelPacksObjs().size(); i++)
+	{
+		if (getTravelPacksObjs().at(i).getIdentifier() > 0)
+		{
+			cout << left << setw(10) << getTravelPacksObjs().at(i).getIdentifier() << left;
+			//Start Date
+			cout << setw(15) << getTravelPacksObjs().at(i).getDepartureDate().getDate() << left;
+			//Final Date
+			cout << setw(15) << getTravelPacksObjs().at(i).getArrivalDate().getDate() << left;
+		
+			cout << setw(8) << getTravelPacksObjs().at(i).getPrice() << left;
+			cout << setw(9) << getTravelPacksObjs().at(i).getMaximumSeats() << left;
+			cout << setw(8) << getTravelPacksObjs().at(i).getSoldSeats()<< left;
+
+			//Places
+			if (getTravelPacksObjs().at(i).getTravelDestination().size() == 0)
+				cout << "---";
+			else
+			{
+				cout << getTravelPacksObjs().at(i).getTravelDestination().at(0);
+				for (size_t j = 1; j < getTravelPacksObjs().at(i).getTravelDestination().size(); j++)
+					if (j == 1)
+						cout << " - " << getTravelPacksObjs().at(i).getTravelDestination().at(j);
+					else
+						cout << ", " << getTravelPacksObjs().at(i).getTravelDestination().at(j);
+			}
+			cout << "\n \n \n";
+
+		}
+		
+	}
+}
+
 void Agency::viewAllClients() const
 {
 	cout << '\n';
@@ -73,7 +119,8 @@ void Agency::viewAllClients() const
 	cout << left << setw(8) << "Floor";
 	cout << left << setw(10) << "ZIP";
 	cout << left << setw(20) << "City";
-	cout << left << "Travel Packs" << "\n \n";
+	cout << left << "Travel Packs" << '\n';
+	cout << "------------------------------------------------------------------------------------------- \n";
 
 	for (size_t i = 0; i < clientsObjs.size(); i++)
 	{

@@ -54,7 +54,8 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 5:
-			cout << "Not working. In construction.";
+			AgencyObj.viewAvailablePacks();
+			system("pause");
 			break;
 		case 6:
 			cout << "Not working. In construction.";
@@ -79,7 +80,7 @@ void Menu::menuSelection(int selected) {
 
 int Menu::showClients() {
 
-	for (int i = 0; i < size(clients); i++)
+	for (size_t i = 0; i < size(clients); i++)
 		cout << i + 1 << ") " << clients[i].getName() << " (" << clients[i].getNif() << ")" << endl;
 
 	int selection = readOption(size(clients));
