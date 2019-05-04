@@ -21,3 +21,4 @@ int readOption(int maxOptions, bool includingZero = true);
 string readName(string message = "");
 unsigned readNIF(string message = "");
 int readPositiveInt(string message = "");
+int readInt(string message = "");

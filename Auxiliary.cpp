@@ -124,3 +124,20 @@ int readPositiveInt(string message) {
 		}
 	} while (true);
 }
+
+int readInt(string message) {
+
+	int input;
+
+	do {
+		cout << message;
+		if (cin >> input) {
+			return input;
+		}
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+	} while (true);
+}

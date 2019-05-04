@@ -284,16 +284,13 @@ int Menu::showChangeTravelPacks() {
 }
 
 void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
-	int aux_int;
+
 	string aux_string;
 
 	switch (selected) {
 		case 1:
-			cout << "Insert the new identifier of the travel pack: ";
-			cin >> aux_int;
-			cin.ignore();
-
-			travelPacks[selected_travel_pack].setIdentifier(aux_int);
+			//cout << "Insert the new identifier of the travel pack: ";
+			travelPacks[selected_travel_pack].setIdentifier(readInt("Insert the new identifier of the travel pack: "));
 			break;
 		case 2:
 			cout << "Insert the new travel destination of the travel pack (in the format 'Region - Place1, Place2...'): ";
@@ -314,18 +311,12 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 			travelPacks[selected_travel_pack].setArrivalDate(aux_string);
 			break;
 		case 5:
-			cout << "Insert the new price of the travel pack: ";
-			cin >> aux_int;
-			cin.ignore();
-
-			travelPacks[selected_travel_pack].setPrice(aux_int);
+			//cout << "Insert the new price of the travel pack: ";
+			travelPacks[selected_travel_pack].setPrice(readPositiveInt("Insert the new price of the travel pack: "));
 			break;
 		case 6:
-			cout << "Insert the new number of maximum seats of the travel pack: ";
-			cin >> aux_int;
-			cin.ignore();
-
-			travelPacks[selected_travel_pack].setMaximumSeats(aux_int);
+			//cout << "Insert the new number of maximum seats of the travel pack: ";
+			travelPacks[selected_travel_pack].setMaximumSeats(readPositiveInt("Insert the new number of maximum seats of the travel pack: "));
 			break;
 	}
 }
@@ -338,9 +329,8 @@ void Menu::createTravelPack() {
 	int aux_maximum_seats;
 	int aux_sold_seats;
 
-	cout << "What's the identifier of the new travel pack? "; 
-	cin >> aux_identifier;
-	cin.ignore();
+	//cout << "What's the identifier of the new travel pack? "; 
+	aux_identifier = readInt("What's the identifier of the new travel pack? ");
 
 	cout << "What's the travel destination of the new travel pack (in the format 'Region - Place1, Place2...')? ";
 	getline(cin, aux_travel_destination);
@@ -353,17 +343,14 @@ void Menu::createTravelPack() {
 	getline(cin, aux_date);
 	Date AuxArrivalDate(aux_date);
 
-	cout << "What's the price of the new travel pack? ";
-	cin >> aux_price;
-	cin.ignore();
+	//cout << "What's the price of the new travel pack? ";
+	aux_price = readPositiveInt("What's the price of the new travel pack? ");
 
-	cout << "What's the number of maximum seats of the new travel pack? ";
-	cin >> aux_maximum_seats;
-	cin.ignore();
+	//cout << "What's the number of maximum seats of the new travel pack? ";
+	aux_maximum_seats = readPositiveInt("What's the number of maximum seats of the new travel pack? ");
 
-	cout << "What's the number of sold seats of the new travel pack? ";
-	cin >> aux_sold_seats;
-	cin.ignore();
+	//cout << "What's the number of sold seats of the new travel pack? ";
+	aux_sold_seats = readPositiveInt("What's the number of sold seats of the new travel pack? ");
 
 	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
 }
