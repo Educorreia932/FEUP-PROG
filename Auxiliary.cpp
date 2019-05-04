@@ -9,6 +9,9 @@ string trim(string s) {
 	return s;
 }
 
+
+
+//String conversion functions
 vector<int> str_to_PackageIds(string line) {
 
 	vector<int> packageIds;
@@ -23,6 +26,48 @@ vector<int> str_to_PackageIds(string line) {
 
 	return packageIds;
 }
+
+
+
+
+//Read functions
+
+
+//Reads an integer between 0 (inclusive if includingZero is true(default) else exclusive) and maxOption(inclusive)
+//Returns that value
+int readOption(int maxOptions, bool includingZero) {
+
+	int option;
+	if (includingZero) {
+		do {
+			cout << endl << "Choose your option:  ";
+			if (cin >> option && option >= 0 && option <= maxOptions) {
+				cin.ignore(1000, '\n');
+				return option;
+			}
+			else {
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << "Invalid input!!" << endl;
+			}
+		} while (true);
+	}
+	else {
+		do {
+			cout << endl << "Choose your option:  ";
+			if (cin >> option && option > 0 && option <= maxOptions) {
+				cin.ignore(1000, '\n');
+				return option;
+			}
+			else {
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << "Invalid input!!" << endl;
+			}
+		} while (true);
+	}
+}
+
 
 
 string readName(string message) {
@@ -43,5 +88,39 @@ string readName(string message) {
 	} while (!validInput);
 
 	return input;
+}
 
+unsigned readNIF(string message) {
+
+
+	unsigned input;
+
+	do {
+		cout << message;
+		if (cin >> input && input >= 100000000 && input <= 999999999) {
+			return input;
+		}
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+	} while (true);
+}
+
+int readPositiveInt(string message) {
+
+	int input;
+
+	do {
+		cout << message;
+		if (cin >> input && input >= 0) {
+			return input;
+		}
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+	} while (true);
 }

@@ -162,18 +162,10 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			clients[selected_client].setName(readName("Insert the new name of the client: "));
 			break;
 		case 2:
-			cout << "Insert the new NIF of the client: ";
-			cin >> aux_int;
-			cin.ignore();
-
-			clients[selected_client].setNif(aux_int);
+			clients[selected_client].setNif(readNIF("Insert the new NIF of the client: "));
 			break;
 		case 3:
-			cout << "Insert the new household of the client: ";
-			cin >> aux_int;
-			cin.ignore();
-
-			clients[selected_client].setHousehold(aux_int);
+			clients[selected_client].setHousehold(readPositiveInt("Insert the new household of the client: "));
 			break;
 		case 4:
 			cout << "Insert the new address of the client: ";
@@ -188,11 +180,7 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			clients[selected_client].setAcquiredTravelPacks(aux_string);
 			break;
 		case 6:
-			cout << "Insert the new value of total purchases of the client: ";
-			cin >> aux_int;
-			cin.ignore();
-
-			clients[selected_client].setTotalPurchases(aux_int);
+			clients[selected_client].setTotalPurchases(readPositiveInt("Insert the new value of total purchases of the client: "));
 			break;
 	}
 }
@@ -208,13 +196,11 @@ void Menu::createClient() {
 	//cout << "What's the name of the new client? ";
 	aux_name = readName("What's the name of the new client? ");
 
-	cout << "What's the NIF of the new client? ";
-	cin >> aux_nif;
-	cin.ignore();
+	//cout << "What's the NIF of the new client? ";
+	aux_nif = readNIF("What's the NIF of the new client? ");
 
-	cout << "What's the household of the new client? ";
-	cin >> aux_household;
-	cin.ignore();
+	//cout << "What's the household of the new client? ";
+	aux_household = readPositiveInt("What's the household of the new client? ");
 
 	cout << "What's the address of the new client? ";
 	getline(cin, aux_client_address);
@@ -224,9 +210,8 @@ void Menu::createClient() {
 	getline(cin, aux_acquired_travel_packs);
 	vector <int> auxAcquiredTravelPacks = str_to_PackageIds(aux_acquired_travel_packs);
 
-	cout << "What's the value of total purchases of the new client? ";
-	cin >> aux_total_purchases;
-	cin.ignore();
+	//cout << "What's the value of total purchases of the new client? ";
+	aux_total_purchases = readPositiveInt("What's the value of total purchases of the new client? ");
 
 	clients.push_back(Client(aux_name, aux_nif, aux_household, auxClientAddress, auxAcquiredTravelPacks, aux_total_purchases));
 }
@@ -381,44 +366,4 @@ void Menu::createTravelPack() {
 	cin.ignore();
 
 	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
-}
-
-
-
-//Reading Function
-
-
-//Reads an integer between 0 (inclusive if includingZero is true(default) else exclusive) and maxOption(inclusive)
-//Returns that value
-int Menu::readOption(int maxOptions, bool includingZero) {
-
-	int option;
-	if (includingZero) {
-		do {
-			cout << endl << "Choose your option:  ";
-			if (cin >> option && option >= 0 && option <= maxOptions) {
-				cin.ignore(1000, '\n');
-				return option;
-			}
-			else {
-				cin.clear();
-				cin.ignore(1000, '\n');
-				cout << "Invalid input!!" << endl;
-			}
-		} while (true);
-	}
-	else {
-		do {
-			cout << endl << "Choose your option:  ";
-			if (cin >> option && option > 0 && option <= maxOptions) {
-				cin.ignore(1000, '\n');
-				return option;
-			}
-			else {
-				cin.clear();
-				cin.ignore(1000, '\n');
-				cout << "Invalid input!!" << endl;
-			}
-		} while (true);
-	}
 }
