@@ -217,7 +217,7 @@ void Agency::viewAllClients() const
 	}
 }
 
-void Agency::viewSpecificClient(int index) const
+void Agency::viewSpecificClient(size_t index) const
 {
 	cout << '\n';
 	cout << "NAME: " << clientsObjs.at(index).getName() << '\n';
@@ -433,4 +433,17 @@ void Agency::removeTravelPack(int selected) {
 
 void Agency::removeClient(int selected) {
 	clientsObjs.erase(clientsObjs.begin() + selected);
+}
+
+//Other funcitions
+void Agency::buyPack(int packSelected, int clientSelected)
+{
+	if ((travelPacksObjs.at(packSelected).getMaximumSeats() - travelPacksObjs.at(packSelected).getSoldSeats()) >= clientsObjs.at(clientSelected).getHousehold())
+	{
+		clientsObjs.at(clientSelected).getAcquiredTravelPacks().push_back(travelPacksObjs.at(packSelected).getIdentifier()); //add id 
+		travelPacksObjs.at(packSelected).setSoldSeats(travelPacksObjs.at(packSelected).getSoldSeats() - clientsObjs.at(clientSelected).getHousehold()); //update sold seats
+		cout << "Purchase complete.\n Total Price: " << travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold() << "€\n\n";
+	}
+	else
+		cerr << "ERROR:\nThere is no suffiecient available seats to complete the purchase. \n\n";
 }
