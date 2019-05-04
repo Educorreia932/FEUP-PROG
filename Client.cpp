@@ -54,7 +54,7 @@ void Client::setAddress(string client_address) {
 }
 
 void Client::setAcquiredTravelPacks(string adcquired_travel_packs) {
-	this->AcquiredTravelPacks = readPackageIds(adcquired_travel_packs);
+	this->AcquiredTravelPacks = str_to_PackageIds(adcquired_travel_packs);
 }
 
 void Client::setTotalPurchases(int total_purchases) {

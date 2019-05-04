@@ -335,7 +335,7 @@ vector <Client> Agency::readClients(string file_name) {
 				aux_ClientAddress = Address(line);
 				break;
 			case 4:
-				aux_AcquiredTravelPacks = readPackageIds(line);
+				aux_AcquiredTravelPacks = str_to_PackageIds(line);
 				break;
 			case 5:
 				aux_total_purchases = stoi(line);

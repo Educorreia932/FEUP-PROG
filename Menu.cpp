@@ -150,10 +150,7 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 
 	switch (selected) {
 		case 1:
-			cout << "Insert the new name of the client: ";
-			getline(cin, aux_string);
-
-			clients[selected_client].setName(aux_string);
+			clients[selected_client].setName(readName("Insert the new name of the client: "));
 			break;
 		case 2:
 			cout << "Insert the new NIF of the client: ";
@@ -199,8 +196,8 @@ void Menu::createClient() {
 	string aux_acquired_travel_packs;
 	int aux_total_purchases;
 
-	cout << "What's the name of the new client? ";
-	getline(cin, aux_name);
+	//cout << "What's the name of the new client? ";
+	aux_name = readName("What's the name of the new client? ");
 
 	cout << "What's the NIF of the new client? ";
 	cin >> aux_nif;
@@ -216,7 +213,7 @@ void Menu::createClient() {
 
 	cout << "What are the acquired travel packs of the new client? ";
 	getline(cin, aux_acquired_travel_packs);
-	vector <int> auxAcquiredTravelPacks = readPackageIds(aux_acquired_travel_packs);
+	vector <int> auxAcquiredTravelPacks = str_to_PackageIds(aux_acquired_travel_packs);
 
 	cout << "What's the value of total purchases of the new client? ";
 	cin >> aux_total_purchases;
