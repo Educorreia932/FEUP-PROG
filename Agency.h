@@ -19,9 +19,11 @@ class Agency {
 
 		//View functions
 		void viewAllClients() const;
-		void viewSpecificClient(int index) const;
+		void viewSpecificClient(size_t index) const;
 		void viewAvailablePacks() const;
 		void viewSoldPacks() const;
+		void buyPack(int pack_index, int client_index);
+
 	private:
 		//Variables/Data Structures
 		string name;

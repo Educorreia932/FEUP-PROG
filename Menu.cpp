@@ -62,7 +62,16 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 7:
-			cout << "Not working. In construction.";
+			int client;
+			int pack;
+			cout << "Which client do is going to buy a pack? Insert the corresponding key." << endl;
+			client = showClients() - 1;
+			system("cls");
+			cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
+			pack = showTravelPacks() - 1;
+			system("cls");
+			AgencyObj.buyPack(pack, client);
+			system("pause");
 			break;
 		case 8:
 			cout << "Not working. In construction.";
