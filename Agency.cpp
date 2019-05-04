@@ -1,5 +1,6 @@
 #include "Agency.h"
 
+
 //Constructors
 Agency::Agency() {
 	this->name = "N/A";
@@ -62,6 +63,77 @@ vector <TravelPack> Agency::getTravelPacksObjs() const {
 }
 
 //View functions
+void Agency::viewSoldPacks() const
+{
+
+	if (clientsObjs.empty())
+	{
+		std::cout << "There are no sold packs. \n\n";
+		return;
+	}
+	else
+	{
+		vector<int> ids;
+		size_t pack_i;
+
+		//packs with info
+		for (size_t j = 0; j < travelPacksObjs.size(); j++)
+			ids.push_back(travelPacksObjs.at(j).getIdentifier());
+
+		for (size_t k = 0; k < clientsObjs.size(); k++)
+		{
+			cout << "Client: " << clientsObjs.at(k).getName() << '\n';
+
+			if (clientsObjs.at(k).getAcquiredTravelPacks().size() == 0) //No packs to show
+			{
+				cout << "This client has bought no packs. \n";
+			}
+
+			for (size_t i = 0; i < clientsObjs.at(k).getAcquiredTravelPacks().size(); i++) //client's packs
+			{
+				std::cout << "\nPack " << clientsObjs.at(k).getAcquiredTravelPacks().at(i) << ": \n"; //Pack ID: 
+
+				if (find(ids.begin(), ids.end(), clientsObjs.at(k).getAcquiredTravelPacks().at(i)) != ids.end() ||
+					find(ids.begin(), ids.end(), 0 - clientsObjs.at(k).getAcquiredTravelPacks().at(i)) != ids.end()) //if client's pack in ids
+				{
+					for (size_t j = 0; j < travelPacksObjs.size(); j++) // find indice
+					{
+						if (travelPacksObjs.at(j).getIdentifier() == clientsObjs.at(k).getAcquiredTravelPacks().at(i) ||
+							travelPacksObjs.at(j).getIdentifier() == 0 - clientsObjs.at(k).getAcquiredTravelPacks().at(i)) //if same indices 
+						{
+							pack_i = j;
+							break;
+						}
+					}
+
+					//COUT 
+					cout << "ID: " << travelPacksObjs.at(pack_i).getIdentifier() << '\n';
+					cout << "Start Date: " << travelPacksObjs.at(pack_i).getDepartureDate().getDate() << '\n';
+					cout << "Final Date: " << travelPacksObjs.at(pack_i).getArrivalDate().getDate() << '\n';
+					cout << "Price: " << travelPacksObjs.at(pack_i).getPrice() << '\n';
+					cout << "Capacity: " << travelPacksObjs.at(pack_i).getMaximumSeats() << '\n';
+					cout << "Sold: " << travelPacksObjs.at(pack_i).getSoldSeats() << '\n';
+					cout << "Places: ";
+					//Places
+					if (travelPacksObjs.at(pack_i).getTravelDestination().size() == 0)
+						cout << "---" << "\n\n";
+					else
+					{
+						cout << travelPacksObjs.at(pack_i).getTravelDestination().at(0);
+						for (size_t w = 1; w < travelPacksObjs.at(pack_i).getTravelDestination().size(); w++)
+							cout << ", " << travelPacksObjs.at(pack_i).getTravelDestination().at(w);
+						cout << "\n\n";
+					}
+				}
+				else
+					cout << "There is no info on this pack. \n\n";
+			}
+			cout << "----------------------------------------------------------------------- \n\n";
+		}
+		return;
+	}
+}
+
 void Agency::viewAvailablePacks() const
 {
 	string date;

@@ -58,7 +58,8 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 6:
-			cout << "Not working. In construction.";
+			AgencyObj.viewSoldPacks();
+			system("pause");
 			break;
 		case 7:
 			cout << "Not working. In construction.";

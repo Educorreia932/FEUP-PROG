@@ -21,6 +21,7 @@ class Agency {
 		void viewAllClients() const;
 		void viewSpecificClient(int index) const;
 		void viewAvailablePacks() const;
+		void viewSoldPacks() const;
 	private:
 		//Variables/Data Structures
 		string name;
