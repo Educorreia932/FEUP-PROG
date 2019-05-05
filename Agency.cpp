@@ -217,6 +217,28 @@ void Agency::viewAllClients() const
 	}
 }
 
+void Agency::viewNumberAndValueSoldPacks()
+{
+	int total_price = 0;
+	int total_sold = 0;
+
+	for (int i = 0; i < travelPacksObjs.size(); i++)
+	{
+		cout << "Travel Pack: " << travelPacksObjs.at(i).getIdentifier() << '\n'
+			<< "Sold Seats: " << travelPacksObjs.at(i).getSoldSeats() << '\n'
+			<< "Prince per seat: " << travelPacksObjs.at(i).getPrice() << "\n\n"
+			<< "-----------------------------\n\n";
+
+		total_price += travelPacksObjs.at(i).getPrice() * travelPacksObjs.at(i).getSoldSeats();
+		total_sold += travelPacksObjs.at(i).getSoldSeats();
+	}
+
+	cout << "Total Sold Seats: " << total_sold << '\n'
+		<< "Total Revenue: " << total_price << "\n\n";
+	
+	return;
+}
+
 void Agency::viewSpecificClient(size_t index) const
 {
 	cout << '\n';
@@ -443,6 +465,8 @@ void Agency::buyPack(int packSelected, int clientSelected)
 		clientsObjs.at(clientSelected).getAcquiredTravelPacks().push_back(travelPacksObjs.at(packSelected).getIdentifier()); //add id 
 		travelPacksObjs.at(packSelected).setSoldSeats(travelPacksObjs.at(packSelected).getSoldSeats() - clientsObjs.at(clientSelected).getHousehold()); //update sold seats
 		cout << "Purchase complete.\n Total Price: " << travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold() << "€\n\n";
+		if (travelPacksObjs.at(packSelected).getSoldSeats() == travelPacksObjs.at(packSelected).getMaximumSeats())
+			travelPacksObjs.at(packSelected).setIdentifier(0 - travelPacksObjs.at(packSelected).getIdentifier());
 	}
 	else
 		cerr << "ERROR:\nThere is no suffiecient available seats to complete the purchase. \n\n";

@@ -70,11 +70,19 @@ void Menu::menuSelection(int selected) {
 			cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
 			pack = showTravelPacks() - 1;
 			system("cls");
+			if (travelPacks.at(pack).getIdentifier() < 0)
+			{
+				cerr << "ERROR:\n This pack is not available anymore (negative ID). Please try again.\n\n";
+				cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
+				pack = showTravelPacks() - 1;
+				system("cls");
+			}
 			AgencyObj.buyPack(pack, client);
 			system("pause");
 			break;
 		case 8:
-			cout << "Not working. In construction.";
+			AgencyObj.viewNumberAndValueSoldPacks();
+			system("pause");
 			break;
 		case 9:
 			cout << "Not working. In construction.";

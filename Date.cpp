@@ -101,7 +101,7 @@ unsigned int Date::numberOfDays(unsigned int month, unsigned int year) {
 }
 
 bool Date::isValid() {
-	if (month > 12 || day > numberOfDays(month, year))
+	if (month < 1 || month > 12 || day > numberOfDays(month, year) || day < 1)
 		return false;
 	else
 		return true;
