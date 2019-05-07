@@ -11,7 +11,7 @@ Address::Address(string line) {
 	int counter = 0;
 	string aux_string;
 
-	for (int i = 0; i < line.length(); i++) {
+	for (size_t i = 0; i < line.length(); i++) {
 		if (line[i] == '/') {
 			switch (counter) {
 				case 0:

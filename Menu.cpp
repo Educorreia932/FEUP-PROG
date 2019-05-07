@@ -162,7 +162,7 @@ int Menu::showChangeClients() {
 }
 
 void Menu::changeClientsSelection(int selected, int selected_client) {
-	int aux_int;
+
 	string aux_string;
 
 	switch (selected) {
@@ -228,7 +228,7 @@ void Menu::createClient() {
 
 int Menu::showTravelPacks() {
 
-	for (int i = 0; i < size(travelPacks); i++)
+	for (size_t i = 0; i < size(travelPacks); i++)
 		cout << i + 1 << ") " << travelPacks[i].getTravelDestination()[0] << " (" << travelPacks[i].getIdentifier() << ")" << endl;
 
 	int selection = readOption(size(travelPacks));
@@ -307,16 +307,12 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 			travelPacks[selected_travel_pack].setTravelDestination(aux_string);
 			break;
 		case 3:
-			cout << "Insert the new departure date of the travel pack (in the format 'YYYY/MM/DD'): ";
-			getline(cin, aux_string);
-
-			travelPacks[selected_travel_pack].setDepartureDate(aux_string);
+			//cout << "Insert the new departure date of the travel pack (in the format 'YYYY/MM/DD'): ";
+			travelPacks[selected_travel_pack].setDepartureDate(readDate("Insert the new departure date of the travel pack(in the format 'YYYY/MM/DD') : "));
 			break;
 		case 4:
-			cout << "Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ";
-			getline(cin, aux_string);
-
-			travelPacks[selected_travel_pack].setArrivalDate(aux_string);
+			//cout << "Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ";
+			travelPacks[selected_travel_pack].setArrivalDate(readDate("Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): "));
 			break;
 		case 5:
 			//cout << "Insert the new price of the travel pack: ";
@@ -343,13 +339,11 @@ void Menu::createTravelPack() {
 	cout << "What's the travel destination of the new travel pack (in the format 'Region - Place1, Place2...')? ";
 	getline(cin, aux_travel_destination);
 
-	cout << "What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ";
-	getline(cin, aux_date);
-	Date AuxDepartureDate(aux_date);
+	//cout << "What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ";
+	Date AuxDepartureDate = readDate("What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ");
 
-	cout << "What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ";
-	getline(cin, aux_date);
-	Date AuxArrivalDate(aux_date);
+	//cout << "What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ";
+	Date AuxArrivalDate = readDate("What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ");
 
 	//cout << "What's the price of the new travel pack? ";
 	aux_price = readPositiveInt("What's the price of the new travel pack? ");

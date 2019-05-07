@@ -22,7 +22,9 @@ class TravelPack {
 		void setIdentifier(int identifier);
 		void setTravelDestination(string travelDestination);
 		void setArrivalDate(string ArrivalDate);
+		void setArrivalDate(Date ArrivalDate);
 		void setDepartureDate(string DepartureDate);
+		void setDepartureDate(Date DepartureDate);
 		void setPrice(int price);
 		void setMaximumSeats(int maximum_seats);
 		void setSoldSeats(int sold_seats);

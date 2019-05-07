@@ -53,8 +53,16 @@ void TravelPack::setDepartureDate(string DepartureDate) {
 	this->DepartureDate = Date(DepartureDate);
 }
 
+void TravelPack::setDepartureDate(Date DepartureDate) {
+	this->DepartureDate = DepartureDate;
+}
+
 void TravelPack::setArrivalDate(string ArrivalDate) {
 	this->ArrivalDate = Date(ArrivalDate);
+}
+
+void TravelPack::setArrivalDate(Date ArrivalDate) {
+	this->ArrivalDate = ArrivalDate;
 }
 
 void TravelPack::setPrice(int price) {
@@ -74,7 +82,7 @@ vector <string> TravelPack::convertTravelDestination(string travel_destination) 
 	vector <string> result;
 	string aux_string;
 
-	for (int i = 0; i < travel_destination.length(); i++)
+	for (size_t i = 0; i < travel_destination.length(); i++)
 		if (travel_destination[i] == '–' || travel_destination[i] == ',' || travel_destination[i] == '-') {
 			result.push_back(trim(aux_string));
 			aux_string = "";

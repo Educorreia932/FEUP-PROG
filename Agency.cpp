@@ -222,7 +222,7 @@ void Agency::viewNumberAndValueSoldPacks()
 	int total_price = 0;
 	int total_sold = 0;
 
-	for (int i = 0; i < travelPacksObjs.size(); i++)
+	for (size_t i = 0; i < travelPacksObjs.size(); i++)
 	{
 		cout << "Travel Pack: " << travelPacksObjs.at(i).getIdentifier() << '\n'
 			<< "Sold Seats: " << travelPacksObjs.at(i).getSoldSeats() << '\n'

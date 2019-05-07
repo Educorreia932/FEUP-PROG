@@ -5,6 +5,7 @@
 using namespace std;
 
 class Date {
+
 	public:
 		Date();
 		Date(unsigned int year, unsigned int month, unsigned int day);
@@ -23,6 +24,9 @@ class Date {
 		bool isNotEqualTo(const Date& date);
 		bool isAfter(const Date& date);
 		bool isBefore(const Date& date);
+
+		
+
 	private:
 		unsigned int year;
 		unsigned int month;
@@ -30,4 +34,5 @@ class Date {
 
 		bool isBissextile(unsigned int year);
 		unsigned int numberOfDays(unsigned int month, unsigned int year);
+
 };
