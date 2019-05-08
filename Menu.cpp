@@ -181,10 +181,7 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			clients[selected_client].setAddress(readAddress("Insert the new address of the client: "));
 			break;
 		case 5:
-			cout << "Insert the new acquired travel packs of the client: ";
-			getline(cin, aux_string);
-
-			clients[selected_client].setAcquiredTravelPacks(aux_string);
+			clients[selected_client].setAcquiredTravelPacks(readBoughtPacks("Insert the new acquired travel packs of the client:(end withCtrl+Z) "));
 			break;
 		case 6:
 			clients[selected_client].setTotalPurchases(readPositiveInt("Insert the new value of total purchases of the client: "));
@@ -215,9 +212,8 @@ void Menu::createClient() {
 	//cout << "What's the address of the new client? ";
 	Address auxClientAddress = readAddress("What's the address of the new client? ");
 
-	cout << "What are the acquired travel packs of the new client? ";
-	getline(cin, aux_acquired_travel_packs);
-	vector <int> auxAcquiredTravelPacks = str_to_PackageIds(aux_acquired_travel_packs);
+	//cout << "What are the acquired travel packs of the new client? ";
+	vector <int> auxAcquiredTravelPacks = readBoughtPacks("What are the acquired travel packs of the new client?(end with Ctrl+Z) ");
 
 	//cout << "What's the value of total purchases of the new client? ";
 	aux_total_purchases = readPositiveInt("What's the value of total purchases of the new client? ");

@@ -233,6 +233,30 @@ vector<string> readDestinations(string message) {
 	} while (true);
 }
 
+vector<int> readBoughtPacks(string message) {
+
+	int i;
+	vector <int> result;
+
+	cout << message;
+	do {
+		if (cin >> i) {
+				result.push_back(i);
+		}
+		else {
+			if (cin.eof()) {
+				return result;
+			}
+			else {
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << "Invalid input!!" << endl;
+			}
+		}
+
+	} while (true);
+}
+
 
 
 //Auxiliary date functions

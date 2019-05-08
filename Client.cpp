@@ -59,6 +59,9 @@ void Client::setAddress(Address new_address) {
 void Client::setAcquiredTravelPacks(string adcquired_travel_packs) {
 	this->AcquiredTravelPacks = str_to_PackageIds(adcquired_travel_packs);
 }
+void Client::setAcquiredTravelPacks(vector<int> adcquired_travel_packs) {
+	this->AcquiredTravelPacks =adcquired_travel_packs;
+}
 
 void Client::setTotalPurchases(int total_purchases) {
 	this->totalPurchases = total_purchases;

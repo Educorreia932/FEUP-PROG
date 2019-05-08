@@ -24,6 +24,7 @@ class Client {
 		void setAddress(string client_address);
 		void setAddress(Address new_address);
 		void setAcquiredTravelPacks(string adcquired_travel_packs);
+		void setAcquiredTravelPacks(vector<int> adcquired_travel_packs);
 		void setTotalPurchases(int total_purchases);
 	private:
 		//Variables/Data Structures
