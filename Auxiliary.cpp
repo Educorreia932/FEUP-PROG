@@ -85,7 +85,7 @@ string readName(string message) {
 				validInput = false;
 		}
 		if (!validInput) {
-			cout << "Invalid input!";
+			cout << "Invalid input!\n";
 		}
 
 	} while (!validInput);
