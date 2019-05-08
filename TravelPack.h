@@ -8,6 +8,7 @@ using namespace std;
 class TravelPack {
 	public:
 		TravelPack(int identifier, string travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats, int sold_seats);
+		TravelPack(int identifier, vector <string> travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats, int sold_seats);
 		
 		//Getters
 		int getIdentifier() const;
@@ -21,6 +22,7 @@ class TravelPack {
 		//Setters
 		void setIdentifier(int identifier);
 		void setTravelDestination(string travelDestination);
+		void setTravelDestination(vector<string> travelDestination);
 		void setArrivalDate(string ArrivalDate);
 		void setArrivalDate(Date ArrivalDate);
 		void setDepartureDate(string DepartureDate);

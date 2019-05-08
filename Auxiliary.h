@@ -26,6 +26,7 @@ int readInt(string message = "");
 Date readDate(string message = "");
 Address readAddress(string message = "");
 string readZipCode(string message = "");
+vector<string> readDestinations(string message = "");
 
 //Auxiliary date functions
 

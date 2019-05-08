@@ -214,6 +214,25 @@ string readZipCode(string message) {
 
 }
 
+//Ends with Ctrl+Z
+vector<string> readDestinations(string message) {
+
+	string s;
+	vector <string> result;
+
+	cout << message;
+	do {
+		getline(cin, s);
+		if (cin.eof()) {
+			return result;
+		}
+		else {
+			result.push_back(s);
+		}
+
+	} while (true);
+}
+
 
 
 //Auxiliary date functions
