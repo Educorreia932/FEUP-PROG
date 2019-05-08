@@ -52,6 +52,9 @@ void Client::setHousehold(int household) {
 void Client::setAddress(string client_address) {
 	this->ClientAddress = Address(client_address);
 }
+void Client::setAddress(Address new_address) {
+	this->ClientAddress = new_address;
+}
 
 void Client::setAcquiredTravelPacks(string adcquired_travel_packs) {
 	this->AcquiredTravelPacks = str_to_PackageIds(adcquired_travel_packs);

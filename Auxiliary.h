@@ -4,9 +4,11 @@
 #include <sstream>
 #include <iostream>
 #include "Date.h"
+#include "Address.h"
 
 using namespace std;
 
+class Address;//Necessário senão ocorrem erros 
 
 string trim(string s);
 
@@ -22,6 +24,8 @@ unsigned readNIF(string message = "");
 int readPositiveInt(string message = "");
 int readInt(string message = "");
 Date readDate(string message = "");
+Address readAddress(string message = "");
+string readZipCode(string message = "");
 
 //Auxiliary date functions
 

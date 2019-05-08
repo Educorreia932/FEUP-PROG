@@ -178,10 +178,7 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			cin.ignore();
 			break;
 		case 4:
-			cout << "Insert the new address of the client: ";
-			getline(cin, aux_string);
-
-			clients[selected_client].setAddress(aux_string);
+			clients[selected_client].setAddress(readAddress("Insert the new address of the client: "));
 			break;
 		case 5:
 			cout << "Insert the new acquired travel packs of the client: ";
@@ -215,9 +212,8 @@ void Menu::createClient() {
 	aux_household = readPositiveInt("What's the household of the new client? ");
 	cin.ignore();
 
-	cout << "What's the address of the new client? ";
-	getline(cin, aux_client_address);
-	Address auxClientAddress(aux_client_address);
+	//cout << "What's the address of the new client? ";
+	Address auxClientAddress = readAddress("What's the address of the new client? ");
 
 	cout << "What are the acquired travel packs of the new client? ";
 	getline(cin, aux_acquired_travel_packs);

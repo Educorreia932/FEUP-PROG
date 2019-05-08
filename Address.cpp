@@ -11,8 +11,8 @@ Address::Address(string street,int door_number,string apartment,string zip_code,
 	this->street = street;
 	this->door_number = door_number;
 	this->apartment = apartment;
-	this->zip_code;
-	this->locality;
+	this->zip_code = zip_code;
+	this->locality = locality;
 }
 
 Address::Address(string line) {

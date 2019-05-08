@@ -167,6 +167,54 @@ Date readDate(string message) {
 
 }
 
+Address readAddress(string message) {
+
+	
+	string aux_street;
+	cout << "Street: ";
+	getline(cin, aux_street);
+
+	int aux_door_number = readPositiveInt("Door Number: ");
+	cin.ignore();
+
+	string aux_apartment;
+	cout << "Apartment: ";
+	getline(cin, aux_apartment);
+
+	string aux_zip_code = readZipCode("Zipcode: ");
+
+	string aux_locality = readName("Locality: ");
+
+
+	Address result = Address(aux_street, aux_door_number, aux_apartment, aux_zip_code, aux_locality);
+	return result;
+}
+
+string readZipCode(string message) {
+
+	char c1;
+	unsigned int first, second;
+
+	do {
+		cout << message;
+		//cin.ignore(1000, '\n');
+		if ((cin >> first >> c1 >> second) && first >= 1000 && first <=9999 && (c1 == '-' || c1 == '-') && second >=0 && second <= 999) {
+			ostringstream s;
+			s << first << c1 << second;
+			return s.str();
+		}
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+
+	} while (true);
+
+}
+
+
+
 //Auxiliary date functions
 
 bool isBissextile(unsigned int year) {

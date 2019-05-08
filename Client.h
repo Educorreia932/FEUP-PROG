@@ -22,6 +22,7 @@ class Client {
 		void setNif(int nif);
 		void setHousehold(int household);
 		void setAddress(string client_address);
+		void setAddress(Address new_address);
 		void setAcquiredTravelPacks(string adcquired_travel_packs);
 		void setTotalPurchases(int total_purchases);
 	private:
