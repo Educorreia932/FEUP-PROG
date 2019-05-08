@@ -7,6 +7,7 @@ class Address {
 	public:
 		Address();
 		Address(string line);
+		Address::Address(string street, int door_number, string apartment, string zip_code, string locality);
 
 		string getStreet();
 		int getDoorNumber();

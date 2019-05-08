@@ -7,6 +7,14 @@ Address::Address() {
 	this->zip_code = "N/A";
 }
 
+Address::Address(string street,int door_number,string apartment,string zip_code,string locality) {
+	this->street = street;
+	this->door_number = door_number;
+	this->apartment = apartment;
+	this->zip_code;
+	this->locality;
+}
+
 Address::Address(string line) {
 	int counter = 0;
 	string aux_string;
