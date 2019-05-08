@@ -171,9 +171,11 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			break;
 		case 2:
 			clients[selected_client].setNif(readNIF("Insert the new NIF of the client: "));
+			cin.ignore();
 			break;
 		case 3:
 			clients[selected_client].setHousehold(readPositiveInt("Insert the new household of the client: "));
+			cin.ignore();
 			break;
 		case 4:
 			cout << "Insert the new address of the client: ";
@@ -189,6 +191,7 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			break;
 		case 6:
 			clients[selected_client].setTotalPurchases(readPositiveInt("Insert the new value of total purchases of the client: "));
+			cin.ignore();
 			break;
 	}
 }
@@ -206,9 +209,11 @@ void Menu::createClient() {
 
 	//cout << "What's the NIF of the new client? ";
 	aux_nif = readNIF("What's the NIF of the new client? ");
+	cin.ignore();
 
 	//cout << "What's the household of the new client? ";
 	aux_household = readPositiveInt("What's the household of the new client? ");
+	cin.ignore();
 
 	cout << "What's the address of the new client? ";
 	getline(cin, aux_client_address);
@@ -220,6 +225,7 @@ void Menu::createClient() {
 
 	//cout << "What's the value of total purchases of the new client? ";
 	aux_total_purchases = readPositiveInt("What's the value of total purchases of the new client? ");
+	cin.ignore();
 
 	clients.push_back(Client(aux_name, aux_nif, aux_household, auxClientAddress, auxAcquiredTravelPacks, aux_total_purchases));
 }
@@ -299,6 +305,7 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 		case 1:
 			//cout << "Insert the new identifier of the travel pack: ";
 			travelPacks[selected_travel_pack].setIdentifier(readInt("Insert the new identifier of the travel pack: "));
+			cin.ignore();
 			break;
 		case 2:
 			cout << "Insert the new travel destination of the travel pack (in the format 'Region - Place1, Place2...'): ";
@@ -317,10 +324,12 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 		case 5:
 			//cout << "Insert the new price of the travel pack: ";
 			travelPacks[selected_travel_pack].setPrice(readPositiveInt("Insert the new price of the travel pack: "));
+			cin.ignore();
 			break;
 		case 6:
 			//cout << "Insert the new number of maximum seats of the travel pack: ";
 			travelPacks[selected_travel_pack].setMaximumSeats(readPositiveInt("Insert the new number of maximum seats of the travel pack: "));
+			cin.ignore();
 			break;
 	}
 }
@@ -335,6 +344,7 @@ void Menu::createTravelPack() {
 
 	//cout << "What's the identifier of the new travel pack? "; 
 	aux_identifier = readInt("What's the identifier of the new travel pack? ");
+	cin.ignore();
 
 	cout << "What's the travel destination of the new travel pack (in the format 'Region - Place1, Place2...')? ";
 	getline(cin, aux_travel_destination);
@@ -347,12 +357,15 @@ void Menu::createTravelPack() {
 
 	//cout << "What's the price of the new travel pack? ";
 	aux_price = readPositiveInt("What's the price of the new travel pack? ");
+	cin.ignore();
 
 	//cout << "What's the number of maximum seats of the new travel pack? ";
 	aux_maximum_seats = readPositiveInt("What's the number of maximum seats of the new travel pack? ");
+	cin.ignore();
 
 	//cout << "What's the number of sold seats of the new travel pack? ";
 	aux_sold_seats = readPositiveInt("What's the number of sold seats of the new travel pack? ");
+	cin.ignore();
 
 	travelPacks.push_back(TravelPack(aux_identifier, aux_travel_destination, AuxDepartureDate, AuxArrivalDate, aux_price, aux_maximum_seats, aux_sold_seats));
 }
