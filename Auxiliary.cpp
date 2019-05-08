@@ -182,6 +182,7 @@ Address readAddress(string message) {
 	getline(cin, aux_apartment);
 
 	string aux_zip_code = readZipCode("Zipcode: ");
+	cin.ignore();
 
 	string aux_locality = readName("Locality: ");
 
@@ -198,7 +199,7 @@ string readZipCode(string message) {
 	do {
 		cout << message;
 		//cin.ignore(1000, '\n');
-		if ((cin >> first >> c1 >> second) && first >= 1000 && first <=9999 && (c1 == '-' || c1 == '-') && second >=0 && second <= 999) {
+		if ((cin >> first >> c1 >> second) && first >= 1000 && first <=9999 && c1 == '-' && second >=0 && second <= 999) {
 			ostringstream s;
 			s << first << c1 << second;
 			return s.str();
