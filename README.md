@@ -6,7 +6,7 @@ Project for PROG course
 * Menus de gerir pacotes de viagem - *Eduardo*
 * Visualizar clientes - *Ana*
 * Visualizar pacotes de viagem - *Ana*
-* Menu de compra de um pacote - N/A
+* Menu de compra de um pacote - *Ana*
 * Estatísticas - N/A
 * Guardar em ficheiros - *Ricardo*
 * Validação de inputs - *Ricardo*
