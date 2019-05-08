@@ -84,6 +84,9 @@ string readName(string message) {
 			if (isdigit(input.at(i)))
 				validInput = false;
 		}
+		if (!validInput) {
+			cout << "Invalid input!";
+		}
 
 	} while (!validInput);
 
