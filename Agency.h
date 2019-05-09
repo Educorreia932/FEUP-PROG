@@ -23,7 +23,8 @@ class Agency {
 		void viewAvailablePacks() const;
 		void viewSoldPacks() const;
 		void buyPack(int pack_index, int client_index);
-		void viewNumberAndValueSoldPacks();
+		void viewNumberAndValueSoldPacks() const;
+		void viewMostVisitedPlaces() const;
 
 	private:
 		//Variables/Data Structures

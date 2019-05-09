@@ -1,5 +1,5 @@
 #include "Agency.h"
-
+#include <map>
 
 //Constructors
 Agency::Agency() {
@@ -192,7 +192,7 @@ void Agency::viewAllClients() const
 	cout << left << setw(10) << "ZIP";
 	cout << left << setw(20) << "City";
 	cout << left << "Travel Packs" << '\n';
-	cout << "------------------------------------------------------------------------------------------- \n";
+	cout << "------------------------------------------------------------------------------------------------------------------------------------------------ \n";
 
 	for (size_t i = 0; i < clientsObjs.size(); i++)
 	{
@@ -217,7 +217,7 @@ void Agency::viewAllClients() const
 	}
 }
 
-void Agency::viewNumberAndValueSoldPacks()
+void Agency::viewNumberAndValueSoldPacks() const
 {
 	int total_price = 0;
 	int total_sold = 0;
@@ -260,6 +260,69 @@ void Agency::viewSpecificClient(size_t index) const
 			cout << ", " << clientsObjs.at(index).getAcquiredTravelPacks().at(i);
 		cout << "\n \n \n";
 	}
+	return;
+}
+
+void Agency::viewMostVisitedPlaces() const
+{
+	if (travelPacksObjs.size() == 0)
+	{
+		cout << "This agency has no travel packs.\n\n";
+		return;
+	}
+
+	map<string, int> placesAndSeats;
+	int aux, max = 0;
+	vector<string> result;
+
+	for (size_t i = 0; i < travelPacksObjs.size(); i++)
+	{
+		for (size_t j = 0; j < travelPacksObjs.at(i).getTravelDestination().size(); j++)
+		{
+			if (placesAndSeats.find(travelPacksObjs.at(i).getTravelDestination().at(j)) != placesAndSeats.end()) //if already there
+			{
+				aux = placesAndSeats[travelPacksObjs.at(i).getTravelDestination().at(j)];
+				placesAndSeats[travelPacksObjs.at(i).getTravelDestination().at(j)] = aux + travelPacksObjs.at(i).getSoldSeats(); //update sold seats
+
+				if (max < aux + travelPacksObjs.at(i).getSoldSeats()) //update max if less
+				{
+					max = aux + travelPacksObjs.at(i).getSoldSeats();
+					result.clear(); //empty vec
+					result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //adds place
+				}
+				else 
+				{
+					if (max = aux + travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
+						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
+				}
+			}
+			else
+			{
+				placesAndSeats.insert(pair<string, int>(travelPacksObjs.at(i).getTravelDestination().at(j), travelPacksObjs.at(i).getSoldSeats())); //if not in map add
+				
+				if (max < travelPacksObjs.at(i).getSoldSeats()) //update max
+				{
+					max = travelPacksObjs.at(i).getSoldSeats(); 
+					result.clear();
+					result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //add place
+				}	
+
+				else
+				{
+					if (max = travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
+						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
+				}
+			}
+		}
+	}
+	
+	//cout result
+	cout << "The most visited place(s) with " << max << " vists: \n";
+
+	for (size_t k = 0; k < result.size(); k++)
+		cout << result.at(k) << '\n';
+	cout << '\n';
+
 	return;
 }
 

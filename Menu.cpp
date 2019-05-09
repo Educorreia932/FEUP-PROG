@@ -85,7 +85,8 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 9:
-			cout << "Not working. In construction.";
+			AgencyObj.viewMostVisitedPlaces();
+			system("pause");
 			break;
 		case 0:
 			break;
