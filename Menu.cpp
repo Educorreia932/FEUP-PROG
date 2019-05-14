@@ -186,29 +186,23 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			clients[selected_client].setAcquiredTravelPacks(readBoughtPacks("Insert the new acquired travel packs of the client:(end withCtrl+Z) "));
 			break;
 		case 6:
-			clients[selected_client].setTotalPurchases(readPositiveInt("Insert the new value of total purchases of the client: "));
+			clients[selected_client].setTotalPurchases(readTotalPurchases("Insert the new value of total purchases of the client: ", travelPacks, clients[selected_client].getAcquiredTravelPacks(), clients[selected_client].getHousehold()));
 			cin.ignore();
 			break;
 	}
 }
 
 void Menu::createClient() {
-	string aux_name;
-	int aux_nif;
-	int aux_household;
-	string aux_client_address;
-	string aux_acquired_travel_packs;
-	int aux_total_purchases;
 
 	//cout << "What's the name of the new client? ";
-	aux_name = readName("What's the name of the new client? ");
+	string aux_name = readName("What's the name of the new client? ");
 
 	//cout << "What's the NIF of the new client? ";
-	aux_nif = readNIF("What's the NIF of the new client? ");
+	int aux_nif = readNIF("What's the NIF of the new client? ");
 	cin.ignore();
 
 	//cout << "What's the household of the new client? ";
-	aux_household = readPositiveInt("What's the household of the new client? ");
+	int aux_household = readPositiveInt("What's the household of the new client? ");
 	cin.ignore();
 
 	//cout << "What's the address of the new client? ";
@@ -216,9 +210,10 @@ void Menu::createClient() {
 
 	//cout << "What are the acquired travel packs of the new client? ";
 	vector <int> auxAcquiredTravelPacks = readBoughtPacks("What are the acquired travel packs of the new client?(end with Ctrl+Z) ");
+	
 
 	//cout << "What's the value of total purchases of the new client? ";
-	aux_total_purchases = readPositiveInt("What's the value of total purchases of the new client? ");
+	int aux_total_purchases = readTotalPurchases("What's the value of total purchases of the new client? ", travelPacks, auxAcquiredTravelPacks, aux_household);
 	cin.ignore();
 
 	clients.push_back(Client(aux_name, aux_nif, aux_household, auxClientAddress, auxAcquiredTravelPacks, aux_total_purchases));

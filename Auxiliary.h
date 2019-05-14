@@ -3,12 +3,14 @@
 #include <vector>
 #include <sstream>
 #include <iostream>
+#include "TravelPack.h"
 #include "Date.h"
 #include "Address.h"
 
 using namespace std;
 
 class Address;//Necessário senão ocorrem erros 
+class TravelPack;
 
 string trim(string s);
 
@@ -28,6 +30,7 @@ Address readAddress(string message = "");
 string readZipCode(string message = "");
 vector<string> readDestinations(string message = "");
 vector<int> readBoughtPacks(string message = "");
+int readTotalPurchases(string message, vector<TravelPack> &packs, vector<int> boughtPacks, int household);
 
 //Auxiliary date functions
 

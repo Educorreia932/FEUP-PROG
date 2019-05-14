@@ -270,6 +270,32 @@ vector<int> readBoughtPacks(string message) {
 	} while (true);
 }
 
+int readTotalPurchases(string message,vector<TravelPack> &packs, vector<int> boughtPacks, int household) {
+
+	int input;
+	int sum = 0;
+
+	for (size_t i = 0; i < size(boughtPacks); i++) {
+		for (size_t j = 0; j < size(packs); j++) {
+			if (boughtPacks.at(i) == packs.at(j).getIdentifier())
+				sum += (household * packs.at(j).getPrice());
+		}
+	}
+
+	do {
+		cout << message;
+		if (cin >> input && input >= sum) {
+			cin.clear();
+			return input;
+		}
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+	} while (true);
+}
+
 //Auxiliary date functions
 bool isBissextile(unsigned int year) {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
