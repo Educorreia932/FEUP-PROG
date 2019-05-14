@@ -59,3 +59,15 @@ x64/Debug/
 html/
 
 latex/
+
+NiceHolidays2/\.vs/NiceHolidays2/v15/\.suo
+
+*.db
+
+*.ipch
+
+*.enc
+
+*.ilk
+
+*.opendb
