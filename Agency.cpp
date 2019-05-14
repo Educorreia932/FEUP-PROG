@@ -239,8 +239,7 @@ void Agency::viewNumberAndValueSoldPacks() const
 	return;
 }
 
-void Agency::viewSpecificClient(size_t index) const
-{
+void Agency::viewSpecificClient(size_t index) const {
 	cout << '\n';
 	cout << "NAME: " << clientsObjs.at(index).getName() << '\n';
 	cout << "NIF: " << clientsObjs.at(index).getNif() << '\n';
@@ -438,41 +437,37 @@ vector <Client> Agency::readClients(string file_name) {
 }
 
 //Save to clients file
-//NOT TESTED
 
 void Agency::updateClientFile() {
-
 	ofstream f;
 
 	f.open(clients_file);
 
 	if (f.is_open()) {
-
 		for (size_t i = 0; i < size(clientsObjs); i++) {
 
-			f << clientsObjs.at(i).getName() << endl;
-			f << clientsObjs.at(i).getNif() << endl;
-			f << clientsObjs.at(i).getHousehold() << endl;
-			f << clientsObjs.at(i).getClientAddress().getStreet() << '/' << clientsObjs.at(i).getClientAddress().getDoorNumber() << '/' << clientsObjs.at(i).getClientAddress().getApartment() << '/'
-				<< clientsObjs.at(i).getClientAddress().getZipCode() << '/' << clientsObjs.at(i).getClientAddress().getLocality() << endl;
-			f << clientsObjs.at(i).getAcquiredTravelPacks()[0];
+			f << clientsObjs.at(i).getName() << endl
+		      << clientsObjs.at(i).getNif() << endl
+			  << clientsObjs.at(i).getHousehold() << endl
+			  << clientsObjs.at(i).getClientAddress().getStreet() << '/' << clientsObjs.at(i).getClientAddress().getDoorNumber() << '/' << clientsObjs.at(i).getClientAddress().getApartment() << '/'
+			  << clientsObjs.at(i).getClientAddress().getZipCode() << '/' << clientsObjs.at(i).getClientAddress().getLocality() << endl
+			  << clientsObjs.at(i).getAcquiredTravelPacks()[0];
+
 			for (size_t j = 1; j < size(clientsObjs.at(i).getAcquiredTravelPacks()); j++) {
 				f << ';' << clientsObjs.at(i).getAcquiredTravelPacks().at(j);
 			}
-			f << endl;
+
+			f << endl << clientsObjs.at(i).getTotalPurchases() << endl;
 
 			if (i != size(clientsObjs) - 1)
 				f << "::::::::::" << endl;
-
 		}
-
 	}
-	f.close();
 
+	f.close();
 }
 
 //Save to packs file
-//NOT TESTED
 
 void Agency::updatePacksFile() {
 
@@ -490,6 +485,7 @@ void Agency::updatePacksFile() {
 
 			if (size(travelPacksObjs.at(i).getTravelDestination()) == 1)
 				f << travelPacksObjs.at(i).getTravelDestination().at(0) << endl;
+
 			else {
 				f << travelPacksObjs.at(i).getTravelDestination().at(0) << " - " << travelPacksObjs.at(i).getTravelDestination().at(1);
 				for (size_t j = 2; j < size(travelPacksObjs.at(i).getTravelDestination()); j++) {
@@ -498,8 +494,8 @@ void Agency::updatePacksFile() {
 
 			}
 
-			f << travelPacksObjs.at(i).getDepartureDate().getYear() << '/' << travelPacksObjs.at(i).getDepartureDate().getMonth() << '/' << travelPacksObjs.at(i).getDepartureDate().getDay() << endl;
-			f << travelPacksObjs.at(i).getArrivalDate().getYear() << '/' << travelPacksObjs.at(i).getArrivalDate().getMonth() << '/' << travelPacksObjs.at(i).getArrivalDate().getDay() << endl;
+			f << travelPacksObjs.at(i).getDepartureDate().getYear() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getDepartureDate().getMonth() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getDepartureDate().getDay() << endl;
+			f << travelPacksObjs.at(i).getArrivalDate().getYear() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getArrivalDate().getMonth() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getArrivalDate().getDay() << endl;
 			f << travelPacksObjs.at(i).getPrice() << endl;
 			f << travelPacksObjs.at(i).getMaximumSeats() << endl;
 			f << travelPacksObjs.at(i).getSoldSeats() << endl;

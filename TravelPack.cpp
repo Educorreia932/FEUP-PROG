@@ -10,6 +10,7 @@ TravelPack::TravelPack(int identifier, string travel_destination, Date Departure
 	this->maximum_seats = maximum_seats;
 	this->sold_seats = sold_seats;
 }
+
 TravelPack::TravelPack(int identifier, vector <string> travel_destination, Date DepartureDate, Date ArrivalDate, int price, int maximum_seats, int sold_seats) {
 	this->identifier = identifier;
 	this->travelDestination = travel_destination;

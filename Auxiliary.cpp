@@ -9,8 +9,6 @@ string trim(string s) {
 	return s;
 }
 
-
-
 //String conversion functions
 vector<int> str_to_PackageIds(string line) {
 
@@ -26,9 +24,6 @@ vector<int> str_to_PackageIds(string line) {
 
 	return packageIds;
 }
-
-
-
 
 //Read functions
 
@@ -67,8 +62,6 @@ int readOption(int maxOptions, bool includingZero) {
 		} while (true);
 	}
 }
-
-
 
 string readName(string message) {
 
@@ -257,10 +250,7 @@ vector<int> readBoughtPacks(string message) {
 	} while (true);
 }
 
-
-
 //Auxiliary date functions
-
 bool isBissextile(unsigned int year) {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 		return true;
@@ -268,6 +258,7 @@ bool isBissextile(unsigned int year) {
 	else
 		return false;
 }
+
 unsigned int numberOfDays(unsigned int month, unsigned int year) {
 	switch (month) {
 	case 2:

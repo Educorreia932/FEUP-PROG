@@ -16,20 +16,19 @@ int Menu::showMenu() {
 	system("cls");
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		<< "1) Manage clients." << endl
-		<< "2) Manage travel packs." << endl
-		<< "3) Visualize a specific client." << endl
-		<< "4) Visualize all the clients of the agency." << endl
-		<< "5) Visualize available travel packs." << endl
-		<< "6) Visualize sold travel packs." << endl
-		<< "7) Buy a travel pack for a client." << endl
-		<< "8) Visualize the number and total value of sold travel packs." << endl
-		<< "9) Obtain the name of the most visited places." << endl
-		// << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl << endl
-		<< "0) Exit the program and save the alterations made." << endl;
-
-
-	int selection = readOption(9); // Mudar para outro valor se se acrescentar alguma coisa
+		 << "1) Manage clients." << endl
+		 << "2) Manage travel packs." << endl
+		 << "3) Visualize a specific client." << endl
+		 << "4) Visualize all the clients of the agency." << endl
+		 << "5) Visualize available travel packs." << endl
+		 << "6) Visualize sold travel packs." << endl
+		 << "7) Buy a travel pack for a client." << endl
+		 << "8) Visualize the number and total value of sold travel packs." << endl
+		 << "9) Obtain the name of the most visited places." << endl
+		 << "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl
+		 << "0) Exit the program and save the alterations made." << endl;
+	
+	int selection = readOption(10); // Mudar para outro valor se se acrescentar alguma coisa
 
 	return selection;
 }
@@ -64,19 +63,21 @@ void Menu::menuSelection(int selected) {
 		case 7:
 			int client;
 			int pack;
+
 			cout << "Which client do is going to buy a pack? Insert the corresponding key." << endl;
 			client = showClients() - 1;
 			system("cls");
 			cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
 			pack = showTravelPacks() - 1;
 			system("cls");
-			if (travelPacks.at(pack).getIdentifier() < 0)
-			{
+
+			if (travelPacks.at(pack).getIdentifier() < 0) {
 				cerr << "ERROR:\n This pack is not available anymore (negative ID). Please try again.\n\n";
 				cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
 				pack = showTravelPacks() - 1;
 				system("cls");
 			}
+
 			AgencyObj.buyPack(pack, client);
 			system("pause");
 			break;
@@ -89,7 +90,9 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 0:
-			break;
+			AgencyObj.updateClientFile();
+			AgencyObj.updatePacksFile();
+			return;
 	}
 
 	menuSelection(showMenu());
@@ -146,7 +149,6 @@ void Menu::manageClientsSelection(int selected) {
 }
 
 int Menu::showChangeClients() {
-
 	cout << "What do you want to change in the client? Insert the corresponding key." << endl << endl
 		 << "1) The name." << endl
 		 << "2) The NIF." << endl
@@ -154,8 +156,7 @@ int Menu::showChangeClients() {
 		 << "4) The address." << endl
 		 << "5) The acquired travel packs." << endl
 		 << "6) The value of total purchases." << endl
-		 << "0) Go back." << endl << endl
-		 << "Option: ";
+		 << "0) Go back." << endl;
 
 	int selection = readOption(6);
 	
@@ -290,7 +291,6 @@ int Menu::showChangeTravelPacks() {
 }
 
 void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
-
 	string aux_string;
 
 	switch (selected) {
