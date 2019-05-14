@@ -58,6 +58,7 @@ void TravelPack::setIdentifier(int identifier) {
 void TravelPack::setTravelDestination(string travelDestination) {
 	this->travelDestination = convertTravelDestination(travelDestination);
 }
+
 void TravelPack::setTravelDestination(vector<string> travelDestination) {
 	this->travelDestination = travelDestination;
 }
