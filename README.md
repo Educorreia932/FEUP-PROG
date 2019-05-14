@@ -15,6 +15,8 @@ Project for PROG course
 * Ler dos ficheiros para as classes
 * Estrutura das classes
 
+
+## :
 * Ver Agency 
 * Ver Clients/Travel Packs nas próprias classes (dar overload do operador "<<")
 * Strings de input com carateres alfa-numéricos
