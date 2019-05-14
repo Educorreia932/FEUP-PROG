@@ -16,7 +16,7 @@ Project for PROG course
 * Estrutura das classes
 
 
-## :
+## Debugging:
 * Ver Agency 
 * Ver Clients/Travel Packs nas próprias classes (dar overload do operador "<<")
 * Strings de input com carateres alfa-numéricos
