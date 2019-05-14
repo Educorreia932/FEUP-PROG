@@ -186,23 +186,29 @@ void Menu::changeClientsSelection(int selected, int selected_client) {
 			clients[selected_client].setAcquiredTravelPacks(readBoughtPacks("Insert the new acquired travel packs of the client:(end withCtrl+Z) "));
 			break;
 		case 6:
-			clients[selected_client].setTotalPurchases(readTotalPurchases("Insert the new value of total purchases of the client: ", travelPacks, clients[selected_client].getAcquiredTravelPacks(), clients[selected_client].getHousehold()));
+			clients[selected_client].setTotalPurchases(readPositiveInt("Insert the new value of total purchases of the client: "));
 			cin.ignore();
 			break;
 	}
 }
 
 void Menu::createClient() {
+	string aux_name;
+	int aux_nif;
+	int aux_household;
+	string aux_client_address;
+	string aux_acquired_travel_packs;
+	int aux_total_purchases;
 
 	//cout << "What's the name of the new client? ";
-	string aux_name = readName("What's the name of the new client? ");
+	aux_name = readName("What's the name of the new client? ");
 
 	//cout << "What's the NIF of the new client? ";
-	int aux_nif = readNIF("What's the NIF of the new client? ");
+	aux_nif = readNIF("What's the NIF of the new client? ");
 	cin.ignore();
 
 	//cout << "What's the household of the new client? ";
-	int aux_household = readPositiveInt("What's the household of the new client? ");
+	aux_household = readPositiveInt("What's the household of the new client? ");
 	cin.ignore();
 
 	//cout << "What's the address of the new client? ";
@@ -210,10 +216,9 @@ void Menu::createClient() {
 
 	//cout << "What are the acquired travel packs of the new client? ";
 	vector <int> auxAcquiredTravelPacks = readBoughtPacks("What are the acquired travel packs of the new client?(end with Ctrl+Z) ");
-	
 
 	//cout << "What's the value of total purchases of the new client? ";
-	int aux_total_purchases = readTotalPurchases("What's the value of total purchases of the new client? ", travelPacks, auxAcquiredTravelPacks, aux_household);
+	aux_total_purchases = readPositiveInt("What's the value of total purchases of the new client? ");
 	cin.ignore();
 
 	clients.push_back(Client(aux_name, aux_nif, aux_household, auxClientAddress, auxAcquiredTravelPacks, aux_total_purchases));
@@ -272,15 +277,16 @@ void Menu::manageTravelPacksSelection(int selected) {
 int Menu::showChangeTravelPacks() {
 
 	cout << "What do you want to change in the travel pack? Insert the corresponding key." << endl << endl
-		<< "1) The identifier." << endl
-		<< "2) The travel destination." << endl
-		<< "3) The departure date." << endl
-		<< "4) The arrival date." << endl
-		<< "5) The price." << endl
-		<< "6) The number of maximum seats." << endl
-		<< "0) Go back." << endl << endl;
+		 << "1) The identifier." << endl
+		 << "2) The travel destination." << endl
+		 << "3) The departure date." << endl
+		 << "4) The arrival date." << endl
+		 << "5) The price." << endl
+		 << "6) The number of maximum seats." << endl
+		 << "7) The number of sold seats." << endl
+		 << "0) Go back." << endl;
 
-	int selection = readOption(6);
+	int selection = readOption(7);
 
 	return selection;
 }
@@ -290,59 +296,49 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 
 	switch (selected) {
 		case 1:
-			//cout << "Insert the new identifier of the travel pack: ";
 			travelPacks[selected_travel_pack].setIdentifier(readInt("Insert the new identifier of the travel pack: "));
 			cin.ignore();
 			break;
 		case 2:
-			//cout << "Insert the new travel destination of the travel pack (in the format 'Region - Place1, Place2...'): ";
 			travelPacks[selected_travel_pack].setTravelDestination(readDestinations("Insert the new travel destination of the travel pack (end with Ctrl+Z): "));
 			break;
 		case 3:
-			//cout << "Insert the new departure date of the travel pack (in the format 'YYYY/MM/DD'): ";
-			travelPacks[selected_travel_pack].setDepartureDate(readDate("Insert the new departure date of the travel pack(in the format 'YYYY/MM/DD') : "));
+			travelPacks[selected_travel_pack].setDepartureDate(readArrivalDate("Insert the new departure date of the travel pack(in the format 'YYYY/MM/DD'): ", travelPacks[selected_travel_pack].getDepartureDate()));
 			break;
 		case 4:
-			//cout << "Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ";
-			travelPacks[selected_travel_pack].setArrivalDate(readDate("Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): "));
+			travelPacks[selected_travel_pack].setArrivalDate(readDepartureDate("Insert the new arrival date of the travel pack (in the format 'YYYY/MM/DD'): ", travelPacks[selected_travel_pack].getArrivalDate()));
 			break;
 		case 5:
-			//cout << "Insert the new price of the travel pack: ";
 			travelPacks[selected_travel_pack].setPrice(readPositiveInt("Insert the new price of the travel pack: "));
 			cin.ignore();
 			break;
 		case 6:
-			//cout << "Insert the new number of maximum seats of the travel pack: ";
-			travelPacks[selected_travel_pack].setMaximumSeats(readPositiveInt("Insert the new number of maximum seats of the travel pack: "));
+			travelPacks[selected_travel_pack].setMaximumSeats(readMaximumSeats("Insert the new number of maximum seats of the travel pack: ", travelPacks[selected_travel_pack].getSoldSeats()));
+			cin.ignore();
+			break;
+		case 7:
+			travelPacks[selected_travel_pack].setSoldSeats(readSoldSeats("Insert the new number of sold seats of the travel pack: ", travelPacks[selected_travel_pack].getMaximumSeats()));
 			cin.ignore();
 			break;
 	}
 }
 
 void Menu::createTravelPack() {
-
-	//cout << "What's the identifier of the new travel pack? "; 
 	int aux_identifier = readInt("What's the identifier of the new travel pack? ");
 	cin.ignore();
 
-	//cout << "What's the travel destination of the new travel pack (in the format 'Region - Place1, Place2...')? ";
 	vector <string> aux_travel_destination = readDestinations("What's the travel destination of the new travel pack (in the format 'Region - Place1, Place2...')? ");
 
-	//cout << "What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ";
-	Date AuxDepartureDate = readDate("What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ");
+	Date AuxDepartureDate = readDepartureDate("What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ", Date(0000, 01, 01));
 
-	//cout << "What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ";
-	Date AuxArrivalDate = readDate("What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ");
+	Date AuxArrivalDate = readArrivalDate("What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ", AuxDepartureDate);
 
-	//cout << "What's the price of the new travel pack? ";
 	int aux_price = readPositiveInt("What's the price of the new travel pack? ");
 	cin.ignore();
 
-	//cout << "What's the number of maximum seats of the new travel pack? ";
 	int aux_maximum_seats = readPositiveInt("What's the number of maximum seats of the new travel pack? ");
 	cin.ignore();
 
-	//cout << "What's the number of sold seats of the new travel pack? ";
 	int aux_sold_seats = readPositiveInt("What's the number of sold seats of the new travel pack? ");
 	cin.ignore();
 

@@ -105,11 +105,11 @@ unsigned readNIF(string message) {
 }
 
 int readPositiveInt(string message) {
-
 	int input;
 
 	do {
 		cout << message;
+
 		if (cin >> input && input > 0) {
 			cin.clear();
 			return input;
@@ -139,18 +139,70 @@ int readInt(string message) {
 	} while (true);
 }
 
-Date readDate(string message) {
+Address readAddress(string message) {
+	string aux_street;
+	bool invalid = true;
 
+	do 	{
+		cout << "Street: ";
+		getline(cin, aux_street);
+		if (aux_street.length() >= 1)
+			invalid = false;
+		else
+			cerr << "\n ERROR: Invalid input. Please try again:\n";
+	} while (invalid);
+
+
+	int aux_door_number = readPositiveInt("Door Number: ");
+	cin.ignore(1000, '\n');
+
+	string aux_apartment;
+	invalid = true;
+
+	do	{
+		cout << "Apartment: ";
+		getline(cin, aux_apartment);
+
+		if (aux_apartment.length() >= 1)
+			invalid = false;
+		
+		else
+			cerr << "\n ERROR: Invalid input. Please try again:\n";
+	} while (invalid);
+
+
+	string aux_zip_code = readZipCode("Zipcode: ");
+	cin.ignore();
+
+	string aux_locality = readName("Locality: ");
+
+
+	Address result = Address(aux_street, aux_door_number, aux_apartment, aux_zip_code, aux_locality);
+	return result;
+}
+
+//Read Functions - Travel Packs
+
+Date readArrivalDate(string message, Date DepartureDate) {
 	char c1, c2;
 	unsigned int year, month, day;
 
 	do {
 		cout << message;
-		//cin.ignore(1000, '\n');
+
 		if ((cin >> year >> c1 >> month >> c2 >> day) && (c1 == '/' && c2 == '/' && year >= 0 && 1 <= month && month <= 12) && (1 <= day && day <= numberOfDays(month, year))) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			
 			Date date = Date(year, month, day);
-			return date;
+
+			if (date.isBefore(DepartureDate)) 
+				cout << "Invalid input!!" << endl; 		
+
+			else
+				return date;
 		}
+
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -161,47 +213,34 @@ Date readDate(string message) {
 
 }
 
-Address readAddress(string message) {
+Date readDepartureDate(string message, Date ArrivalDate) {
+	char c1, c2;
+	unsigned int year, month, day;
 
-	
-	string aux_street;
-	bool invalid = true;
+	do {
+		cout << message;
 
-	do 
-	{
-	cout << "Street: ";
-	getline(cin, aux_street);
-	if (aux_street.length() >= 1)
-		invalid = false;
-	else
-		cerr << "\nERROR: Invalid input. Please try again:\n";
-	} while (invalid);
-	
+		if ((cin >> year >> c1 >> month >> c2 >> day) && (c1 == '/' && c2 == '/' && year >= 0 && 1 <= month && month <= 12) && (1 <= day && day <= numberOfDays(month, year))) {
+			cin.clear();
+			cin.ignore(1000, '\n');
 
-	int aux_door_number = readPositiveInt("Door Number: ");
-	cin.ignore();
+			Date date = Date(year, month, day);
 
-	string aux_apartment;
-	invalid = true;
-	do
-	{
-		cout << "Apartment: ";
-		getline(cin, aux_apartment);
-		if (aux_apartment.length() >= 1)
-			invalid = false;
-		else
-			cerr << "\nERROR: Invalid input. Please try again:\n";
-	} while (invalid);
-	
+			if (date.isAfter(ArrivalDate))
+				cout << "Invalid input!!" << endl;
 
-	string aux_zip_code = readZipCode("Zipcode: ");
-	cin.ignore();
+			else
+				return date;
+		}
 
-	string aux_locality = readName("Locality: ");
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
 
+	} while (true);
 
-	Address result = Address(aux_street, aux_door_number, aux_apartment, aux_zip_code, aux_locality);
-	return result;
 }
 
 string readZipCode(string message) {
@@ -225,6 +264,44 @@ string readZipCode(string message) {
 
 	} while (true);
 
+}
+
+int readMaximumSeats(string message, int sold_seats) {
+	int input;
+
+	do {
+		cout << message;
+
+		if (cin >> input && input > 0 && input >= sold_seats) {
+			cin.clear();
+			return input;
+		}
+
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+	} while (true);
+}
+
+int readSoldSeats(string message, int maximum_seats) {
+	int input;
+
+	do {
+		cout << message;
+
+		if (cin >> input && input > 0 && input <= maximum_seats) {
+			cin.clear();
+			return input;
+		}
+
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input!!" << endl;
+		}
+	} while (true);
 }
 
 //Ends with Ctrl+Z
@@ -267,32 +344,6 @@ vector<int> readBoughtPacks(string message) {
 			}
 		}
 
-	} while (true);
-}
-
-int readTotalPurchases(string message,vector<TravelPack> &packs, vector<int> boughtPacks, int household) {
-
-	int input;
-	int sum = 0;
-
-	for (size_t i = 0; i < size(boughtPacks); i++) {
-		for (size_t j = 0; j < size(packs); j++) {
-			if (boughtPacks.at(i) == packs.at(j).getIdentifier() || boughtPacks.at(i) == -packs.at(j).getIdentifier())
-				sum += (household * packs.at(j).getPrice());
-		}
-	}
-
-	do {
-		cout << message;
-		if (cin >> input && input >= sum) {
-			cin.clear();
-			return input;
-		}
-		else {
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
-		}
 	} while (true);
 }
 
