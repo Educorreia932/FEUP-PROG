@@ -277,7 +277,7 @@ int readTotalPurchases(string message,vector<TravelPack> &packs, vector<int> bou
 
 	for (size_t i = 0; i < size(boughtPacks); i++) {
 		for (size_t j = 0; j < size(packs); j++) {
-			if (boughtPacks.at(i) == packs.at(j).getIdentifier())
+			if (boughtPacks.at(i) == packs.at(j).getIdentifier() || boughtPacks.at(i) == -packs.at(j).getIdentifier())
 				sum += (household * packs.at(j).getPrice());
 		}
 	}
