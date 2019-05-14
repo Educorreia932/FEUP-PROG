@@ -509,7 +509,8 @@ void Agency::updatePacksFile() {
 }
 
 void Agency::removeTravelPack(int selected) {
-	travelPacksObjs.erase(travelPacksObjs.begin() + selected);
+	if(travelPacksObjs.at(selected).getIdentifier() < 0)
+		travelPacksObjs.at(selected).setIdentifier(-travelPacksObjs.at(selected).getIdentifier());
 }
 
 void Agency::removeClient(int selected) {
