@@ -1,6 +1,7 @@
 #include "Agency.h"
 #include <map>
 
+
 //Constructors
 Agency::Agency() {
 	this->name = "N/A";
@@ -107,23 +108,7 @@ void Agency::viewSoldPacks() const
 					}
 
 					//COUT 
-					cout << "ID: " << travelPacksObjs.at(pack_i).getIdentifier() << '\n';
-					cout << "Start Date: " << travelPacksObjs.at(pack_i).getDepartureDate().getDate() << '\n';
-					cout << "Final Date: " << travelPacksObjs.at(pack_i).getArrivalDate().getDate() << '\n';
-					cout << "Price: " << travelPacksObjs.at(pack_i).getPrice() << '\n';
-					cout << "Capacity: " << travelPacksObjs.at(pack_i).getMaximumSeats() << '\n';
-					cout << "Sold: " << travelPacksObjs.at(pack_i).getSoldSeats() << '\n';
-					cout << "Places: ";
-					//Places
-					if (travelPacksObjs.at(pack_i).getTravelDestination().size() == 0)
-						cout << "---" << "\n\n";
-					else
-					{
-						cout << travelPacksObjs.at(pack_i).getTravelDestination().at(0);
-						for (size_t w = 1; w < travelPacksObjs.at(pack_i).getTravelDestination().size(); w++)
-							cout << ", " << travelPacksObjs.at(pack_i).getTravelDestination().at(w);
-						cout << "\n\n";
-					}
+					travelPacksObjs.at(pack_i).show();
 				}
 				else
 					cout << "There is no info on this pack. \n\n";
@@ -226,7 +211,7 @@ void Agency::viewNumberAndValueSoldPacks() const
 	{
 		cout << "Travel Pack: " << travelPacksObjs.at(i).getIdentifier() << '\n'
 			<< "Sold Seats: " << travelPacksObjs.at(i).getSoldSeats() << '\n'
-			<< "Prince per seat: " << travelPacksObjs.at(i).getPrice() << "\n\n"
+			<< "Price per seat: " << travelPacksObjs.at(i).getPrice() << "\n\n"
 			<< "-----------------------------\n\n";
 
 		total_price += travelPacksObjs.at(i).getPrice() * travelPacksObjs.at(i).getSoldSeats();
@@ -239,30 +224,22 @@ void Agency::viewNumberAndValueSoldPacks() const
 	return;
 }
 
-void Agency::viewSpecificClient(size_t index) const {
-	cout << '\n';
-	cout << "NAME: " << clientsObjs.at(index).getName() << '\n';
-	cout << "NIF: " << clientsObjs.at(index).getNif() << '\n';
-	cout << "FAMILY SIZE: " << clientsObjs.at(index).getHousehold() << '\n';
-	cout << "STREET: " << clientsObjs.at(index).getClientAddress().getStreet() << '\n';
-	cout << "DOOR: " << clientsObjs.at(index).getClientAddress().getDoorNumber() << '\n';
-	cout << "FLOOR: " << clientsObjs.at(index).getClientAddress().getApartment() << '\n';
-	cout << "ZIP: " << clientsObjs.at(index).getClientAddress().getZipCode() << '\n';
-	cout << "CITY: " << clientsObjs.at(index).getClientAddress().getLocality() << '\n';
-	cout << "TRAVEL PACKS: ";
-	if (clientsObjs.at(index).getAcquiredTravelPacks().size() == 0)
-		cout << "-----" << '\n';
-	else
-	{
-		cout << clientsObjs.at(index).getAcquiredTravelPacks().at(0);
-		for (size_t i = 1; i < clientsObjs.at(index).getAcquiredTravelPacks().size(); i++)
-			cout << ", " << clientsObjs.at(index).getAcquiredTravelPacks().at(i);
-		cout << "\n \n \n";
-	}
+void Agency::viewSpecificClient(size_t index) 
+{
+	clientsObjs.at(index).show();
 	return;
 }
 
-void Agency::viewMostVisitedPlaces() const
+void Agency::coutPlaces(vector<string> places) const
+{
+	cout << "The most visited place(s):\n";
+
+	for (size_t k = 0; k < places.size(); k++)
+		cout << places.at(k) << '\n';
+	cout << '\n';
+}
+
+vector<string> Agency::viewMostVisitedPlaces() const
 {
 	if (travelPacksObjs.size() == 0)
 	{
@@ -273,6 +250,7 @@ void Agency::viewMostVisitedPlaces() const
 	map<string, int> placesAndSeats;
 	int aux, max = 0;
 	vector<string> result;
+	vector<int> result_id;
 
 	for (size_t i = 0; i < travelPacksObjs.size(); i++)
 	{
@@ -310,17 +288,51 @@ void Agency::viewMostVisitedPlaces() const
 				{
 					if (max = travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
 						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
+					
+						
 				}
 			}
 		}
 	}
-	
-	//cout result
-	cout << "The most visited place(s) with " << max << " vists: \n";
+	return result;
+}
 
-	for (size_t k = 0; k < result.size(); k++)
-		cout << result.at(k) << '\n';
-	cout << '\n';
+void Agency::show() 
+{
+
+	cout << "     AGENCY INFO\n\n";
+	cout << "NAME: " << name << '\n'
+		 << "NIF: " << nif << '\n'
+		 << "STREET: " << AgencyAddress.getStreet() << '\n'
+		 << "DOOR: " << AgencyAddress.getDoorNumber() << '\n'
+		 << "FLOOR: " << AgencyAddress.getApartment() << '\n'
+		 << "ZIP: " << AgencyAddress.getZipCode() << '\n'
+		 << "CITY: " << AgencyAddress.getLocality() << '\n'
+		 << "URL: " << url << '\n'
+		 << "CLIENTS FILE: " <<	clients_file << '\n'
+		 << "TRAVEL PACKS FILE: " << travelpacks_file << '\n'
+		 << "CLIENTS: ";
+
+	//Clients
+	if (clientsObjs.size() != 0)
+	{
+		cout << clientsObjs.at(0).getName();
+		for (size_t i = 1; i < clientsObjs.size(); i++)
+			cout << ", " << clientsObjs.at(i).getName();
+	}
+	else cout << "---";
+
+	//Travel Packs
+	cout << "\nTRAVEL PACKS: ";
+	if (travelPacksObjs.size() != 0)
+	{
+		cout << travelPacksObjs.at(0).getIdentifier();
+		for (size_t j = 1; j < travelPacksObjs.size(); j++)
+			cout << ", " << travelPacksObjs.at(j).getIdentifier();
+	}
+	else cout << "---";
+
+	cout << "\n\n";
 
 	return;
 }

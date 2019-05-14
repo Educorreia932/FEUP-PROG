@@ -16,6 +16,7 @@ class Client {
 		Address getClientAddress() const;
 		vector <int> getAcquiredTravelPacks() const;
 		int getTotalPurchases() const;
+		void show();
 
 		//Setters
 		void setName(string name);

@@ -50,6 +50,34 @@ int TravelPack::getSoldSeats() const {
 	return this->sold_seats;
 }
 
+void TravelPack::show() const
+{
+	cout << "ID: " <<identifier << '\n';
+	cout << "Places: ";
+
+	if (travelDestination.size() > 0)
+	{
+		cout << travelDestination.at(0);
+
+		if (travelDestination.size() > 1)
+			cout << " - " << travelDestination.at(1);
+
+		for (size_t i = 2; i < travelDestination.size(); i++)
+			cout << ", " << travelDestination.at(i);
+
+	}
+	else cout << "---";
+
+	cout << '\n';
+
+	cout << "Start Date: " << DepartureDate.getDate() << '\n';
+	cout << "Final Date: " << ArrivalDate.getDate() << '\n';
+	cout << "Price: " << price << '\n';
+	cout << "Capacity: " << maximum_seats << '\n';
+	cout << "Sold: " << sold_seats << '\n';
+
+}
+
 //Setters
 void TravelPack::setIdentifier(int identifier) {
 	this->identifier = identifier;
