@@ -36,6 +36,9 @@ int Menu::showMenu() {
 
 void Menu::menuSelection(int selected) {
 	system("cls");
+	int option;
+	vector<string> places;
+	vector <Client> Clients;
 
 	switch (selected) {
 		case 1:
@@ -46,8 +49,13 @@ void Menu::menuSelection(int selected) {
 			break;
 		case 3:
 			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl << endl;
-			AgencyObj.viewSpecificClient(showClients() - 1);
-			system("pause");
+			option = showClients();
+			if (option >= 1)
+			{
+				AgencyObj.viewSpecificClient(option-1);
+				system("pause");
+			}
+			else (showMenu());
 			break;
 		case 4:
 			AgencyObj.viewAllClients();
@@ -93,13 +101,41 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 9:
-			AgencyObj.coutPlaces(AgencyObj.viewMostVisitedPlaces());
+			places = AgencyObj.mostVisitedPlaces();
+
+			if (places.empty())
+				cout << "This agency has no travel packs.\n\n";
+
+			else
+			{
+				cout << "The most visited place(s):\n";
+
+				for (size_t k = 0; k < places.size(); k++)
+					cout << places.at(k) << '\n';
+				cout << '\n';
+			}
+
+			system("pause");
+			break; 
+		case 10:
+			places = AgencyObj.mostVisitedPlaces();
+			Clients = AgencyObj.clientsWithPacksWithPlaces(places);
+
+			if (Clients.empty())
+				cout << "There are no clients with travel packs for the most visited places.\n\n";
+
+			else
+			{
+				cout << "Clients:\n";
+
+				for (size_t k = 0; k < Clients.size(); k++)
+				{
+					Clients.at(k).show();
+				}
+			}
+
 			system("pause");
 			break;
-		/*case 10:
-			AgencyObj.viewMostVisitedPlaces()
-			system("pause");
-			break;*/
 		case 11:
 			AgencyObj.show();
 			system("pause");
@@ -163,6 +199,12 @@ void Menu::manageClientsSelection(int selected) {
 			cout << "Which client do you wish to remove? Insert the corresponding key." << endl << endl;
 
 			selected_client = showClients() - 1;
+
+			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
+				manageClientsSelection(showManageClients());
+				return;
+			}
+
 			AgencyObj.removeClient(selected_client);
 			break;
 	}
@@ -293,6 +335,10 @@ void Menu::manageTravelPacksSelection(int selected) {
 
 			selected_travel_pack = showTravelPacks() - 1;
 
+			if (!(selected_travel_pack + 1)) { //Op��o de voltar para tr�s
+				manageTravelPacksSelection(showManageTravelPacks());
+				return;
+			}
 			AgencyObj.removeTravelPack(selected_travel_pack);
 			break;
 		case 0:

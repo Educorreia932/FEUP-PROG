@@ -22,11 +22,13 @@ class Agency {
 		void viewSpecificClient(size_t index);
 		void viewAvailablePacks() const;
 		void viewSoldPacks() const;
-		void buyPack(int pack_index, int client_index);
 		void viewNumberAndValueSoldPacks() const;
-		void coutPlaces(vector<string> places) const;
-		vector<string> viewMostVisitedPlaces() const;
 		void show();
+
+		//Other
+		vector<string> mostVisitedPlaces() const;
+		void buyPack(int pack_index, int client_index);
+		vector<Client> clientsWithPacksWithPlaces(vector<string> places) const;
 
 	private:
 		//Variables/Data Structures
