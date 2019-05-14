@@ -84,7 +84,7 @@ string readName(string message) {
 			if (isdigit(input.at(i)))
 				validInput = false;
 		}
-		if (!validInput) {
+		if (!validInput || input.length() < 1) {
 			cout << "Invalid input!\n";
 		}
 
@@ -106,7 +106,7 @@ unsigned readNIF(string message) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cout << "\nInvalid input!!\n" << endl;
 		}
 	} while (true);
 }
@@ -117,7 +117,7 @@ int readPositiveInt(string message) {
 
 	do {
 		cout << message;
-		if (cin >> input && input >= 0) {
+		if (cin >> input && input > 0) {
 			cin.clear();
 			return input;
 		}
@@ -172,15 +172,30 @@ Address readAddress(string message) {
 
 	
 	string aux_street;
+	bool invalid = true;
+
+	do 
+	{
 	cout << "Street: ";
 	getline(cin, aux_street);
+	if (aux_street.length >= 1)
+		invalid = false;
+	} while (invalid);
+	
 
 	int aux_door_number = readPositiveInt("Door Number: ");
 	cin.ignore();
 
 	string aux_apartment;
-	cout << "Apartment: ";
-	getline(cin, aux_apartment);
+	invalid = true;
+	do
+	{
+		cout << "Apartment: ";
+		getline(cin, aux_apartment);
+		if (aux_apartment.length >= 1)
+			invalid = false;
+	} while (invalid);
+	
 
 	string aux_zip_code = readZipCode("Zipcode: ");
 	cin.ignore();
