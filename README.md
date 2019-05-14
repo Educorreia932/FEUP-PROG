@@ -17,7 +17,7 @@ Project for PROG course
 
 
 ## Debugging:
-* Ver Agency 
+* Ver Agency ☑
 * Ver Clients/Travel Packs nas próprias classes (dar overload do operador "<<")
 * Strings de input com carateres alfa-numéricos
 * Ver Client/Travel Pack ao modificá-lo ☑
