@@ -7,7 +7,7 @@ Project for PROG course
 * Visualizar clientes - *Ana*
 * Visualizar pacotes de viagem - *Ana*
 * Menu de compra de um pacote - *Ana*
-* Estatísticas - N/A
+* Estatísticas - *Ana*
 * Guardar em ficheiros - *Ricardo*
 * Validação de inputs - *Ricardo*
 
