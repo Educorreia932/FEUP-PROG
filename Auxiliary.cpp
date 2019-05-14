@@ -49,7 +49,7 @@ int readOption(int maxOptions, bool includingZero) {
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cout << "Invalid input!!" << endl;
-			}
+			}	
 		} while (true);
 	}
 	else {
@@ -118,6 +118,7 @@ int readPositiveInt(string message) {
 	do {
 		cout << message;
 		if (cin >> input && input >= 0) {
+			cin.clear();
 			return input;
 		}
 		else {

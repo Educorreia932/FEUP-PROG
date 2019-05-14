@@ -525,11 +525,18 @@ void Agency::buyPack(int packSelected, int clientSelected)
 {
 	if ((travelPacksObjs.at(packSelected).getMaximumSeats() - travelPacksObjs.at(packSelected).getSoldSeats()) >= clientsObjs.at(clientSelected).getHousehold())
 	{
-		clientsObjs.at(clientSelected).getAcquiredTravelPacks().push_back(travelPacksObjs.at(packSelected).getIdentifier()); //add id 
-		travelPacksObjs.at(packSelected).setSoldSeats(travelPacksObjs.at(packSelected).getSoldSeats() - clientsObjs.at(clientSelected).getHousehold()); //update sold seats
-		cout << "Purchase complete.\n Total Price: " << travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold() << "€\n\n";
+		travelPacksObjs.at(packSelected).setSoldSeats(travelPacksObjs.at(packSelected).getSoldSeats() + clientsObjs.at(clientSelected).getHousehold()); //update sold seats
+
 		if (travelPacksObjs.at(packSelected).getSoldSeats() == travelPacksObjs.at(packSelected).getMaximumSeats())
-			travelPacksObjs.at(packSelected).setIdentifier(0 - travelPacksObjs.at(packSelected).getIdentifier());
+			travelPacksObjs.at(packSelected).setIdentifier(0 - travelPacksObjs.at(packSelected).getIdentifier()); //update id if sold out
+
+		clientsObjs.at(clientSelected).getAcquiredTravelPacks().push_back(travelPacksObjs.at(packSelected).getIdentifier()); //add id 
+		
+
+		clientsObjs.at(clientSelected).setTotalPurchases(clientsObjs.at(clientSelected).getTotalPurchases() + travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold());
+		cout << "Purchase complete.\n Total Price: " << travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold() << "euros\n\n";
+
+		
 	}
 	else
 		cerr << "ERROR:\nThere is no suffiecient available seats to complete the purchase. \n\n";

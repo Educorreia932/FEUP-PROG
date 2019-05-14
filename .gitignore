@@ -69,3 +69,5 @@ NiceHolidays2/\.vs/NiceHolidays2/v15/\.suo
 *.enc
 
 *.ilk
+
+*.opendb
