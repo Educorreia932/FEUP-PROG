@@ -38,3 +38,8 @@ Date readDepartureDate(string message, Date DepartureDate);
 
 bool isBissextile(unsigned int year);
 unsigned int numberOfDays(unsigned int month, unsigned int year);
+
+//Clear screen and pause
+
+void clearScreen();
+void pause();
