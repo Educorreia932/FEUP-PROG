@@ -232,25 +232,35 @@ void Agency::viewSpecificClient(size_t index)
 
 void Agency::coutPlaces(vector<string> places) const
 {
-	cout << "The most visited place(s):\n";
+	if (places.empty())
+		cout << "This agency has no travel packs.\n\n";
 
-	for (size_t k = 0; k < places.size(); k++)
-		cout << places.at(k) << '\n';
-	cout << '\n';
+	else
+	{
+		cout << "The most visited place(s):\n";
+
+		for (size_t k = 0; k < places.size(); k++)
+			cout << places.at(k) << '\n';
+		cout << '\n';
+
+		return;
+	}
+
 }
 
 vector<string> Agency::viewMostVisitedPlaces() const
 {
+	vector<string> result;
+
 	if (travelPacksObjs.size() == 0)
 	{
-		cout << "This agency has no travel packs.\n\n";
-		return;
+		result.clear();
+		return result;
 	}
 
 	map<string, int> placesAndSeats;
 	int aux, max = 0;
-	vector<string> result;
-	vector<int> result_id;
+	
 
 	for (size_t i = 0; i < travelPacksObjs.size(); i++)
 	{
