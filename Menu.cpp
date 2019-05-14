@@ -8,8 +8,8 @@ Menu::Menu(Agency AgencyObj) {
 }
 
 /*
-	«Show» functions - Mostram menu de seleção e retornam opção selecionada
-	«Selection» functions - "Switch cases", fazem ações diferentes conforme o selecionado
+	ï¿½Showï¿½ functions - Mostram menu de seleï¿½ï¿½o e retornam opï¿½ï¿½o selecionada
+	ï¿½Selectionï¿½ functions - "Switch cases", fazem aï¿½ï¿½es diferentes conforme o selecionado
 */
 
 int Menu::showMenu() {
@@ -45,7 +45,7 @@ void Menu::menuSelection(int selected) {
 			manageTravelPacksSelection(showManageTravelPacks());
 			break;
 		case 3:
-			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl;
+			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl << endl;
 			AgencyObj.viewSpecificClient(showClients() - 1);
 			system("pause");
 			break;
@@ -62,12 +62,18 @@ void Menu::menuSelection(int selected) {
 			system("pause");
 			break;
 		case 7:
-			int client;
-			int pack;
+			int selected_client, pack;
 
-			cout << "Which client is going to buy a pack? Insert the corresponding key." << endl;
-			client = showClients() - 1;
+			cout << "Which client is going to buy a pack? Insert the corresponding key." << endl << endl;
+			
+			selected_client = showClients() - 1;
 			system("cls");
+
+			if (!(selected_client + 1)) { //Opï¿½ï¿½o de voltar para trï¿½s
+				menuSelection(showMenu());
+				return;
+			}
+			
 			cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
 			pack = showTravelPacks() - 1;
 			system("cls");
@@ -79,7 +85,7 @@ void Menu::menuSelection(int selected) {
 				system("cls");
 			}
 
-			AgencyObj.buyPack(pack, client);
+			AgencyObj.buyPack(pack, selected_client);
 			system("pause");
 			break;
 		case 8:
@@ -110,9 +116,10 @@ void Menu::menuSelection(int selected) {
 //Clients Menus
 
 int Menu::showClients() {
-
 	for (size_t i = 0; i < size(clients); i++)
 		cout << i + 1 << ") " << clients[i].getName() << " (" << clients[i].getNif() << ")" << endl;
+
+	cout << "0) Go back." << endl;
 
 	int selection = readOption(size(clients));
 
@@ -120,13 +127,11 @@ int Menu::showClients() {
 }
 
 int Menu::showManageClients() {
-	
-
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		<< "1) Create a new client." << endl
-		<< "2) Change the information of a client." << endl
-		<< "3) Remove an existent client." << endl
-		<< "0) Go back." << endl;
+		 << "1) Create a new client." << endl
+		 << "2) Change the information of a client." << endl
+		 << "3) Remove an existent client." << endl
+		 << "0) Go back." << endl;
 
 	int selection = readOption(3);
 
@@ -146,8 +151,12 @@ void Menu::manageClientsSelection(int selected) {
 
 			selected_client = showClients() - 1;
 			system("cls");
-			cout << "Current client's information: \n";
-			AgencyObj.viewSpecificClient(selected_client);
+
+			if (!(selected_client + 1)) { //Opï¿½ï¿½o de voltar para trï¿½s
+				manageClientsSelection(showManageClients());
+				return;
+			}
+				
 			changeClientsSelection(showChangeClients(), selected_client);
 			break;
 		case 3:
@@ -176,7 +185,6 @@ int Menu::showChangeClients() {
 }
 
 void Menu::changeClientsSelection(int selected, int selected_client) {
-
 	string aux_string;
 
 	switch (selected) {
@@ -212,24 +220,18 @@ void Menu::createClient() {
 	string aux_acquired_travel_packs;
 	int aux_total_purchases;
 
-	//cout << "What's the name of the new client? ";
 	aux_name = readName("What's the name of the new client? ");
 
-	//cout << "What's the NIF of the new client? ";
 	aux_nif = readNIF("What's the NIF of the new client? ");
 	cin.ignore();
 
-	//cout << "What's the household of the new client? ";
 	aux_household = readPositiveInt("What's the household of the new client? ");
 	cin.ignore();
 
-	//cout << "What's the address of the new client? ";
 	Address auxClientAddress = readAddress("What's the address of the new client? ");
 
-	//cout << "What are the acquired travel packs of the new client? ";
 	vector <int> auxAcquiredTravelPacks = readBoughtPacks("What are the acquired travel packs of the new client?(end with Ctrl+Z) ");
 
-	//cout << "What's the value of total purchases of the new client? ";
 	aux_total_purchases = readPositiveInt("What's the value of total purchases of the new client? ");
 	cin.ignore();
 
@@ -239,9 +241,10 @@ void Menu::createClient() {
 //Travel Packs Menus
 
 int Menu::showTravelPacks() {
-
 	for (size_t i = 0; i < size(travelPacks); i++)
 		cout << i + 1 << ") " << travelPacks[i].getTravelDestination()[0] << " (" << travelPacks[i].getIdentifier() << ")" << endl;
+
+	cout << "0) Go back." << endl;
 
 	int selection = readOption(size(travelPacks));
 
@@ -249,7 +252,6 @@ int Menu::showTravelPacks() {
 }
 
 int Menu::showManageTravelPacks() {
-
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
 		<< "1) Create a new travel pack." << endl
 		<< "2) Change the information of a travel pack." << endl
@@ -273,6 +275,13 @@ void Menu::manageTravelPacksSelection(int selected) {
 			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key." << endl << endl;
 
 			selected_travel_pack = showTravelPacks() - 1;
+			system("cls");
+			
+			if (!(selected_travel_pack + 1)) { //Opï¿½ï¿½o de voltar para trï¿½s
+				manageTravelPacksSelection(showManageTravelPacks());
+				return;
+			}
+
 			//Show travel pack
 			cout << "Current Travel Pack Information: \n\n";
 			system("cls");
@@ -283,6 +292,7 @@ void Menu::manageTravelPacksSelection(int selected) {
 			cout << "Which travel pack do you wish to remove? Insert the corresponding key." << endl << endl;
 
 			selected_travel_pack = showTravelPacks() - 1;
+
 			AgencyObj.removeTravelPack(selected_travel_pack);
 			break;
 		case 0:
@@ -335,6 +345,8 @@ void Menu::changeTravelPacksSelection(int selected, int selected_travel_pack) {
 		case 7:
 			travelPacks[selected_travel_pack].setSoldSeats(readSoldSeats("Insert the new number of sold seats of the travel pack: ", travelPacks[selected_travel_pack].getMaximumSeats()));
 			cin.ignore();
+			break;
+		case 0:
 			break;
 	}
 }
