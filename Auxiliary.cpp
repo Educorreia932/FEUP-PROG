@@ -1,4 +1,5 @@
 #include "Auxiliary.h"
+#include <iterator>
 
 string trim(string s) {
 	s.erase(0, s.find_first_not_of(' ')); //Removes spaces to the left
@@ -27,7 +28,6 @@ vector<int> str_to_PackageIds(string line) {
 
 //Read functions
 
-
 //Reads an integer between 0 (inclusive if includingZero is true(default) else exclusive) and maxOption(inclusive)
 //Returns that value
 int readOption(int maxOptions, bool includingZero) {
@@ -43,7 +43,7 @@ int readOption(int maxOptions, bool includingZero) {
 			else {
 				cin.clear();
 				cin.ignore(1000, '\n');
-				cout << "Invalid input!!" << endl;
+				cerr << "\nERROR: Invalid input. Please try again:\n\n";
 			}	
 		} while (true);
 	}
@@ -57,7 +57,7 @@ int readOption(int maxOptions, bool includingZero) {
 			else {
 				cin.clear();
 				cin.ignore(1000, '\n');
-				cout << "Invalid input!!" << endl;
+				cerr << "\nERROR: Invalid input. Please try again:\n\n";
 			}
 		} while (true);
 	}
@@ -74,11 +74,28 @@ string readName(string message) {
 		//cin.ignore(1000, '\n');
 		getline(cin, input);
 		for (size_t i = 0; i < input.length(); i++) {
-			if (isdigit(input.at(i)))
+			if (isdigit(input.at(i)) || (!isalpha(input.at(i)) && input.at(i) != ' ')) {
 				validInput = false;
+				break;
+			}
 		}
-		if (!validInput || input.length() < 1) {
-			cout << "Invalid input!\n";
+
+		if (input.empty())
+			validInput = false;
+
+		std::istringstream iss(input);
+		std::vector<std::string> results(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+
+		if (results.empty() || cin.eof())
+		{
+			validInput = false;
+			cin.clear();
+		}
+
+
+		if (!validInput) 
+		{
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 
 	} while (!validInput);
@@ -99,7 +116,7 @@ unsigned readNIF(string message) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "\nInvalid input!!\n" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 	} while (true);
 }
@@ -117,7 +134,7 @@ int readPositiveInt(string message) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 	} while (true);
 }
@@ -134,7 +151,7 @@ int readInt(string message) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 	} while (true);
 }
@@ -146,10 +163,19 @@ Address readAddress(string message) {
 	do 	{
 		cout << "Street: ";
 		getline(cin, aux_street);
-		if (aux_street.length() >= 1)
+
+		std::istringstream iss(aux_street);
+		std::vector<std::string> results(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+
+		if (!results.empty() && !cin.eof())
 			invalid = false;
+	
 		else
+		{
+			cin.clear();
 			cerr << "\n ERROR: Invalid input. Please try again:\n";
+		}
+			
 	} while (invalid);
 
 
@@ -163,11 +189,18 @@ Address readAddress(string message) {
 		cout << "Apartment: ";
 		getline(cin, aux_apartment);
 
-		if (aux_apartment.length() >= 1)
+		std::istringstream iss(aux_apartment);
+		std::vector<std::string> results(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+
+		if (!results.empty() && !cin.eof())
 			invalid = false;
 		
 		else
+		{
 			cerr << "\n ERROR: Invalid input. Please try again:\n";
+			cin.clear();
+		}
+			
 	} while (invalid);
 
 
@@ -206,7 +239,7 @@ Date readArrivalDate(string message, Date DepartureDate) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 
 	} while (true);
@@ -241,6 +274,8 @@ Date readDepartureDate(string message, Date ArrivalDate) {
 
 	} while (true);
 
+
+
 }
 
 string readZipCode(string message) {
@@ -259,7 +294,7 @@ string readZipCode(string message) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 
 	} while (true);
@@ -280,7 +315,7 @@ int readMaximumSeats(string message, int sold_seats) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 	} while (true);
 }
@@ -299,7 +334,7 @@ int readSoldSeats(string message, int maximum_seats) {
 		else {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input!!" << endl;
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
 		}
 	} while (true);
 }
@@ -309,16 +344,30 @@ vector<string> readDestinations(string message) {
 
 	string s;
 	vector <string> result;
+	bool valid;
 
-	cout << message;
 	do {
+		valid = true;
+		cout << message;
 		getline(cin, s);
-		if (cin.eof()) {
+
+		std::istringstream iss(s);
+		std::vector<std::string> results(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+
+		if (cin.eof())
+		{
+			cin.clear();
 			return result;
 		}
-		else {
-			result.push_back(s);
+			
+		if (results.empty())
+		{
+			valid = false;
+			cerr << "\n ERROR: Invalid input. Please try again:\n\n";
 		}
+	
+		if (valid)
+			result.push_back(s);
 
 	} while (true);
 }
@@ -335,12 +384,13 @@ vector<int> readBoughtPacks(string message) {
 		}
 		else {
 			if (cin.eof()) {
+				cin.clear();
 				return result;
 			}
 			else {
 				cin.clear();
 				cin.ignore(1000, '\n');
-				cout << "Invalid input!!" << endl;
+				cerr << "\nERROR: Invalid input. Please try again:\n\n";
 			}
 		}
 

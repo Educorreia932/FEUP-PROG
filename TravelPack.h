@@ -18,6 +18,7 @@ class TravelPack {
 		int getPrice() const;
 		int getMaximumSeats() const;
 		int getSoldSeats() const;
+		void show() const;
 
 		//Setters
 		void setIdentifier(int identifier);
