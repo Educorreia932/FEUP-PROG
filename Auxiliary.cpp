@@ -171,8 +171,10 @@ Address readAddress(string message) {
 	{
 	cout << "Street: ";
 	getline(cin, aux_street);
-	if (aux_street.length >= 1)
+	if (aux_street.length() >= 1)
 		invalid = false;
+	else
+		cerr << "\nERROR: Invalid input. Please try again:\n";
 	} while (invalid);
 	
 
@@ -185,8 +187,10 @@ Address readAddress(string message) {
 	{
 		cout << "Apartment: ";
 		getline(cin, aux_apartment);
-		if (aux_apartment.length >= 1)
+		if (aux_apartment.length() >= 1)
 			invalid = false;
+		else
+			cerr << "\nERROR: Invalid input. Please try again:\n";
 	} while (invalid);
 	
 
