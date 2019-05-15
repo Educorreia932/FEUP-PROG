@@ -13,7 +13,7 @@ Menu::Menu(Agency AgencyObj) {
 */
 
 int Menu::showMenu() {
-	system("cls");
+	clearScreen();
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
 		<< "1) Manage clients." << endl
@@ -35,8 +35,7 @@ int Menu::showMenu() {
 }
 
 void Menu::menuSelection(int selected) {
-	system("cls");
-	int option;
+	clearScreen();
 	vector<string> places;
 	vector <Client> Clients;
 
@@ -53,21 +52,21 @@ void Menu::menuSelection(int selected) {
 			if (option >= 1)
 			{
 				AgencyObj.viewSpecificClient(option-1);
-				system("pause");
+			pause();
 			}
 			else (showMenu());
 			break;
 		case 4:
 			AgencyObj.viewAllClients();
-			system("pause");
+			pause();
 			break;
 		case 5:
 			AgencyObj.viewAvailablePacks();
-			system("pause");
+			pause();
 			break;
 		case 6:
 			AgencyObj.viewSoldPacks();
-			system("pause");
+			pause();
 			break;
 		case 7:
 			int selected_client, pack;
@@ -75,7 +74,7 @@ void Menu::menuSelection(int selected) {
 			cout << "Which client is going to buy a pack? Insert the corresponding key." << endl << endl;
 			
 			selected_client = showClients() - 1;
-			system("cls");
+			clearScreen();
 
 			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
 				menuSelection(showMenu());
@@ -84,28 +83,26 @@ void Menu::menuSelection(int selected) {
 			
 			cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
 			pack = showTravelPacks() - 1;
-			system("cls");
+			clearScreen();
 
 			if (travelPacks.at(pack).getIdentifier() < 0) {
 				cerr << "ERROR:\n This pack is not available anymore (negative ID). Please try again.\n\n";
 				cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
 				pack = showTravelPacks() - 1;
-				system("cls");
+				clearScreen();
 			}
 
 			AgencyObj.buyPack(pack, selected_client);
-			system("pause");
+			pause();
 			break;
 		case 8:
 			AgencyObj.viewNumberAndValueSoldPacks();
-			system("pause");
+			pause();
 			break;
 		case 9:
 			places = AgencyObj.mostVisitedPlaces();
-
 			if (places.empty())
 				cout << "This agency has no travel packs.\n\n";
-
 			else
 			{
 				cout << "The most visited place(s):\n";
@@ -115,7 +112,7 @@ void Menu::menuSelection(int selected) {
 				cout << '\n';
 			}
 
-			system("pause");
+			pause();
 			break; 
 		case 10:
 			places = AgencyObj.mostVisitedPlaces();
@@ -136,9 +133,13 @@ void Menu::menuSelection(int selected) {
 
 			system("pause");
 			break;
+		/*case 10:
+			AgencyObj.viewMostVisitedPlaces()
+			system("pause");
+			break;*/
 		case 11:
 			AgencyObj.show();
-			system("pause");
+			pause();
 			break;
 		case 0:
 			AgencyObj.updateClientFile();
@@ -176,7 +177,7 @@ int Menu::showManageClients() {
 
 void Menu::manageClientsSelection(int selected) {
 	int selected_client;
-	system("cls");
+	clearScreen();
 
 	switch (selected) {
 		case 1:
@@ -186,7 +187,7 @@ void Menu::manageClientsSelection(int selected) {
 			cout << "Which client do you wish to change the information of? Insert the corresponding key." << endl << endl;
 
 			selected_client = showClients() - 1;
-			system("cls");
+			clearScreen();
 
 			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
 				manageClientsSelection(showManageClients());
@@ -307,7 +308,7 @@ int Menu::showManageTravelPacks() {
 
 void Menu::manageTravelPacksSelection(int selected) {
 	int selected_travel_pack;
-	system("cls");
+	clearScreen();
 
 	switch (selected) {
 		case 1:
@@ -317,7 +318,7 @@ void Menu::manageTravelPacksSelection(int selected) {
 			cout << "Which travel pack do you wish to change the information of? Insert the corresponding key." << endl << endl;
 
 			selected_travel_pack = showTravelPacks() - 1;
-			system("cls");
+			clearScreen();
 			
 			if (!(selected_travel_pack + 1)) { //Op��o de voltar para tr�s
 				manageTravelPacksSelection(showManageTravelPacks());
@@ -326,7 +327,7 @@ void Menu::manageTravelPacksSelection(int selected) {
 
 			//Show travel pack
 			cout << "Current Travel Pack Information: \n\n";
-			system("cls");
+			clearScreen();
 			AgencyObj.getTravelPacksObjs().at(selected_travel_pack).show();
 			changeTravelPacksSelection(showChangeTravelPacks(), selected_travel_pack);
 			break;

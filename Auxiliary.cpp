@@ -425,3 +425,20 @@ unsigned int numberOfDays(unsigned int month, unsigned int year) {
 		return 31;
 	}
 }
+
+//Clear screen and pause
+
+void clearScreen() {
+	cout << string(22, '\n');
+}
+
+void pause() {
+	
+	cout << "Press enter to continue...";
+
+	if (cin.peek() != EOF)
+		cin.ignore(100, '\n');
+	cin.get();
+	fflush(stdin);
+	return;
+}
