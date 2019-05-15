@@ -436,8 +436,6 @@ void pause() {
 	
 	cout << "Press enter to continue...";
 
-	if (cin.peek() != EOF)
-		cin.ignore(100, '\n');
 	cin.get();
 	fflush(stdin);
 	return;
