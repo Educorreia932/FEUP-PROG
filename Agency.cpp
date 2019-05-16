@@ -487,12 +487,11 @@ void Agency::buyPack(int packSelected, int clientSelected)
 		cerr << "ERROR:\nThere is no suffiecient available seats to complete the purchase. \n\n";
 }
 
-vector<string> Agency::mostVisitedPlaces() const
-{
+vector<string> Agency::mostVisitedPlaces() {
 	vector<string> result;
+	result.clear();
 
-	if (travelPacksObjs.size() == 0)
-	{
+	if (travelPacksObjs.size() == 0) {
 		result.clear();
 		return result;
 	}
@@ -500,13 +499,9 @@ vector<string> Agency::mostVisitedPlaces() const
 	map<string, int> placesAndSeats;
 	int aux, max = 0;
 
-
-	for (size_t i = 0; i < travelPacksObjs.size(); i++)
-	{
-		for (size_t j = 0; j < travelPacksObjs.at(i).getTravelDestination().size(); j++)
-		{
-			if (placesAndSeats.find(travelPacksObjs.at(i).getTravelDestination().at(j)) != placesAndSeats.end()) //if already there
-			{
+	for (size_t i = 0; i < travelPacksObjs.size(); i++) { //Percorre os pacotes
+		for (size_t j = 0; j < travelPacksObjs.at(i).getTravelDestination().size(); j++) { //Percorre os destinos do pacote
+			if (placesAndSeats.find(travelPacksObjs.at(i).getTravelDestination().at(j)) != placesAndSeats.end()) { //Se o local já estiver em placesAndSeats
 				aux = placesAndSeats[travelPacksObjs.at(i).getTravelDestination().at(j)];
 				placesAndSeats[travelPacksObjs.at(i).getTravelDestination().at(j)] = aux + travelPacksObjs.at(i).getSoldSeats(); //update sold seats
 
@@ -516,14 +511,14 @@ vector<string> Agency::mostVisitedPlaces() const
 					result.clear(); //empty vec
 					result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //adds place
 				}
-				else
-				{
-					if (max = aux + travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
+
+				else {
+					if (max == aux + travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
 						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
 				}
 			}
-			else
-			{
+			
+			else {
 				placesAndSeats.insert(pair<string, int>(travelPacksObjs.at(i).getTravelDestination().at(j), travelPacksObjs.at(i).getSoldSeats())); //if not in map add
 
 				if (max < travelPacksObjs.at(i).getSoldSeats()) //update max
@@ -533,16 +528,14 @@ vector<string> Agency::mostVisitedPlaces() const
 					result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //add place
 				}
 
-				else
-				{
-					if (max = travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
+				else {
+					if (max == travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
 						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
-
-
 				}
 			}
 		}
 	}
+
 	return result;
 }
 

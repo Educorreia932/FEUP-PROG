@@ -26,7 +26,7 @@ class Agency {
 		void show();
 
 		//Other
-		vector<string> mostVisitedPlaces() const;
+		vector<string> mostVisitedPlaces();
 		void buyPack(int pack_index, int client_index);
 		vector<Client> clientsWithPacksWithPlaces(vector<string> places) const;
 

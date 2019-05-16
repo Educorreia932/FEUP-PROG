@@ -122,15 +122,15 @@ bool Date::isNotEqualTo(const Date & date) {
 }
 
 bool Date::isAfter(const Date & date) {
-	if (date.year > year || (date.year == year && date.month > month) || (date.year == year && date.month == month && date.day > day))
+	if (date.year < year || (date.year == year && date.month < month) || (date.year == year && date.month == month && date.day < day))
 		return true;
 	else
 		return false;
 }
 
 bool Date::isBefore(const Date & date) {
-	if (isAfter(date))
-		return false;
-	else
+	if (date.year > year || (date.year == year && date.month > month) || (date.year == year && date.month == month && date.day > day))
 		return true;
+	else
+		return false;
 }

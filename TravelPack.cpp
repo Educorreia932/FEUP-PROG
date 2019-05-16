@@ -117,6 +117,9 @@ void TravelPack::setMaximumSeats(int maximum_seats) {
 
 void TravelPack::setSoldSeats(int sold_seats) {
 	this->sold_seats = sold_seats;
+
+	if (sold_seats == maximum_seats)
+		identifier = -abs(identifier);
 }
 
 //Other

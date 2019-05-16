@@ -38,6 +38,7 @@ void Menu::menuSelection(int selected) {
 	clearScreen();
 	vector<string> places;
 	vector <Client> Clients;
+	int option;
 
 	switch (selected) {
 		case 1:
@@ -49,12 +50,14 @@ void Menu::menuSelection(int selected) {
 		case 3:
 			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl << endl;
 			option = showClients();
-			if (option >= 1)
-			{
-				AgencyObj.viewSpecificClient(option-1);
-			pause();
+
+			clearScreen();
+
+			if (option >= 1) {
+				AgencyObj.viewSpecificClient(option - 1);
+			    pause();
 			}
-			else (showMenu());
+
 			break;
 		case 4:
 			AgencyObj.viewAllClients();
@@ -103,8 +106,8 @@ void Menu::menuSelection(int selected) {
 			places = AgencyObj.mostVisitedPlaces();
 			if (places.empty())
 				cout << "This agency has no travel packs.\n\n";
-			else
-			{
+
+			else {
 				cout << "The most visited place(s):\n";
 
 				for (size_t k = 0; k < places.size(); k++)
@@ -133,10 +136,6 @@ void Menu::menuSelection(int selected) {
 
 			system("pause");
 			break;
-		/*case 10:
-			AgencyObj.viewMostVisitedPlaces()
-			system("pause");
-			break;*/
 		case 11:
 			AgencyObj.show();
 			pause();
@@ -200,6 +199,7 @@ void Menu::manageClientsSelection(int selected) {
 			cout << "Which client do you wish to remove? Insert the corresponding key." << endl << endl;
 
 			selected_client = showClients() - 1;
+			clearScreen();
 
 			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
 				manageClientsSelection(showManageClients());
@@ -335,11 +335,13 @@ void Menu::manageTravelPacksSelection(int selected) {
 			cout << "Which travel pack do you wish to remove? Insert the corresponding key." << endl << endl;
 
 			selected_travel_pack = showTravelPacks() - 1;
+			clearScreen();
 
 			if (!(selected_travel_pack + 1)) { //Op��o de voltar para tr�s
 				manageTravelPacksSelection(showManageTravelPacks());
 				return;
 			}
+
 			AgencyObj.removeTravelPack(selected_travel_pack);
 			break;
 		case 0:
@@ -402,9 +404,9 @@ void Menu::createTravelPack() {
 	int aux_identifier = readInt("What's the identifier of the new travel pack? ");
 	cin.ignore();
 
-	vector <string> aux_travel_destination = readDestinations("What's the travel destination of the new travel pack (in the format 'Region - Place1, Place2...')? ");
+	vector <string> aux_travel_destination = readDestinations("What's the travel destination of the new travel pack (end with Ctrl + Z)? ");
 
-	Date AuxDepartureDate = readDepartureDate("What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ", Date(0000, 01, 01));
+	Date AuxDepartureDate = readDepartureDate("What's the departure date of the new travel pack (in the format 'YYYY/MM/DD')? ", Date(9999, 12, 31));
 
 	Date AuxArrivalDate = readArrivalDate("What's the arrival date of the new travel pack (in the format 'YYYY/MM/DD')? ", AuxDepartureDate);
 

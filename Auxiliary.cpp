@@ -216,36 +216,6 @@ Address readAddress(string message) {
 
 //Read Functions - Travel Packs
 
-Date readArrivalDate(string message, Date DepartureDate) {
-	char c1, c2;
-	unsigned int year, month, day;
-
-	do {
-		cout << message;
-
-		if ((cin >> year >> c1 >> month >> c2 >> day) && (c1 == '/' && c2 == '/' && year >= 0 && 1 <= month && month <= 12) && (1 <= day && day <= numberOfDays(month, year))) {
-			cin.clear();
-			cin.ignore(1000, '\n');
-			
-			Date date = Date(year, month, day);
-
-			if (date.isBefore(DepartureDate)) 
-				cout << "Invalid input!!" << endl; 		
-
-			else
-				return date;
-		}
-
-		else {
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cerr << "\nERROR: Invalid input. Please try again:\n\n";
-		}
-
-	} while (true);
-
-}
-
 Date readDepartureDate(string message, Date ArrivalDate) {
 	char c1, c2;
 	unsigned int year, month, day;
@@ -273,8 +243,35 @@ Date readDepartureDate(string message, Date ArrivalDate) {
 		}
 
 	} while (true);
+}
 
+Date readArrivalDate(string message, Date DepartureDate) {
+	char c1, c2;
+	unsigned int year, month, day;
 
+	do {
+		cout << message;
+
+		if ((cin >> year >> c1 >> month >> c2 >> day) && (c1 == '/' && c2 == '/' && year >= 0 && 1 <= month && month <= 12) && (1 <= day && day <= numberOfDays(month, year))) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			
+			Date date = Date(year, month, day);
+
+			if (date.isBefore(DepartureDate)) 
+				cout << "fOI AQUI!!" << endl; 		
+
+			else
+				return date;
+		}
+
+		else {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cerr << "\nERROR: Invalid input. Please try again:\n\n";
+		}
+
+	} while (true);
 
 }
 
@@ -398,6 +395,7 @@ vector<int> readBoughtPacks(string message) {
 }
 
 //Auxiliary date functions
+
 bool isBissextile(unsigned int year) {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 		return true;
@@ -429,12 +427,11 @@ unsigned int numberOfDays(unsigned int month, unsigned int year) {
 //Clear screen and pause
 
 void clearScreen() {
-	cout << string(22, '\n');
+	cout << string(30, '\n');
 }
 
-void pause() {
-	
-	cout << "Press enter to continue...";
+void pause() {	
+	cout << "Press Enter to continue...";
 
 	cin.get();
 	fflush(stdin);
