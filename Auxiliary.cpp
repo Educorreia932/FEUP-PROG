@@ -1,5 +1,4 @@
 #include "Auxiliary.h"
-#include <iterator>
 
 string trim(string s) {
 	s.erase(0, s.find_first_not_of(' ')); //Removes spaces to the left
@@ -395,7 +394,6 @@ vector<int> readBoughtPacks(string message) {
 }
 
 //Auxiliary date functions
-
 bool isBissextile(unsigned int year) {
 	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 		return true;
@@ -425,7 +423,6 @@ unsigned int numberOfDays(unsigned int month, unsigned int year) {
 }
 
 //Clear screen and pause
-
 void clearScreen() {
 	cout << string(30, '\n');
 }

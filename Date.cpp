@@ -53,17 +53,14 @@ unsigned int Date::getDay() const {
 string Date::getDate() const {
 	string string_year = to_string(year), string_month = to_string(month), string_day = to_string(day);
 
-	while (string_year.length() < 4) {
+	while (string_year.length() < 4)
 		string_year = "0" + string_year;
-	}
 
-	while (string_month.length() < 2) {
+	while (string_month.length() < 2)
 		string_month = "0" + string_month;
-	}
 
-	while (string_day.length() < 2) {
+	while (string_day.length() < 2)
 		string_day = "0" + string_day;
-	}
 
 	return string_year + '/' + string_month + '/' + string_day;
 }
@@ -80,29 +77,30 @@ bool Date::isBissextile(unsigned int year) {
 		return false;
 }
 
-unsigned int Date::numberOfDays(unsigned int month, unsigned int year) {
+unsigned int Date::numberOfDays(unsigned int month, unsigned int year)	 {
 	switch (month) {
-	case 2:
-		if (isBissextile(year))
-			return 29;
-		else
-			return 28;
-	case 4:
-		return 30;
-	case 6:
-		return 30;
-	case 9:
-		return 30;
-	case 11:
-		return 31;
-	default:
-		return 31;
+		case 2:
+			if (isBissextile(year))
+				return 29;
+			else
+				return 28;
+		case 4:
+			return 30;
+		case 6:
+			return 30;
+		case 9:
+			return 30;
+		case 11:
+			return 31;
+		default:
+			return 31;
 	}
 }
 
 bool Date::isValid() {
 	if (month < 1 || month > 12 || day > numberOfDays(month, year) || day < 1)
 		return false;
+
 	else
 		return true;
 }
@@ -110,6 +108,7 @@ bool Date::isValid() {
 bool Date::isEqualTo(const Date & date) {
 	if (date.day == day && date.month == month && date.day == day)
 		return true;
+
 	else
 		return false;
 }
@@ -117,6 +116,7 @@ bool Date::isEqualTo(const Date & date) {
 bool Date::isNotEqualTo(const Date & date) {
 	if (isEqualTo(date))
 		return false;
+
 	else
 		return true;
 }
@@ -124,6 +124,7 @@ bool Date::isNotEqualTo(const Date & date) {
 bool Date::isAfter(const Date & date) {
 	if (date.year < year || (date.year == year && date.month < month) || (date.year == year && date.month == month && date.day < day))
 		return true;
+
 	else
 		return false;
 }
@@ -131,6 +132,7 @@ bool Date::isAfter(const Date & date) {
 bool Date::isBefore(const Date & date) {
 	if (date.year > year || (date.year == year && date.month > month) || (date.year == year && date.month == month && date.day > day))
 		return true;
+
 	else
 		return false;
 }

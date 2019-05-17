@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include "Date.h"
 #include "Auxiliary.h"
 
@@ -18,7 +17,7 @@ class TravelPack {
 		int getPrice() const;
 		int getMaximumSeats() const;
 		int getSoldSeats() const;
-		void show() const;
+		void show() const; //Displays information about the travel pack in question
 
 		//Setters
 		void setIdentifier(int identifier);

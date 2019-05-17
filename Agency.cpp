@@ -1,6 +1,6 @@
 #include "Agency.h"
-#include <map>
-
+#undef travelPack 
+#define travelPack travelPacksObjs.at(i)
 
 //Constructors
 Agency::Agency() {
@@ -63,21 +63,18 @@ vector <TravelPack> Agency::getTravelPacksObjs() const {
 	return travelPacksObjs;
 }
 
-//View functions
-void Agency::viewSoldPacks() const
-{
-
-	if (clientsObjs.empty())
-	{
+//View functions - To visualize information about packs, clients and the agency
+void Agency::viewSoldPacks() const {
+	if (clientsObjs.empty()) {
 		std::cout << "There are no sold packs. \n\n";
 		return;
 	}
-	else
-	{
+
+	else {
 		vector<int> ids;
 		size_t pack_i;
 
-		//packs with info
+		//Packs with info
 		for (size_t j = 0; j < travelPacksObjs.size(); j++)
 			ids.push_back(travelPacksObjs.at(j).getIdentifier());
 
@@ -90,17 +87,17 @@ void Agency::viewSoldPacks() const
 				cout << "This client has bought no packs. \n";
 			}
 
-			for (size_t i = 0; i < clientsObjs.at(k).getAcquiredTravelPacks().size(); i++) //client's packs
+			for (size_t i = 0; i < clientsObjs.at(k).getAcquiredTravelPacks().size(); i++) //Client's packs
 			{
 				std::cout << "\nPack " << clientsObjs.at(k).getAcquiredTravelPacks().at(i) << ": \n"; //Pack ID: 
 
 				if (find(ids.begin(), ids.end(), clientsObjs.at(k).getAcquiredTravelPacks().at(i)) != ids.end() ||
-					find(ids.begin(), ids.end(), 0 - clientsObjs.at(k).getAcquiredTravelPacks().at(i)) != ids.end()) //if client's pack in ids
+					find(ids.begin(), ids.end(), 0 - clientsObjs.at(k).getAcquiredTravelPacks().at(i)) != ids.end()) //If client's pack in ids
 				{
-					for (size_t j = 0; j < travelPacksObjs.size(); j++) // find indice
+					for (size_t j = 0; j < travelPacksObjs.size(); j++) //Find index
 					{
 						if (travelPacksObjs.at(j).getIdentifier() == clientsObjs.at(k).getAcquiredTravelPacks().at(i) ||
-							travelPacksObjs.at(j).getIdentifier() == 0 - clientsObjs.at(k).getAcquiredTravelPacks().at(i)) //if same indices 
+							travelPacksObjs.at(j).getIdentifier() == 0 - clientsObjs.at(k).getAcquiredTravelPacks().at(i)) //If same index
 						{
 							pack_i = j;
 							break;
@@ -119,8 +116,7 @@ void Agency::viewSoldPacks() const
 	}
 }
 
-void Agency::viewAvailablePacks() const
-{
+void Agency::viewAvailablePacks() const {
 	string date;
 
 	cout << left << setw(10) << "ID";
@@ -132,13 +128,13 @@ void Agency::viewAvailablePacks() const
 	cout << left << setw(30) << "Places" << '\n';
 	cout << "----------------------------------------------------------------------------------------------------------------------------------------------- \n";
 
-	for (size_t i = 0; i < getTravelPacksObjs().size(); i++)
-	{
-		if (getTravelPacksObjs().at(i).getIdentifier() > 0)
-		{
+	for (size_t i = 0; i < getTravelPacksObjs().size(); i++) {
+		if (getTravelPacksObjs().at(i).getIdentifier() > 0)	{
 			cout << left << setw(10) << getTravelPacksObjs().at(i).getIdentifier() << left;
+
 			//Start Date
 			cout << setw(15) << getTravelPacksObjs().at(i).getDepartureDate().getDate() << left;
+
 			//Final Date
 			cout << setw(15) << getTravelPacksObjs().at(i).getArrivalDate().getDate() << left;
 		
@@ -149,8 +145,8 @@ void Agency::viewAvailablePacks() const
 			//Places
 			if (getTravelPacksObjs().at(i).getTravelDestination().size() == 0)
 				cout << "---";
-			else
-			{
+
+			else {
 				cout << getTravelPacksObjs().at(i).getTravelDestination().at(0);
 				for (size_t j = 1; j < getTravelPacksObjs().at(i).getTravelDestination().size(); j++)
 					if (j == 1)
@@ -202,20 +198,17 @@ void Agency::viewAllClients() const
 	}
 }
 
-void Agency::viewNumberAndValueSoldPacks() const
-{
-	int total_price = 0;
-	int total_sold = 0;
+void Agency::viewNumberAndValueSoldPacks() const {
+	int total_price = 0, total_sold = 0;
 
-	for (size_t i = 0; i < travelPacksObjs.size(); i++)
-	{
-		cout << "Travel Pack: " << travelPacksObjs.at(i).getIdentifier() << '\n'
-			<< "Sold Seats: " << travelPacksObjs.at(i).getSoldSeats() << '\n'
-			<< "Price per seat: " << travelPacksObjs.at(i).getPrice() << "\n\n"
-			<< "-----------------------------\n\n";
+	for (size_t i = 0; i < travelPacksObjs.size(); i++)	{
+		cout << "Travel Pack: " << travelPack.getIdentifier() << '\n'
+			 << "Sold Seats: " << travelPack.getSoldSeats() << '\n'
+			 << "Price per seat: " << travelPack.getPrice() << "\n\n"
+			 << "-----------------------------\n\n";
 
-		total_price += travelPacksObjs.at(i).getPrice() * travelPacksObjs.at(i).getSoldSeats();
-		total_sold += travelPacksObjs.at(i).getSoldSeats();
+		total_price += travelPack.getPrice() * travelPack.getSoldSeats();
+		total_sold += travelPack.getSoldSeats();
 	}
 
 	cout << "Total Sold Seats: " << total_sold << '\n'
@@ -224,16 +217,13 @@ void Agency::viewNumberAndValueSoldPacks() const
 	return;
 }
 
-void Agency::viewSpecificClient(size_t index) 
-{
+void Agency::viewSpecificClient(size_t index) {
 	clientsObjs.at(index).show();
 	return;
 }
 
-void Agency::show() 
-{
-
-	cout << "     AGENCY INFO\n\n";
+void Agency::show() {
+	cout << "AGENCY INFO\n\n";
 	cout << "NAME: " << name << '\n'
 		 << "NIF: " << nif << '\n'
 		 << "STREET: " << AgencyAddress.getStreet() << '\n'
@@ -381,8 +371,7 @@ vector <Client> Agency::readClients(string file_name) {
 	return result;
 }
 
-//Save to clients file
-
+//Update Functions - Saves the alterations made to the respective files
 void Agency::updateClientFile() {
 	ofstream f;
 
@@ -412,8 +401,6 @@ void Agency::updateClientFile() {
 	f.close();
 }
 
-//Save to packs file
-
 void Agency::updatePacksFile() {
 
 	ofstream f;
@@ -426,24 +413,24 @@ void Agency::updatePacksFile() {
 
 		for (size_t i = 0; i < size(travelPacksObjs); i++) {
 
-			f << travelPacksObjs.at(i).getIdentifier() << endl;
+			f << travelPack.getIdentifier() << endl;
 
-			if (size(travelPacksObjs.at(i).getTravelDestination()) == 1)
-				f << travelPacksObjs.at(i).getTravelDestination().at(0) << endl;
+			if (size(travelPack.getTravelDestination()) == 1)
+				f << travelPack.getTravelDestination().at(0) << endl;
 
 			else {
-				f << travelPacksObjs.at(i).getTravelDestination().at(0) << " - " << travelPacksObjs.at(i).getTravelDestination().at(1);
-				for (size_t j = 2; j < size(travelPacksObjs.at(i).getTravelDestination()); j++) {
-					f << ',' << travelPacksObjs.at(i).getTravelDestination().at(j);
+				f << travelPack.getTravelDestination().at(0) << " - " << travelPack.getTravelDestination().at(1);
+				for (size_t j = 2; j < size(travelPack.getTravelDestination()); j++) {
+					f << ',' << travelPack.getTravelDestination().at(j);
 				} f << endl;
 
 			}
 
-			f << travelPacksObjs.at(i).getDepartureDate().getYear() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getDepartureDate().getMonth() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getDepartureDate().getDay() << endl;
-			f << travelPacksObjs.at(i).getArrivalDate().getYear() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getArrivalDate().getMonth() << '/' << setw(2) << setfill('0') << travelPacksObjs.at(i).getArrivalDate().getDay() << endl;
-			f << travelPacksObjs.at(i).getPrice() << endl;
-			f << travelPacksObjs.at(i).getMaximumSeats() << endl;
-			f << travelPacksObjs.at(i).getSoldSeats() << endl;
+			f << travelPack.getDepartureDate().getYear() << '/' << setw(2) << setfill('0') << travelPack.getDepartureDate().getMonth() << '/' << setw(2) << setfill('0') << travelPack.getDepartureDate().getDay() << endl;
+			f << travelPack.getArrivalDate().getYear() << '/' << setw(2) << setfill('0') << travelPack.getArrivalDate().getMonth() << '/' << setw(2) << setfill('0') << travelPack.getArrivalDate().getDay() << endl;
+			f << travelPack.getPrice() << endl;
+			f << travelPack.getMaximumSeats() << endl;
+			f << travelPack.getSoldSeats() << endl;
 
 			if (i != size(travelPacksObjs) - 1)
 				f << "::::::::::" << endl;
@@ -461,31 +448,38 @@ void Agency::removeClient(int selected) {
 	clientsObjs.erase(clientsObjs.begin() + selected);
 }
 
-//Other funcitions
-void Agency::buyPack(int packSelected, int clientSelected)
-{
+//Other functions
+
+#undef travelPack 
+#define client clientsObjs.at(clientSelected)
+#define travelPack travelPacksObjs.at(packSelected)
+
+void Agency::buyPack(int packSelected, int clientSelected) {
 	vector<int> result;
 
-	if ((travelPacksObjs.at(packSelected).getMaximumSeats() - travelPacksObjs.at(packSelected).getSoldSeats()) >= clientsObjs.at(clientSelected).getHousehold())
-	{
-		travelPacksObjs.at(packSelected).setSoldSeats(travelPacksObjs.at(packSelected).getSoldSeats() + clientsObjs.at(clientSelected).getHousehold()); //update sold seats
+	if ((travelPack.getMaximumSeats() - travelPack.getSoldSeats()) >= client.getHousehold()) {
+		travelPack.setSoldSeats(travelPack.getSoldSeats() + client.getHousehold()); //update sold seats
 
-		if (travelPacksObjs.at(packSelected).getSoldSeats() == travelPacksObjs.at(packSelected).getMaximumSeats())
-			travelPacksObjs.at(packSelected).setIdentifier(0 - travelPacksObjs.at(packSelected).getIdentifier()); //update id if sold out
+		if (travelPack.getSoldSeats() == travelPack.getMaximumSeats())
+			travelPack.setIdentifier(0 - travelPack.getIdentifier()); //update id if sold out
 
-		//add id
-		for (size_t i = 0; i < clientsObjs.at(clientSelected).getAcquiredTravelPacks().size(); i++)
-			result.push_back(clientsObjs.at(clientSelected).getAcquiredTravelPacks().at(i));
+		//Add id
+		for (size_t i = 0; i < client.getAcquiredTravelPacks().size(); i++)
+			result.push_back(client.getAcquiredTravelPacks().at(i));
 
-		result.push_back(travelPacksObjs.at(packSelected).getIdentifier());
-		clientsObjs.at(clientSelected).setAcquiredTravelPacks(result);
+		result.push_back(travelPack.getIdentifier());
+		client.setAcquiredTravelPacks(result);
 
-		clientsObjs.at(clientSelected).setTotalPurchases(clientsObjs.at(clientSelected).getTotalPurchases() + travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold());
-		cout << "Purchase complete.\n Total Price: " << travelPacksObjs.at(packSelected).getPrice() * clientsObjs.at(clientSelected).getHousehold() << "euros\n\n";
+		client.setTotalPurchases(client.getTotalPurchases() + travelPack.getPrice() * client.getHousehold());
+		cout << "Purchase complete.\n Total Price: " << travelPack.getPrice() * client.getHousehold() << "euros\n\n";
 	}
+
 	else
-		cerr << "ERROR:\nThere is no suffiecient available seats to complete the purchase. \n\n";
+		cerr << "ERROR:\nThere is no sufficient available seats to complete the purchase. \n\n";
 }
+
+#undef travelPack 
+#define travelPack travelPacksObjs.at(i)
 
 vector<string> Agency::mostVisitedPlaces() {
 	vector<string> result;
@@ -500,37 +494,37 @@ vector<string> Agency::mostVisitedPlaces() {
 	int aux, max = 0;
 
 	for (size_t i = 0; i < travelPacksObjs.size(); i++) { //Percorre os pacotes
-		for (size_t j = 0; j < travelPacksObjs.at(i).getTravelDestination().size(); j++) { //Percorre os destinos do pacote
-			if (placesAndSeats.find(travelPacksObjs.at(i).getTravelDestination().at(j)) != placesAndSeats.end()) { //Se o local já estiver em placesAndSeats
-				aux = placesAndSeats[travelPacksObjs.at(i).getTravelDestination().at(j)];
-				placesAndSeats[travelPacksObjs.at(i).getTravelDestination().at(j)] = aux + travelPacksObjs.at(i).getSoldSeats(); //update sold seats
+		for (size_t j = 0; j < travelPack.getTravelDestination().size(); j++) { //Percorre os destinos do pacote
+			if (placesAndSeats.find(travelPack.getTravelDestination().at(j)) != placesAndSeats.end()) { //Se o local já estiver em placesAndSeats
+				aux = placesAndSeats[travelPack.getTravelDestination().at(j)];
+				placesAndSeats[travelPack.getTravelDestination().at(j)] = aux + travelPack.getSoldSeats(); //update sold seats
 
-				if (max < aux + travelPacksObjs.at(i).getSoldSeats()) //update max if less
+				if (max < aux + travelPack.getSoldSeats()) //update max if less
 				{
-					max = aux + travelPacksObjs.at(i).getSoldSeats();
+					max = aux + travelPack.getSoldSeats();
 					result.clear(); //empty vec
-					result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //adds place
+					result.push_back(travelPack.getTravelDestination().at(j)); //adds place
 				}
 
 				else {
-					if (max == aux + travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
-						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
+					if (max == aux + travelPack.getSoldSeats()) //dont need to update max
+						result.push_back(travelPack.getTravelDestination().at(j)); //only adds place to result
 				}
 			}
 			
 			else {
-				placesAndSeats.insert(pair<string, int>(travelPacksObjs.at(i).getTravelDestination().at(j), travelPacksObjs.at(i).getSoldSeats())); //if not in map add
+				placesAndSeats.insert(pair<string, int>(travelPack.getTravelDestination().at(j), travelPack.getSoldSeats())); //if not in map add
 
-				if (max < travelPacksObjs.at(i).getSoldSeats()) //update max
+				if (max < travelPack.getSoldSeats()) //update max
 				{
-					max = travelPacksObjs.at(i).getSoldSeats();
+					max = travelPack.getSoldSeats();
 					result.clear();
-					result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //add place
+					result.push_back(travelPack.getTravelDestination().at(j)); //add place
 				}
 
 				else {
-					if (max == travelPacksObjs.at(i).getSoldSeats()) //dont need to update max
-						result.push_back(travelPacksObjs.at(i).getTravelDestination().at(j)); //only adds place to result
+					if (max == travelPack.getSoldSeats()) //dont need to update max
+						result.push_back(travelPack.getTravelDestination().at(j)); //only adds place to result
 				}
 			}
 		}
@@ -545,11 +539,11 @@ vector<int> Agency::packsWithMostVisitedPlaces(vector<string> &places)
 
 	for (size_t i = 0; i < travelPacksObjs.size(); i++)
 	{
-		for (size_t j = 0; j < travelPacksObjs.at(i).getTravelDestination().size(); j++)
+		for (size_t j = 0; j < travelPack.getTravelDestination().size(); j++)
 		{
-			if (find(places.begin(), places.end(), travelPacksObjs.at(i).getTravelDestination().at(j)) != places.end())
+			if (find(places.begin(), places.end(), travelPack.getTravelDestination().at(j)) != places.end())
 			{
-				result.push_back(travelPacksObjs.at(i).getIdentifier());
+				result.push_back(travelPack.getIdentifier());
 				break;
 			}
 		}

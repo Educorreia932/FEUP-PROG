@@ -1,36 +1,33 @@
 #include "Menu.h"
-#include <map>
-#define clients AgencyObj.clientsObjs
-#define travelPacks AgencyObj.travelPacksObjs	
 
 //Constructor
 Menu::Menu(Agency AgencyObj) {
 	this->AgencyObj = AgencyObj;
 }
 
-/*
-	�Show� functions - Mostram menu de sele��o e retornam op��o selecionada
-	�Selection� functions - "Switch cases", fazem a��es diferentes conforme o selecionado
-*/
+/***********************************************************************************************************************************************************************
+	Show Functions - They show the selection menu for a determined operation and return the selected option
+	Selection Functions - "Switch cases", they perform different actions depending on the selected option from a "Show" function (passed in the function argument)
+***********************************************************************************************************************************************************************/
 
 int Menu::showMenu() {
 	clearScreen();
 
 	cout << "What do you want to do? Insert the corresponding key." << endl << endl
-		<< "1) Manage clients." << endl
-		<< "2) Manage travel packs." << endl
-		<< "3) Visualize a specific client." << endl
-		<< "4) Visualize all the clients of the agency." << endl
-		<< "5) Visualize available travel packs." << endl
-		<< "6) Visualize sold travel packs." << endl
-		<< "7) Buy a travel pack for a client." << endl
-		<< "8) Visualize the number and total value of sold travel packs." << endl
-		<< "9) Obtain the name of the most visited places." << endl
-		<< "10) Obtain a list of the clients and recommend a travel pack with most visited place." << endl
-		<< "11) Visualize agency's info.\n" 
-		<< "0) Exit the program and save the alterations made." << endl;
+	 	 << "1) Manage clients." << endl
+		 << "2) Manage travel packs." << endl
+		 << "3) Visualize a specific client." << endl
+		 << "4) Visualize all the clients of the agency." << endl
+		 << "5) Visualize available travel packs." << endl
+		 << "6) Visualize sold travel packs." << endl
+		 << "7) Buy a travel pack for a client." << endl
+		 << "8) Visualize the number and total value of sold travel packs." << endl
+		 << "9) Obtain the name of the most visited places." << endl
+		 << "10) Obtain a list of the clients and recommend a travel pack with most visited place." << endl
+		 << "11) Visualize agency's info.\n" 
+		 << "0) Exit the program and save the alterations made." << endl;
 	
-	int selection = readOption(11); // Mudar para outro valor se se acrescentar alguma coisa
+	int selection = readOption(11);
 
 	return selection;
 }
@@ -38,9 +35,9 @@ int Menu::showMenu() {
 void Menu::menuSelection(int selected) {
 	clearScreen();
 	vector<string> places;
-	vector <int> packs;
+	vector<int> packs;
 	map<Client, int> client_pack;
-	int option;
+	int selected_client, selected_pack;
 	bool aux;
 
 	switch (selected) {
@@ -52,12 +49,12 @@ void Menu::menuSelection(int selected) {
 			break;
 		case 3:
 			cout << "Which client do you wish to check the information of? Insert the corresponding key." << endl << endl;
-			option = showClients();
+			selected_client = showClients();
 
 			clearScreen();
 
-			if (option >= 1) {
-				AgencyObj.viewSpecificClient(option - 1);
+			if (selected_client >= 1) { //Going back
+				AgencyObj.viewSpecificClient(selected_client - 1);
 			    pause();
 			}
 
@@ -75,30 +72,29 @@ void Menu::menuSelection(int selected) {
 			pause();
 			break;
 		case 7:
-			int selected_client, pack;
-
 			cout << "Which client is going to buy a pack? Insert the corresponding key." << endl << endl;
 			
 			selected_client = showClients() - 1;
 			clearScreen();
 
-			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
-				menuSelection(showMenu());
-				return;
-			}
+			if (selected_client >= 1) //Going back
+				AgencyObj.viewSpecificClient(selected_client - 1);
+
+			else
+				break;
 			
 			cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
-			pack = showTravelPacks() - 1;
+			selected_pack = showTravelPacks() - 1;
 			clearScreen();
 
-			if (travelPacks.at(pack).getIdentifier() < 0) {
+			if (travelPacks.at(selected_pack).getIdentifier() < 0) {
 				cerr << "ERROR:\n This pack is not available anymore (negative ID). Please try again.\n\n";
 				cout << "Which travel pack is the client going to buy? Insert the corresponding key." << endl;
-				pack = showTravelPacks() - 1;
+				selected_pack = showTravelPacks() - 1;
 				clearScreen();
 			}
 
-			AgencyObj.buyPack(pack, selected_client);
+			AgencyObj.buyPack(selected_pack, selected_client);
 			pause();
 			break;
 		case 8:
@@ -107,6 +103,7 @@ void Menu::menuSelection(int selected) {
 			break;
 		case 9:
 			places = AgencyObj.mostVisitedPlaces();
+
 			if (places.empty())
 				cout << "This agency has no travel packs.\n\n";
 
@@ -124,46 +121,42 @@ void Menu::menuSelection(int selected) {
 			places = AgencyObj.mostVisitedPlaces();
 			packs = AgencyObj.packsWithMostVisitedPlaces(places);
 
-			//Create map of client and recommended pack
+			//Creates map of client and recommended pack
 			client_pack.clear();
 
-			for (size_t i = 0; i < clients.size(); i++)  //iterate clients
-			{
-				for (size_t j = 0; j < packs.size(); j++) //iterate packs with most visited places 
-				{
+			for (size_t i = 0; i < clients.size(); i++) { //Iterate clients
+				for (size_t j = 0; j < packs.size(); j++) { //Iterate packs with most visited places 
 					aux = false;
-					for (size_t k = 0; k < clients.at(i).getAcquiredTravelPacks().size(); k++) //iterare packs of clients
-					{	
-						if (clients.at(i).getAcquiredTravelPacks().at(k) == packs.at(j)) //if pack with most visited place in packs of client
-						{
+
+					for (size_t k = 0; k < clients.at(i).getAcquiredTravelPacks().size(); k++) { //Iterare packs of clients
+						if (clients.at(i).getAcquiredTravelPacks().at(k) == packs.at(j)) { //If pack with most visited place in packs of client
 							aux = true;
 							break;
 						}
 					}
 
-					if (!aux) //if didnt find in client
+					if (!aux) //If the client wasn't found
 						client_pack.insert(pair<Client, int>(clients.at(i), packs.at(j))); //insert pair client and pack id in result
 						
 				}
 			}
 
-			//Cout result
+			//Show result
 			if (client_pack.empty())
 				cout << "There are no clients to recommend packs to.\n\n";
 
-			else
-			{
+			else {
 				cout << setw(20) << left << "Client" << setw(10) << "Recommended Travel Pack\n";
 				cout << "-----------------------------------------------------------------\n";
-				for (map<Client, int>::const_iterator it = client_pack.begin(); it != client_pack.end(); it++)
-				{
+
+				for (map<Client, int>::const_iterator it = client_pack.begin(); it != client_pack.end(); it++) {
 					cout << setw(20) << left << it->first.getName() << setw(10) << it->second << '\n';
 					cout << "NIF: " << it->first.getNif() << '\n';
 					cout << "-----------------------------------------------------------------\n";
 				}
 			}
 
-			system("pause");
+			pause();
 			break;
 		case 11:
 			AgencyObj.show();
@@ -179,7 +172,6 @@ void Menu::menuSelection(int selected) {
 }
 
 //Clients Menus
-
 int Menu::showClients() {
 	for (size_t i = 0; i < size(clients); i++)
 		cout << i + 1 << ") " << clients[i].getName() << " (" << clients[i].getNif() << ")" << endl;
@@ -217,7 +209,7 @@ void Menu::manageClientsSelection(int selected) {
 			selected_client = showClients() - 1;
 			clearScreen();
 
-			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
+			if (!(selected_client + 1)) { //Go back
 				manageClientsSelection(showManageClients());
 				return;
 			}
@@ -230,7 +222,7 @@ void Menu::manageClientsSelection(int selected) {
 			selected_client = showClients() - 1;
 			clearScreen();
 
-			if (!(selected_client + 1)) { //Op��o de voltar para tr�s
+			if (!(selected_client + 1)) { //Go back
 				manageClientsSelection(showManageClients());
 				return;
 			}
@@ -311,7 +303,6 @@ void Menu::createClient() {
 }
 
 //Travel Packs Menus
-
 int Menu::showTravelPacks() {
 	for (size_t i = 0; i < size(travelPacks); i++)
 		cout << i + 1 << ") " << travelPacks[i].getTravelDestination()[0] << " (" << travelPacks[i].getIdentifier() << ")" << endl;
@@ -349,12 +340,12 @@ void Menu::manageTravelPacksSelection(int selected) {
 			selected_travel_pack = showTravelPacks() - 1;
 			clearScreen();
 			
-			if (!(selected_travel_pack + 1)) { //Op��o de voltar para tr�s
+			if (!(selected_travel_pack + 1)) { //Go back
 				manageTravelPacksSelection(showManageTravelPacks());
 				return;
 			}
 
-			//Show travel pack
+			//Show Travel pack
 			cout << "Current Travel Pack Information: \n\n";
 			clearScreen();
 			AgencyObj.getTravelPacksObjs().at(selected_travel_pack).show();
@@ -366,7 +357,7 @@ void Menu::manageTravelPacksSelection(int selected) {
 			selected_travel_pack = showTravelPacks() - 1;
 			clearScreen();
 
-			if (!(selected_travel_pack + 1)) { //Op��o de voltar para tr�s
+			if (!(selected_travel_pack + 1)) { //Go back
 				manageTravelPacksSelection(showManageTravelPacks());
 				return;
 			}

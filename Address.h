@@ -3,14 +3,14 @@
 
 using namespace std;
 
-string trim(string s);//Necessário porque se incluirmos o Auxiliary.h dá erro
-
 class Address {
 	public:
+		//Constructors
 		Address();
 		Address(string line);
 		Address(string street, int door_number, string apartment, string zip_code, string locality);
 
+		//Getters
 		string getStreet();
 		int getDoorNumber();
 		string getApartment();

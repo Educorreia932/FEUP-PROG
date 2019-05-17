@@ -1,8 +1,13 @@
 #pragma once
 #include "Agency.h"
+#undef clients
+#undef travelPacks
+#define clients AgencyObj.clientsObjs
+#define travelPacks AgencyObj.travelPacksObjs
 
 class Menu {
 	public:
+		//Constructor
 		Menu(Agency AgencyObj);
 
 		int showMenu();
@@ -31,8 +36,5 @@ class Menu {
 		int showChangeTravelPacks();
 		void changeTravelPacksSelection(int selected, int selected_travel_pack);
 
-		void createTravelPack();
-
-		
-		
+		void createTravelPack();		
 };

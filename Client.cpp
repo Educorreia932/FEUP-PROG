@@ -35,8 +35,7 @@ int Client::getTotalPurchases() const{
 	return this->totalPurchases;
 }
 
-void Client::show()
-{
+void Client::show() {
 	cout << "NAME: " << name << '\n';
 	cout << "NIF: " << nif << '\n';
 	cout << "FAMILY SIZE: " << household << '\n';
@@ -46,15 +45,17 @@ void Client::show()
 	cout << "ZIP: " << ClientAddress.getZipCode() << '\n';
 	cout << "CITY: " << ClientAddress.getLocality() << '\n';
 	cout << "TRAVEL PACKS: ";
+
 	if (AcquiredTravelPacks.size() == 0)
 		cout << "-----" << '\n';
-	else
-	{
+
+	else {
 		cout << AcquiredTravelPacks.at(0);
 		for (size_t i = 1; i <AcquiredTravelPacks.size(); i++)
 			cout << ", " << AcquiredTravelPacks.at(i);
 		cout << "\n \n \n";
 	}
+
 	return;
 }
 
