@@ -539,34 +539,20 @@ vector<string> Agency::mostVisitedPlaces() {
 	return result;
 }
 
-vector<Client> Agency::clientsWithPacksWithPlaces(vector<string> places) const
+vector<int> Agency::packsWithMostVisitedPlaces(vector<string> &places)
 {
-	vector<int> ids; //vector with ids of packs with most visited places
-	vector<Client> clients;
+	vector<int> result;
 
-	//get ids
-	for (size_t k = 0; k < travelPacksObjs.size(); k++)
-	{	
-		if (find(ids.begin(), ids.end(), travelPacksObjs.at(k).getIdentifier()) == ids.end()) //if not in ids vector
+	for (size_t i = 0; i < travelPacksObjs.size(); i++)
+	{
+		for (size_t j = 0; j < travelPacksObjs.at(i).getTravelDestination().size(); j++)
 		{
-			for (size_t a = 0; a < travelPacksObjs.at(k).getTravelDestination().size(); a++)
+			if (find(places.begin(), places.end(), travelPacksObjs.at(i).getTravelDestination().at(j)) != places.end())
 			{
-				if (find(places.begin(), places.end(), travelPacksObjs.at(k).getTravelDestination().at(a)) != places.end()) //if place in most visited places
-					ids.push_back(travelPacksObjs.at(k).getIdentifier());
-				
-					
+				result.push_back(travelPacksObjs.at(i).getIdentifier());
+				break;
 			}
 		}
-		
 	}
-
-	for (size_t i = 0; i < clientsObjs.size(); i++)
-	{
-		for (size_t j = 0; j < clientsObjs.at(i).getAcquiredTravelPacks().size(); j++)
-		{
-			if (find(ids.begin(), ids.end(), clientsObjs.at(i).getAcquiredTravelPacks().at(j)) != ids.end()) //if id in ids
-				clients.push_back(clientsObjs.at(i)); //add client to result
-		}
-	}
-	return clients;
+	return result;
 }

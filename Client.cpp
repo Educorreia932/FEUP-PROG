@@ -89,3 +89,10 @@ void Client::setAcquiredTravelPacks(vector<int> adcquired_travel_packs) {
 void Client::setTotalPurchases(int total_purchases) {
 	this->totalPurchases = total_purchases;
 }
+
+bool operator <(const Client& c1, const Client& c2)
+{
+	if (c1.getName().at(0) < c2.getName().at(0))
+		return true;
+	else return false;
+}

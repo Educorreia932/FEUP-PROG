@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <map>
 #define clients AgencyObj.clientsObjs
 #define travelPacks AgencyObj.travelPacksObjs	
 
@@ -25,7 +26,7 @@ int Menu::showMenu() {
 		<< "7) Buy a travel pack for a client." << endl
 		<< "8) Visualize the number and total value of sold travel packs." << endl
 		<< "9) Obtain the name of the most visited places." << endl
-		<< "10) Obtain a list of the clients with one of the travel packs with one of the most visited places." << endl
+		<< "10) Obtain a list of the clients and recommend a travel pack with most visited place." << endl
 		<< "11) Visualize agency's info.\n" 
 		<< "0) Exit the program and save the alterations made." << endl;
 	
@@ -37,8 +38,10 @@ int Menu::showMenu() {
 void Menu::menuSelection(int selected) {
 	clearScreen();
 	vector<string> places;
-	vector <Client> Clients;
+	vector <int> packs;
+	map<Client, int> client_pack;
 	int option;
+	bool aux;
 
 	switch (selected) {
 		case 1:
@@ -119,18 +122,44 @@ void Menu::menuSelection(int selected) {
 			break; 
 		case 10:
 			places = AgencyObj.mostVisitedPlaces();
-			Clients = AgencyObj.clientsWithPacksWithPlaces(places);
+			packs = AgencyObj.packsWithMostVisitedPlaces(places);
 
-			if (Clients.empty())
-				cout << "There are no clients with travel packs for the most visited places.\n\n";
+			//Create map of client and recommended pack
+			client_pack.clear();
+
+			for (size_t i = 0; i < clients.size(); i++)  //iterate clients
+			{
+				for (size_t j = 0; j < packs.size(); j++) //iterate packs with most visited places 
+				{
+					aux = false;
+					for (size_t k = 0; k < clients.at(i).getAcquiredTravelPacks().size(); k++) //iterare packs of clients
+					{	
+						if (clients.at(i).getAcquiredTravelPacks().at(k) == packs.at(j)) //if pack with most visited place in packs of client
+						{
+							aux = true;
+							break;
+						}
+					}
+
+					if (!aux) //if didnt find in client
+						client_pack.insert(pair<Client, int>(clients.at(i), packs.at(j))); //insert pair client and pack id in result
+						
+				}
+			}
+
+			//Cout result
+			if (client_pack.empty())
+				cout << "There are no clients to recommend packs to.\n\n";
 
 			else
 			{
-				cout << "Clients:\n";
-
-				for (size_t k = 0; k < Clients.size(); k++)
+				cout << setw(20) << left << "Client" << setw(10) << "Recommended Travel Pack\n";
+				cout << "-----------------------------------------------------------------\n";
+				for (map<Client, int>::const_iterator it = client_pack.begin(); it != client_pack.end(); it++)
 				{
-					Clients.at(k).show();
+					cout << setw(20) << left << it->first.getName() << setw(10) << it->second << '\n';
+					cout << "NIF: " << it->first.getNif() << '\n';
+					cout << "-----------------------------------------------------------------\n";
 				}
 			}
 

@@ -36,3 +36,5 @@ class Client {
 		vector <int> AcquiredTravelPacks; 
 		int totalPurchases; 
 };
+
+bool operator <(const Client& c1, const Client& c2);
