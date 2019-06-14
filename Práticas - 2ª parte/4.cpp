@@ -97,10 +97,9 @@ class Invoice {
 			this->Client = Client;
 			this->items = items;
 			amount_due = 0;
-
-			for (int i = 0; i < size(items); i++) {
-				amount_due += items[0].getTotalPrice();
-			}
+			
+			for (int i = 0; i < size(items); i++)
+				amount_due += items[i].getTotalPrice();
 		}
 		void showLine(int itemNumber);
 		void show();
@@ -111,22 +110,22 @@ class Invoice {
 };
 
 void Invoice::showLine(int itemNumber) {
-	cout << items[itemNumber].getProduct().getDescription() << setw(23) << " "
-		 << items[itemNumber].getProduct().getPrice() << setw(5) << " "
-		 << items[itemNumber].getQuantity() << setw(5) << " "
-		 << items[itemNumber].getTotalPrice() << setw(8) << endl;
+	cout << setw(20) << left << items[itemNumber].getProduct().getDescription()  << " "
+		 << setw(6) << left <<items[itemNumber].getProduct().getPrice() << " "
+		 << setw(4) << right << items[itemNumber].getQuantity() << " "
+		 << setw(8) << right << items[itemNumber].getTotalPrice() << endl;
 }
 
 void Invoice::show() {
 	cout << Client.getName() << endl 
 		 << Client.getAddress() << endl
-		 << "Description" << setw(23) << " " << "Price" << setw(5) << " " << "Qty" << setw(5) << " " << setw(8) << "Total" << endl
-		 << "-------------------- ------ ---- - --------" << endl;
+		 << setw(20) << left << "Description" << " " << setw(6) << left << "Price" << " " << setw(4) << left << "Qty" << " " << left << setw(8) << "Total"  << endl
+		 << "-------------------- ------ ---- --------" << endl;
 	
 	for (int i = 0; i < size(items); i++)
 		showLine(i);
 
-	cout << "Amount due: " << amount_due << " euro";
+	cout << endl << "Amount due: " << amount_due << " euro";
 }
 
 int main() {
