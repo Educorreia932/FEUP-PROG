@@ -44,3 +44,25 @@ void saveToFile(vector <string> &words) { //Exercise 1.d)
 		File.close();
 	}
 }
+
+void decomposeLineRepeated(string& line, vector <string>& words) { //Exercise 1.e)
+	string aux;
+	stringstream result;
+
+	line = transformLine(line);
+
+	result << line;
+
+	while (result >> aux) {
+		bool repeated = false;
+
+		for (int i = 0; i < size(words); i++)
+			if (words[i] == aux) {
+				repeated = true;
+				break;
+			}
+				
+		if (!repeated)
+			words.push_back(aux);
+	}
+}
