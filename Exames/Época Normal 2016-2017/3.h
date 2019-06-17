@@ -19,5 +19,5 @@ class Image {
 		// ... other methods
 	private:
 		vector <vector<int>> img; // image representation
-		//
+		// ... other attributes
 };

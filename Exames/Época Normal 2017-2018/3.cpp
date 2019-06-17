@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#include <set> 
+#include <new>
+#include <set>
 
 using namespace std;
 
@@ -15,14 +16,15 @@ float average(const int grades[], int numStudents) { //Exercise 3.a1)
 void readGrades(int grades[], int numStudents);
 
 void showAverage() { //Exercise 3.a2)
-	int grades[50];
 	int numStudents;
 
-	//readGrades(grades, numStudents);
+	cin >> numStudents;
+
+	int *grades = new int(numStudents);
+
+	readGrades(grades, numStudents);
 
 	cout << average(grades, numStudents);
-
-	//Não percebi como é para fazer este https://i.kym-cdn.com/photos/images/original/001/387/435/7b3.jpg
 }
 
 struct Position {
@@ -30,6 +32,5 @@ struct Position {
 };
 
 int main() {
-	set<Position> edubbuska;
 	return 0;
 }

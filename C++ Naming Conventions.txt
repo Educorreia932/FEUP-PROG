@@ -9,6 +9,7 @@ Class - ClassExample
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <new>
 #include <string>
 #include <vector>
 #include <map>
