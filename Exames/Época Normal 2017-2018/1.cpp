@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <algorithm> 
 
 using namespace std;
 
@@ -33,15 +34,26 @@ void decomposeLine(string& line, vector <string> &words) { //Exercise 1.c)
 		words.push_back(aux);
 }
 
-void saveToFile(vector <string> &words) { //Exercise 1.d)
-	ifstream File("C:\docs\words.txt");
+void saveToFile() { //Exercise 1.d)
+	ifstream File1("C:\docs\text.txt");
+	ofstream File2("C:\docs\words.txt");
+	vector <string> words;
 	string line;
 
-	if (File.is_open()) {
-		while (getline(File, line))
+	if (File1.is_open()) {
+		while (getline(File1, line))
 			decomposeLine(line, words);
 
-		File.close();
+		File1.close();
+	} 
+
+	sort(words.begin(), words.end());
+
+	if (File2.is_open()) {
+		for (int i = 0; i < size(words); i++)
+			File2 << words[i] << endl;
+
+		File2.close();
 	}
 }
 

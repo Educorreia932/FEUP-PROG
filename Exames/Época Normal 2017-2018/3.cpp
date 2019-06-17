@@ -1,4 +1,5 @@
-#include <iostream>
+﻿#include <iostream>
+#include <set> 
 
 using namespace std;
 
@@ -17,8 +18,18 @@ void showAverage() { //Exercise 3.a2)
 	int grades[50];
 	int numStudents;
 
-	readGrades(grades, numStudents);
-
+	//readGrades(grades, numStudents);
 
 	cout << average(grades, numStudents);
+
+	//Não percebi como é para fazer este https://i.kym-cdn.com/photos/images/original/001/387/435/7b3.jpg
+}
+
+struct Position {
+	int lin, col;
+};
+
+int main() {
+	set<Position> edubbuska;
+	return 0;
 }

@@ -1,0 +1,17 @@
+Variables - variable_example
+Constant Varibales - VARIABLE_EXAMPLE
+Functions - functionExample
+Vector - vectorExample
+Struct - StructExample
+Class - ClassExample
+...Stream - streamExample
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <map>
+#include <math>
+#include <algorithm>
+
