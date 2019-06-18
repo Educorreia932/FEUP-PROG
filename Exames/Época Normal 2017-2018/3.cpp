@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <new>
-#include <set>
 
 using namespace std;
 
@@ -22,7 +21,7 @@ void showAverage() { //Exercise 3.a2)
 
 	int *grades = new int(numStudents);
 
-	readGrades(grades, numStudents);
+	//readGrades(grades, numStudents);
 
 	cout << average(grades, numStudents);
 }
@@ -30,7 +29,3 @@ void showAverage() { //Exercise 3.a2)
 struct Position {
 	int lin, col;
 };
-
-int main() {
-	return 0;
-}

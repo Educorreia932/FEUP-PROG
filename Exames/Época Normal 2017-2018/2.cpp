@@ -1,20 +1,23 @@
 ﻿#include "2.h"
 
-Board::Board(size_t numLines = 10, size_t numColumns = 10) { //Exercise 2.b)
-	for (int y = 0; y < board.size(); y++)
-		for (int x; x < board[x].size(); x++)
+Board::Board(size_t numLines, size_t numColumns) { //Exercise 2.b)
+	this->numLines = numLines;
+	this->numColumns = numColumns;
+
+	for (int y = 0; y < numLines; y++)
+		for (int x = 0; x < numColumns; x++)
 			board[y][x] = -1;
 }
 
 bool Board::canPutShip(Position pos, char dir, size_t size) { //Exercise 2.c)
-	switch (dir) { // TO DO
+	switch (dir) {
 		case 'H': // TO DO: test if ship with length 'size' can be put at 'pos', in horizontal direction
-			for (int i = pos.lin; i < size; i++)
+			for (int i = pos.lin; i < pos.lin + size; i++)
 				if (i < board.size() && board[pos.col][i] != -1)
 					return false;
 
 		case 'V': // TO DO, just this line: test if ship ... can be put in vertical direction
-			for (int i = pos.col; i < size; i++)
+			for (int i = pos.col; i < pos.col + size; i++)
 				if (i < board.size() && board[i][pos.lin] != -1)
 					return false;
 
@@ -34,12 +37,12 @@ bool Board::putShip(const Ship& s) { //Exercise 2.d)
 
 		switch (dir) {
 			case 'H': 
-				for (int i = pos.lin; i < size; i++)
-					board[pos.col][i] = s.id();
+				for (int i = pos.lin; i < pos.lin + size; i++)
+					board[pos.lin][i] = s.id();
 
 			case 'V':
-				for (int i = pos.lin; i < size; i++)
-					board[i][pos.lin] = s.id();
+				for (int i = pos.col; i < pos.col + size; i++)
+					board[i][pos.col] = s.id();
 		}
 
 		return true;
@@ -70,4 +73,8 @@ void create10x20Board() { //Exercise 2.e)
 	catch (string s) {
 		cerr << s;
 	}	
+}
+
+int main() {
+	return 0;
 }
