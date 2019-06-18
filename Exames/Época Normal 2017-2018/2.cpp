@@ -1,12 +1,18 @@
 ﻿#include "2.h"
 
 Board::Board(size_t numLines, size_t numColumns) { //Exercise 2.b)
+	vector<int> line;
+
+	for (int y = 0; y < numLines; y++) {
+		for (int x = 0; x < numColumns; x++)
+			line.push_back(-1);
+
+		board.push_back(line);
+		line.clear();
+	}
+		
 	this->numLines = numLines;
 	this->numColumns = numColumns;
-
-	for (int y = 0; y < numLines; y++)
-		for (int x = 0; x < numColumns; x++)
-			board[y][x] = -1;
 }
 
 bool Board::canPutShip(Position pos, char dir, size_t size) { //Exercise 2.c)

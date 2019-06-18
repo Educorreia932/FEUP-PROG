@@ -1,2 +1,2 @@
 # PROG
-MIEIC - 1? ano / 2? semestre
+MIEIC - 1º ano / 2º semestre
