@@ -3,9 +3,9 @@
 Image Image::getRegion(size_t lin, size_t col, size_t nLins, size_t nCols) const { //Exercise 3.b)
 	Image Result(nLins, nCols, 0);
 
-	for (int y = lin; y < nCols; y++)
-		for (int x = lin; x < nLins; y++)
-			Result.setPixel(y, x, img[y][x]);
+	for (int y = 0; y < nCols; y++)
+		for (int x = 0; x < nLins; y++)
+			Result.setPixel(y, x, img[lin][col]);
 
 	return Result;
 }

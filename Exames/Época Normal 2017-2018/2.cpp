@@ -18,13 +18,13 @@ Board::Board(size_t numLines, size_t numColumns) { //Exercise 2.b)
 bool Board::canPutShip(Position pos, char dir, size_t size) { //Exercise 2.c)
 	switch (dir) {
 		case 'H': // TO DO: test if ship with length 'size' can be put at 'pos', in horizontal direction
-			for (int i = pos.lin; i < pos.lin + size; i++)
-				if (i < board.size() && board[pos.col][i] != -1)
+			for (int i = pos.col; i < pos.col + size; i++)
+				if (i < board[pos.lin].size() && board[pos.lin][i] != -1)
 					return false;
 
 		case 'V': // TO DO, just this line: test if ship ... can be put in vertical direction
-			for (int i = pos.col; i < pos.col + size; i++)
-				if (i < board.size() && board[i][pos.lin] != -1)
+			for (int i = pos.lin; i < pos.lin + size; i++)
+				if (i < board.size() && board[i][pos.col] != -1)
 					return false;
 
 		// DONE. This piece of code was correctly implemented but was carelessly erased …
@@ -70,7 +70,7 @@ void create10x20Board() { //Exercise 2.e)
 
 	try {
 		if (!b.putShip(s))
-			throw "Can't put ship!";
+			throw exception("Can't put ship!");
 
 		else
 			b.putShip(s);	

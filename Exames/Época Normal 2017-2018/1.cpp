@@ -35,8 +35,8 @@ void decomposeLine(string& line, vector <string> &words) { //Exercise 1.c)
 }
 
 void saveToFile() { //Exercise 1.d)
-	ifstream File1("C:\docs\text.txt");
-	ofstream File2("C:\docs\words.txt");
+	ifstream File1("C:\\docs\\text.txt");
+	ofstream File2("C:\\docs\\words.txt");
 	vector <string> words;
 	string line;
 

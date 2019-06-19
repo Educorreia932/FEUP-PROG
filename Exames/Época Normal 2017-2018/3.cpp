@@ -19,9 +19,9 @@ void showAverage() { //Exercise 3.a2)
 
 	cin >> numStudents;
 
-	int *grades = new int(numStudents);
+	int *grades = new int[numStudents];
 
-	//readGrades(grades, numStudents);
+	readGrades(grades, numStudents);
 
 	cout << average(grades, numStudents);
 }
