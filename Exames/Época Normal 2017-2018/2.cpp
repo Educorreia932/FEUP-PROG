@@ -67,18 +67,12 @@ void create10x20Board() { //Exercise 2.e)
 	cin >> identifier >> symbol >> position.col >> position.lin >> direction >> size;
 
 	Ship s(identifier, symbol, position, direction, size);
-
-	try {
-		if (!b.putShip(s))
+	
+	if (!b.putShip(s))
 			throw exception("Can't put ship!");
 
-		else
-			b.putShip(s);	
-	}
-
-	catch (string s) {
-		cerr << s;
-	}	
+	else
+		b.putShip(s);	
 }
 
 int main() {

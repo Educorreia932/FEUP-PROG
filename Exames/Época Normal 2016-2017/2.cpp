@@ -17,15 +17,15 @@ bool operator<(const Date &left, const Date &right) { //Exercise 2.b)
 istream& operator>>(istream &f, Date &date) { //Exercise 2.c)
 	string date_string;
 	int year, month, day;
-	char hyphen;
+	char hyphen1, hyphen2;
 
 	getline(f, date_string);
 
 	istringstream dateStream(date_string);
 
-	dateStream >> year >> hyphen >> month >> hyphen >> day;
+	dateStream >> year >> hyphen1 >> month >> hyphen2 >> day;
 
-	if (hyphen != '-' || year < 0 || month <= 0 || day <= 0) {
+	if (hyphen1 != '-' || hyphen2 != '-' || year < 0 || month <= 0 || day <= 0 || f.fail()) {
 		runtime_error message("invalid Date");
 		throw message;
 	}

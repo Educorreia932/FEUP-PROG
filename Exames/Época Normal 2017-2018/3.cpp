@@ -6,7 +6,7 @@ using namespace std;
 float average(const int grades[], int numStudents) { //Exercise 3.a1)
 	float sum = 0;
 
-	for (int i = 0; i < sizeof(grades) / sizeof(const int); i++)
+	for (int i = 0; i < numStudents; i++)
 		sum += grades[i];
 
 	return sum / numStudents;
