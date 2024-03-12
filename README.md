@@ -1,6 +1,6 @@
 # Programming
 
-> This repository is part of a series of curricular units I had while studying in University.
+> This repository is part of a [series](https://gist.github.com/Educorreia932/b1d49aa00ce465172c20c7e747d948e1#university-curriculum-) of curricular units I had while studying in University.
 
 <div align=center>
     <img width="500" src="https://i.imgur.com/qUBTdG5.png" alt="FEUP Logo">
